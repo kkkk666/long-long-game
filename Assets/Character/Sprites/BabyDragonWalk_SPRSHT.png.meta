@@ -1,0 +1,702 @@
+fileFormatVersion: 2
+guid: 30bd2375a56f6ea4b9721533681d1f5f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6814807867282955929
+    second: BabyDragonWalk_SPRSHT_0
+  - first:
+      213: 7995660632317425035
+    second: BabyDragonWalk_SPRSHT_1
+  - first:
+      213: 3248564614897596413
+    second: BabyDragonWalk_SPRSHT_2
+  - first:
+      213: -916181552789865554
+    second: BabyDragonWalk_SPRSHT_3
+  - first:
+      213: 4752580701017928098
+    second: BabyDragonWalk_SPRSHT_4
+  - first:
+      213: 5618903450447805072
+    second: BabyDragonWalk_SPRSHT_5
+  - first:
+      213: -8443798819158594364
+    second: BabyDragonWalk_SPRSHT_6
+  - first:
+      213: 5453324418422258736
+    second: BabyDragonWalk_SPRSHT_7
+  - first:
+      213: -969963864209486276
+    second: BabyDragonWalk_SPRSHT_8
+  - first:
+      213: -1263527163262988481
+    second: BabyDragonWalk_SPRSHT_9
+  - first:
+      213: -3871587234886715561
+    second: BabyDragonWalk_SPRSHT_10
+  - first:
+      213: 6371097034516770983
+    second: BabyDragonWalk_SPRSHT_11
+  - first:
+      213: 148773450092963046
+    second: BabyDragonWalk_SPRSHT_12
+  - first:
+      213: 3813863384346387964
+    second: BabyDragonWalk_SPRSHT_13
+  - first:
+      213: 1421247843165654663
+    second: BabyDragonWalk_SPRSHT_14
+  - first:
+      213: -5078463098594800467
+    second: BabyDragonWalk_SPRSHT_15
+  - first:
+      213: -5891346497785570004
+    second: BabyDragonWalk_SPRSHT_16
+  - first:
+      213: 1424626391409583703
+    second: BabyDragonWalk_SPRSHT_17
+  - first:
+      213: 6306529322624192757
+    second: BabyDragonWalk_SPRSHT_18
+  - first:
+      213: 571381021268335935
+    second: BabyDragonWalk_SPRSHT_19
+  - first:
+      213: -6324285865678674162
+    second: BabyDragonWalk_SPRSHT_20
+  - first:
+      213: -5103648595302610502
+    second: BabyDragonWalk_SPRSHT_21
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BabyDragonWalk_SPRSHT_0
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 794
+        width: 236
+        height: 203
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99e10fd16af039e50800000000000000
+      internalID: 6814807867282955929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragonWalk_SPRSHT_1
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 794
+        width: 232
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b85fad57bfa46fe60800000000000000
+      internalID: 7995660632317425035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragonWalk_SPRSHT_2
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 794
+        width: 229
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df7ffdc3e48351d20800000000000000
+      internalID: 3248564614897596413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragonWalk_SPRSHT_3
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 794
+        width: 226
+        height: 205
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eabb13c5bb11943f0800000000000000
+      internalID: -916181552789865554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragonWalk_SPRSHT_4
+      rect:
+        serializedVersion: 2
+        x: 1043
+        y: 794
+        width: 227
+        height: 205
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a1fc82a7fe84f140800000000000000
+      internalID: 4752580701017928098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragonWalk_SPRSHT_5
+      rect:
+        serializedVersion: 2
+        x: 1300
+        y: 794
+        width: 227
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09a782ffaea5afd40800000000000000
+      internalID: 5618903450447805072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragonWalk_SPRSHT_6
+      rect:
+        serializedVersion: 2
+        x: 1556
+        y: 794
+        width: 228
+        height: 203
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4cc603d06b991da80800000000000000
+      internalID: -8443798819158594364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragonWalk_SPRSHT_7
+      rect:
+        serializedVersion: 2
+        x: 1811
+        y: 794
+        width: 230
+        height: 202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03cb5056aa91eab40800000000000000
+      internalID: 5453324418422258736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragonWalk_SPRSHT_8
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 538
+        width: 233
+        height: 202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3e04dc210ff982f0800000000000000
+      internalID: -969963864209486276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragonWalk_SPRSHT_9
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 539
+        width: 230
+        height: 201
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3f07ad4dbc077ee0800000000000000
+      internalID: -1263527163262988481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragonWalk_SPRSHT_10
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 540
+        width: 228
+        height: 201
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 757f3a32ceb554ac0800000000000000
+      internalID: -3871587234886715561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragonWalk_SPRSHT_11
+      rect:
+        serializedVersion: 2
+        x: 788
+        y: 540
+        width: 227
+        height: 202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a0bae35ffeaa6850800000000000000
+      internalID: 6371097034516770983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragonWalk_SPRSHT_12
+      rect:
+        serializedVersion: 2
+        x: 1043
+        y: 540
+        width: 227
+        height: 203
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e4ecc42aac801200800000000000000
+      internalID: 148773450092963046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragonWalk_SPRSHT_13
+      rect:
+        serializedVersion: 2
+        x: 1299
+        y: 540
+        width: 226
+        height: 203
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf5e5d59a809de430800000000000000
+      internalID: 3813863384346387964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragonWalk_SPRSHT_14
+      rect:
+        serializedVersion: 2
+        x: 1553
+        y: 540
+        width: 229
+        height: 202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78ecdad126949b310800000000000000
+      internalID: 1421247843165654663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragonWalk_SPRSHT_15
+      rect:
+        serializedVersion: 2
+        x: 1807
+        y: 540
+        width: 232
+        height: 202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dacc35bf7bca589b0800000000000000
+      internalID: -5078463098594800467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragonWalk_SPRSHT_16
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 284
+        width: 236
+        height: 201
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2ddfbee29bbd3ea0800000000000000
+      internalID: -5891346497785570004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragonWalk_SPRSHT_17
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 284
+        width: 237
+        height: 201
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7566d9da72a45c310800000000000000
+      internalID: 1424626391409583703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragonWalk_SPRSHT_18
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 283
+        width: 238
+        height: 201
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f09998610b458750800000000000000
+      internalID: 6306529322624192757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragonWalk_SPRSHT_19
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 282
+        width: 239
+        height: 202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3d5914f204fde700800000000000000
+      internalID: 571381021268335935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragonWalk_SPRSHT_20
+      rect:
+        serializedVersion: 2
+        x: 1034
+        y: 282
+        width: 238
+        height: 202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e07e23e338f9b38a0800000000000000
+      internalID: -6324285865678674162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragonWalk_SPRSHT_21
+      rect:
+        serializedVersion: 2
+        x: 1291
+        y: 282
+        width: 237
+        height: 203
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab9019294a23c29b0800000000000000
+      internalID: -5103648595302610502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      BabyDragonWalk_SPRSHT_0: 6814807867282955929
+      BabyDragonWalk_SPRSHT_1: 7995660632317425035
+      BabyDragonWalk_SPRSHT_10: -3871587234886715561
+      BabyDragonWalk_SPRSHT_11: 6371097034516770983
+      BabyDragonWalk_SPRSHT_12: 148773450092963046
+      BabyDragonWalk_SPRSHT_13: 3813863384346387964
+      BabyDragonWalk_SPRSHT_14: 1421247843165654663
+      BabyDragonWalk_SPRSHT_15: -5078463098594800467
+      BabyDragonWalk_SPRSHT_16: -5891346497785570004
+      BabyDragonWalk_SPRSHT_17: 1424626391409583703
+      BabyDragonWalk_SPRSHT_18: 6306529322624192757
+      BabyDragonWalk_SPRSHT_19: 571381021268335935
+      BabyDragonWalk_SPRSHT_2: 3248564614897596413
+      BabyDragonWalk_SPRSHT_20: -6324285865678674162
+      BabyDragonWalk_SPRSHT_21: -5103648595302610502
+      BabyDragonWalk_SPRSHT_3: -916181552789865554
+      BabyDragonWalk_SPRSHT_4: 4752580701017928098
+      BabyDragonWalk_SPRSHT_5: 5618903450447805072
+      BabyDragonWalk_SPRSHT_6: -8443798819158594364
+      BabyDragonWalk_SPRSHT_7: 5453324418422258736
+      BabyDragonWalk_SPRSHT_8: -969963864209486276
+      BabyDragonWalk_SPRSHT_9: -1263527163262988481
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

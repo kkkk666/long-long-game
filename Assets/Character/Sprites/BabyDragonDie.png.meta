@@ -1,0 +1,705 @@
+fileFormatVersion: 2
+guid: 864b6c8a512ddcb45854200842db07b0
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BabyDragon_Die_00001
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 943
+        width: 232
+        height: 185
+      alignment: 9
+      pivot: {x: 0.54741377, y: 0.5081081}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b09661e7d0a1b314682a44141d5eefdc
+      internalID: 927473469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragon_Die_00002
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 939
+        width: 234
+        height: 189
+      alignment: 9
+      pivot: {x: 0.52991456, y: 0.4814815}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0a643411fba3d244820fab0f13ae35a
+      internalID: -388176970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragon_Die_00003
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 936
+        width: 230
+        height: 192
+      alignment: 9
+      pivot: {x: 0.5478261, y: 0.46875}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d7117ac82776574e9c2ce6d40567190
+      internalID: -1373962486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragon_Die_00004
+      rect:
+        serializedVersion: 2
+        x: 759
+        y: 930
+        width: 220
+        height: 198
+      alignment: 9
+      pivot: {x: 0.58181816, y: 0.44444445}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18b68ba9524babb418e1f04bfbbef7f4
+      internalID: -529598262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragon_Die_00005
+      rect:
+        serializedVersion: 2
+        x: 1012
+        y: 918
+        width: 215
+        height: 210
+      alignment: 9
+      pivot: {x: 0.59534883, y: 0.44285715}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 991b85d26aa9d1e43a6a308ae96c4216
+      internalID: -1644135734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragon_Die_00006
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 685
+        width: 214
+        height: 218
+      alignment: 9
+      pivot: {x: 0.5981308, y: 0.4357798}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a488baf1e8dbfa429b9b89ffaa31693
+      internalID: -602707111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragon_Die_00007
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 685
+        width: 216
+        height: 218
+      alignment: 9
+      pivot: {x: 0.5925926, y: 0.4174312}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd14d242f51822a4f84ab8cbf76cbcce
+      internalID: -1100299897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragon_Die_00008
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 688
+        width: 216
+        height: 215
+      alignment: 9
+      pivot: {x: 0.5925926, y: 0.40930232}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ef53aa8d76308f408bc5013b78c5537
+      internalID: 1099069062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragon_Die_00009
+      rect:
+        serializedVersion: 2
+        x: 759
+        y: 687
+        width: 211
+        height: 216
+      alignment: 9
+      pivot: {x: 0.6066351, y: 0.41666666}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b725aa10c4867ee43a2faf64981f0b95
+      internalID: -1790720915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragon_Die_00010
+      rect:
+        serializedVersion: 2
+        x: 1012
+        y: 683
+        width: 216
+        height: 220
+      alignment: 9
+      pivot: {x: 0.5925926, y: 0.4227273}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a1fdc641c4658047afea23843a32467
+      internalID: 659910579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragon_Die_00011
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 453
+        width: 212
+        height: 225
+      alignment: 9
+      pivot: {x: 0.6037736, y: 0.4311111}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: daa6854346a98f84c9d4096a5d37b377
+      internalID: -1370856444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragon_Die_00012
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 454
+        width: 210
+        height: 224
+      alignment: 9
+      pivot: {x: 0.6047619, y: 0.42857143}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cef9a4c4da88aa64898382c33109f6ca
+      internalID: -831467310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragon_Die_00013
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 454
+        width: 214
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5981308, y: 0.42857143}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59392da4f99d1964ba77947ac834d090
+      internalID: -1676087051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragon_Die_00014
+      rect:
+        serializedVersion: 2
+        x: 759
+        y: 456
+        width: 211
+        height: 222
+      alignment: 9
+      pivot: {x: 0.6066351, y: 0.42792794}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e00c1e7907061c42ae92021f1cd0ef7
+      internalID: 2072533929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragon_Die_00015
+      rect:
+        serializedVersion: 2
+        x: 1012
+        y: 459
+        width: 218
+        height: 219
+      alignment: 9
+      pivot: {x: 0.5825688, y: 0.43835616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fd433d05930b1146865cfb6bba95a7a
+      internalID: 1804736708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragon_Die_00016
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 244
+        width: 222
+        height: 209
+      alignment: 9
+      pivot: {x: 0.5585586, y: 0.44976076}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f44f01091c690f94e8a82938ac41f1b6
+      internalID: 694347790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragon_Die_00017
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 250
+        width: 235
+        height: 203
+      alignment: 9
+      pivot: {x: 0.54468083, y: 0.4679803}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07f4123b55a4c8c41b05a36ddd49e167
+      internalID: -475728755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragon_Die_00018
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 271
+        width: 250
+        height: 182
+      alignment: 9
+      pivot: {x: 0.508, y: 0.521978}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c639422730b02445a90e623fea979e9
+      internalID: 1694807338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragon_Die_00019
+      rect:
+        serializedVersion: 2
+        x: 759
+        y: 279
+        width: 252
+        height: 174
+      alignment: 9
+      pivot: {x: 0.50793654, y: 0.6091954}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c67b9b83e67a6f4daddb69b97391222
+      internalID: 1951548614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragon_Die_00020
+      rect:
+        serializedVersion: 2
+        x: 1012
+        y: 287
+        width: 252
+        height: 166
+      alignment: 9
+      pivot: {x: 0.50793654, y: 0.61445785}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63af192247c325a4a814d3981eacfe47
+      internalID: -1205091383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragon_Die_00021
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 88
+        width: 253
+        height: 140
+      alignment: 9
+      pivot: {x: 0.5059289, y: 0.7285714}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f47f8a7cec8f310489f4a0b72bc8829c
+      internalID: 245695503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragon_Die_00022
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 96
+        width: 249
+        height: 132
+      alignment: 9
+      pivot: {x: 0.5140562, y: 0.780303}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7be00bafa5a2da47a3c7466b90296e3
+      internalID: 719628253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragon_Die_00023
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 95
+        width: 235
+        height: 133
+      alignment: 9
+      pivot: {x: 0.54468083, y: 0.7969925}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 166db314fdc82b345896ef445c82cf51
+      internalID: 2060875270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragon_Die_00024
+      rect:
+        serializedVersion: 2
+        x: 759
+        y: 95
+        width: 235
+        height: 133
+      alignment: 9
+      pivot: {x: 0.54468083, y: 0.7969925}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 849ff5e60d75c3d45bf122d250b39baf
+      internalID: -1820980916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BabyDragon_Die_00025
+      rect:
+        serializedVersion: 2
+        x: 1012
+        y: 95
+        width: 235
+        height: 133
+      alignment: 9
+      pivot: {x: 0.54468083, y: 0.7969925}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eecf15f8bbb7dda4e9db6b4fc1859b53
+      internalID: 997036151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: f316929ed853c4b48b755c31da6d87c2
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      BabyDragon_Die_00001: 927473469
+      BabyDragon_Die_00002: -388176970
+      BabyDragon_Die_00003: -1373962486
+      BabyDragon_Die_00004: -529598262
+      BabyDragon_Die_00005: -1644135734
+      BabyDragon_Die_00006: -602707111
+      BabyDragon_Die_00007: -1100299897
+      BabyDragon_Die_00008: 1099069062
+      BabyDragon_Die_00009: -1790720915
+      BabyDragon_Die_00010: 659910579
+      BabyDragon_Die_00011: -1370856444
+      BabyDragon_Die_00012: -831467310
+      BabyDragon_Die_00013: -1676087051
+      BabyDragon_Die_00014: 2072533929
+      BabyDragon_Die_00015: 1804736708
+      BabyDragon_Die_00016: 694347790
+      BabyDragon_Die_00017: -475728755
+      BabyDragon_Die_00018: 1694807338
+      BabyDragon_Die_00019: 1951548614
+      BabyDragon_Die_00020: -1205091383
+      BabyDragon_Die_00021: 245695503
+      BabyDragon_Die_00022: 719628253
+      BabyDragon_Die_00023: 2060875270
+      BabyDragon_Die_00024: -1820980916
+      BabyDragon_Die_00025: 997036151
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

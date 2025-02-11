@@ -1,0 +1,114 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:a2869e5906ffaf90b5b9b21c9a0beca0:da2238f1cc31dcb655e44c7d2580d35d:dfe88b44388cfe4324694dc50ea0498e$
+#
+:format=40300
+:texture=BabyDragonIdle.png
+:size=2560x2560
+:pivotpoints=enabled
+:borders=disabled
+:alphahandling=ClearTransparentPixels
+
+BabyDragonIdle0000;0;2304;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0001;256;2304;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0002;512;2304;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0003;768;2304;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0004;1024;2304;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0005;1280;2304;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0006;1536;2304;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0007;1792;2304;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0008;2048;2304;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0009;2304;2304;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0010;0;2048;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0011;256;2048;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0012;512;2048;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0013;768;2048;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0014;1024;2048;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0015;1280;2048;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0016;1536;2048;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0017;1792;2048;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0018;2048;2048;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0019;2304;2048;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0020;0;1792;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0021;256;1792;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0022;512;1792;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0023;768;1792;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0024;1024;1792;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0025;1280;1792;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0026;1536;1792;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0027;1792;1792;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0028;2048;1792;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0029;2304;1792;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0030;0;1536;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0031;256;1536;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0032;512;1536;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0033;768;1536;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0034;1024;1536;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0035;1280;1536;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0036;1536;1536;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0037;1792;1536;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0038;2048;1536;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0039;2304;1536;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0040;0;1280;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0041;256;1280;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0042;512;1280;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0043;768;1280;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0044;1024;1280;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0045;1280;1280;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0046;1536;1280;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0047;1792;1280;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0048;2048;1280;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0049;2304;1280;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0050;0;1024;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0051;256;1024;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0052;512;1024;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0053;768;1024;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0054;1024;1024;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0055;1280;1024;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0056;1536;1024;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0057;1792;1024;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0058;2048;1024;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0059;2304;1024;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0060;0;768;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0061;256;768;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0062;512;768;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0063;768;768;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0064;1024;768;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0065;1280;768;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0066;1536;768;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0067;1792;768;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0068;2048;768;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0069;2304;768;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0070;0;512;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0071;256;512;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0072;512;512;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0073;768;512;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0074;1024;512;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0075;1280;512;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0076;1536;512;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0077;1792;512;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0078;2048;512;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0079;2304;512;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0080;0;256;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0081;256;256;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0082;512;256;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0083;768;256;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0084;1024;256;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0085;1280;256;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0086;1536;256;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0087;1792;256;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0088;2048;256;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0089;2304;256;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0090;0;0;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0091;256;0;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0092;512;0;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0093;768;0;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0094;1024;0;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0095;1280;0;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0096;1536;0;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0097;1536;0;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonIdle0098;1536;0;256;256; 0.5;0.5; 0;0;0;0
