@@ -15,7 +15,9 @@ namespace Platformer.Mechanics
         public float maxSpeed = 7;
         public float jumpTakeOffSpeed = 7;
         public float sprintSpeedMultiplier = 2.5f;
-
+         private bool wasSprintingBeforeJump;
+        private float currentHorizontalSpeed;
+        public float airDragMultiplier = 0.98f;
         public JumpState jumpState = JumpState.Grounded;
         private bool stopJump;
         public Collider2D collider2d;
@@ -25,11 +27,13 @@ namespace Platformer.Mechanics
         private bool isDead = false;
         private bool jump;
         private bool isSprinting;
+        private bool canSprint;   
         private Vector2 move;
         private SpriteRenderer spriteRenderer;
         internal Animator animator;
         private readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
         private string currentAnimation;
+
 
         // Animation States       
         private const string PLAYER_IDLE = "BabyDragonIdle";
@@ -75,15 +79,14 @@ namespace Platformer.Mechanics
             base.Update();
         }
 
- void UpdateAnimationState()
+     void UpdateAnimationState()
     {
-        // If dead, don't update animations
         if (isDead) return;
 
-        // Input-based sprint check
-        isSprinting = Input.GetKey(KeyCode.LeftShift) && Mathf.Abs(Input.GetAxis("Horizontal")) > 0.1f;
+        // Only allow sprint state when grounded
+        isSprinting = IsGrounded && Input.GetKey(KeyCode.LeftShift) && Mathf.Abs(Input.GetAxis("Horizontal")) > 0.1f;
 
-        // Check if the player is grounded
+        // Air states take priority
         if (!IsGrounded)
         {
             if (velocity.y > 0)
@@ -161,8 +164,25 @@ namespace Platformer.Mechanics
         }
     }
 
-    protected override void ComputeVelocity()
+        protected override void ComputeVelocity()
     {
+        // Track if we were sprinting before jumping
+        if (IsGrounded)
+        {
+            wasSprintingBeforeJump = Input.GetKey(KeyCode.LeftShift);
+            currentHorizontalSpeed = wasSprintingBeforeJump ? maxSpeed * sprintSpeedMultiplier : maxSpeed;
+        }
+        else
+        {
+            // In air, gradually reduce speed if it was higher than normal max speed
+            if (Mathf.Abs(currentHorizontalSpeed) > maxSpeed)
+            {
+                currentHorizontalSpeed *= airDragMultiplier;
+                // Don't let it go below normal speed
+                currentHorizontalSpeed = Mathf.Max(currentHorizontalSpeed, maxSpeed);
+            }
+        }
+
         if (jump && IsGrounded)
         {
             velocity.y = jumpTakeOffSpeed * model.jumpModifier;
@@ -182,8 +202,7 @@ namespace Platformer.Mechanics
         else if (move.x < -0.01f)
             spriteRenderer.flipX = true;
 
-        float currentMaxSpeed = isSprinting ? maxSpeed * sprintSpeedMultiplier : maxSpeed;
-        targetVelocity = move * currentMaxSpeed;
+        targetVelocity = move * currentHorizontalSpeed;
     }
 
         public enum JumpState
