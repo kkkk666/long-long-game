@@ -28,13 +28,15 @@ namespace Platformer.Mechanics
         /// Is the entity currently sitting on a surface?
         /// </summary>
         /// <value></value>
-        public bool IsGrounded { get; private set; }
+        public bool IsGrounded { get;  set; }
 
         protected Vector2 targetVelocity;
         protected Vector2 groundNormal;
         protected Rigidbody2D body;
         protected ContactFilter2D contactFilter;
         protected RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
+        protected Transform originalParent;
+        protected Vector3 localPositionOnParent;
 
         protected const float minMoveDistance = 0.001f;
         protected const float shellRadius = 0.01f;
@@ -70,11 +72,12 @@ namespace Platformer.Mechanics
             body.linearVelocity *= 0;
         }
 
-        protected virtual void OnEnable()
-        {
-            body = GetComponent<Rigidbody2D>();
-            body.bodyType = RigidbodyType2D.Kinematic;
-        }
+            protected virtual void OnEnable()
+    {
+        body = GetComponent<Rigidbody2D>();
+        body.bodyType = RigidbodyType2D.Kinematic;
+        originalParent = transform.parent;
+    }
 
         protected virtual void OnDisable()
         {
@@ -99,31 +102,36 @@ namespace Platformer.Mechanics
 
         }
 
-        protected virtual void FixedUpdate()
-        {
-            //if already falling, fall faster than the jump speed, otherwise use normal gravity.
-            if (velocity.y < 0)
-                velocity += gravityModifier * Physics2D.gravity * Time.deltaTime;
-            else
-                velocity += Physics2D.gravity * Time.deltaTime;
 
-            velocity.x = targetVelocity.x;
+    protected virtual void FixedUpdate()
+{
+    //if already falling, fall faster than the jump speed, otherwise use normal gravity.
+    if (velocity.y < 0)
+        velocity += gravityModifier * Physics2D.gravity * Time.deltaTime;
+    else
+        velocity += Physics2D.gravity * Time.deltaTime;
 
-            IsGrounded = false;
+    // Update velocity based on target
+    velocity.x = targetVelocity.x;
+    
+    // Keep vertical velocity unless explicitly changed
+    if (Mathf.Abs(targetVelocity.y) > 0.001f)
+    {
+        velocity.y = targetVelocity.y;
+    }
 
-            var deltaPosition = velocity * Time.deltaTime;
+    IsGrounded = false;
 
-            var moveAlongGround = new Vector2(groundNormal.y, -groundNormal.x);
+    var deltaPosition = velocity * Time.deltaTime;
+    var moveAlongGround = new Vector2(groundNormal.y, -groundNormal.x);
+    var move = moveAlongGround * deltaPosition.x;
 
-            var move = moveAlongGround * deltaPosition.x;
+    PerformMovement(move, false);
 
-            PerformMovement(move, false);
+    move = Vector2.up * deltaPosition.y;
 
-            move = Vector2.up * deltaPosition.y;
-
-            PerformMovement(move, true);
-
-        }
+    PerformMovement(move, true);
+}
 
         void PerformMovement(Vector2 move, bool yMovement)
         {
@@ -148,6 +156,8 @@ namespace Platformer.Mechanics
                             currentNormal.x = 0;
                         }
                     }
+
+                    // Modification: Reduce collision response when on a platform
                     if (IsGrounded)
                     {
                         //how much of our velocity aligns with surface normal?
@@ -155,7 +165,7 @@ namespace Platformer.Mechanics
                         if (projection < 0)
                         {
                             //slower velocity if moving against the normal (up a hill).
-                            velocity = velocity - projection * currentNormal;
+                            velocity = velocity - projection * currentNormal * 0.5f; // Reduced from full projection cancellation
                         }
                     }
                     else
@@ -164,11 +174,14 @@ namespace Platformer.Mechanics
                         velocity.x *= 0;
                         velocity.y = Mathf.Min(velocity.y, 0);
                     }
+
                     //remove shellDistance from actual move distance.
                     var modifiedDistance = hitBuffer[i].distance - shellRadius;
                     distance = modifiedDistance < distance ? modifiedDistance : distance;
                 }
             }
+
+            // Important: Use body.position instead of transform.position to respect platform parenting
             body.position = body.position + move.normalized * distance;
         }
 

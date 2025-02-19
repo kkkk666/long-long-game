@@ -6,204 +6,224 @@ using Platformer.Core;
 
 namespace Platformer.Mechanics
 {
-    public class PlayerController : KinematicObject
+    public class PlayerController : MonoBehaviour
     {
+        [Header("Movement")]
+        public float maxSpeed = 7f;
+        public float jumpForce = 7f;
+        public float sprintSpeedMultiplier = 2.5f;
+        
+        [Header("Ground Check")]
+        public Transform groundCheck;
+        public float groundCheckRadius = 0.1f;
+        public LayerMask groundLayer;
+
+        [Header("Audio")]
         public AudioClip jumpAudio;
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
 
-        public float maxSpeed = 7;
-        public float jumpTakeOffSpeed = 7;
-        public float sprintSpeedMultiplier = 2.5f;
-         private bool wasSprintingBeforeJump;
-        private float currentHorizontalSpeed;
-        public float airDragMultiplier = 0.98f;
-        public JumpState jumpState = JumpState.Grounded;
-        private bool stopJump;
+        [Header("References")]
         public Collider2D collider2d;
         public AudioSource audioSource;
         public Health health;
-        public bool controlEnabled = true;
-        private bool isDead = false;
-        private bool jump;
-        private bool isSprinting;
-        private bool canSprint;   
-        private Vector2 move;
-        private SpriteRenderer spriteRenderer;
-        internal Animator animator;
-        private readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
-        private string currentAnimation;
+        public Animator animator;  // Made public as required
 
+        // Control and State
+        public bool controlEnabled = true;
+        public JumpState jumpState = JumpState.Grounded;
+
+        // Properties required by other scripts
+        public Vector2 velocity 
+        { 
+            get => rb.linearVelocity;
+            set => rb.linearVelocity = value;
+        }
+        
+        public Bounds Bounds => collider2d.bounds;
+
+        // Private variables
+        private Rigidbody2D rb;
+        private SpriteRenderer spriteRenderer;
+        private bool isGrounded;
+        private bool isSprinting;
+        private Vector2 moveInput;
+        private bool isDead;
+        private string currentAnimation;
+        private readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
 
         // Animation States       
         private const string PLAYER_IDLE = "BabyDragonIdle";
         private const string PLAYER_RUN = "BabyDragonWalk";
         private const string PLAYER_JUMP = "BabyDragonJump";
         private const string PLAYER_FALL = "BabyDragonLand 0";
-
         private const string PLAYER_SPRINT = "BabyDragonSprint";
-         private const string PLAYER_DIE = "BabyDragonDie";
+        private const string PLAYER_DIE = "BabyDragonDie";
 
-
-        public Bounds Bounds => collider2d.bounds;
-
-        void Awake()
+        private void Awake()
         {
-            health = GetComponent<Health>();
-            audioSource = GetComponent<AudioSource>();
-            collider2d = GetComponent<Collider2D>();
+            rb = GetComponent<Rigidbody2D>();
             spriteRenderer = GetComponent<SpriteRenderer>();
-            animator = GetComponent<Animator>();
+            
+            // Setup Rigidbody2D for platform movement
+            rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+            rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
 
-        protected override void Update()
+        private void Update()
         {
+            if (isDead) return;
+
             if (controlEnabled)
             {
-                move.x = Input.GetAxis("Horizontal");
-                if (jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
-                    jumpState = JumpState.PrepareToJump;
-                else if (Input.GetButtonUp("Jump"))
+                // Input
+                moveInput.x = Input.GetAxisRaw("Horizontal");
+                isSprinting = Input.GetKey(KeyCode.LeftShift);
+
+                // Jump
+                if (Input.GetButtonDown("Jump") && isGrounded)
                 {
-                    stopJump = true;
-                    Schedule<PlayerStopJump>().player = this;
+                    Jump();
                 }
             }
             else
             {
-                move.x = 0;
+                moveInput = Vector2.zero;
             }
 
-            UpdateJumpState();
+            // Animation
             UpdateAnimationState();
-            base.Update();
+            UpdateJumpState();
         }
 
-     void UpdateAnimationState()
-    {
-        if (isDead) return;
-
-        // Only allow sprint state when grounded
-        isSprinting = IsGrounded && Input.GetKey(KeyCode.LeftShift) && Mathf.Abs(Input.GetAxis("Horizontal")) > 0.1f;
-
-        // Air states take priority
-        if (!IsGrounded)
+        private void FixedUpdate()
         {
-            if (velocity.y > 0)
-                ChangeAnimationState(PLAYER_JUMP);
+            if (isDead) return;
+
+            // Ground Check
+            isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+
+            // Movement
+            if (controlEnabled)
+            {
+                float currentSpeed = maxSpeed * (isSprinting ? sprintSpeedMultiplier : 1f);
+                rb.linearVelocity = new Vector2(moveInput.x * currentSpeed, rb.linearVelocity.y);
+            }
+
+            // Sprite Flip
+            if (moveInput.x > 0.01f)
+                spriteRenderer.flipX = false;
+            else if (moveInput.x < -0.01f)
+                spriteRenderer.flipX = true;
+        }
+
+        // Required methods from original implementation
+        public void Bounce(float force)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, force);
+        }
+
+        public void Bounce(Vector2 direction)
+        {
+            rb.linearVelocity = direction;
+        }
+
+        public void Teleport(Vector3 position)
+        {
+            rb.position = position;
+            rb.linearVelocity = Vector2.zero;
+        }
+
+        private void Jump()
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            if (audioSource && jumpAudio)
+                audioSource.PlayOneShot(jumpAudio);
+        }
+
+        void UpdateJumpState()
+        {
+            if (isGrounded)
+            {
+                jumpState = JumpState.Grounded;
+            }
+            else if (rb.linearVelocity.y > 0)
+            {
+                jumpState = JumpState.InFlight;
+            }
+            else if (rb.linearVelocity.y < 0)
+            {
+                jumpState = JumpState.Falling;
+            }
+        }
+
+        void UpdateAnimationState()
+        {
+            if (!isGrounded)
+            {
+                if (rb.linearVelocity.y > 0)
+                    ChangeAnimationState(PLAYER_JUMP);
+                else
+                    ChangeAnimationState(PLAYER_FALL);
+                return;
+            }
+
+            if (Mathf.Abs(moveInput.x) > 0f)
+            {
+                ChangeAnimationState(isSprinting ? PLAYER_SPRINT : PLAYER_RUN);
+            }
             else
-                ChangeAnimationState(PLAYER_FALL);
-            return;
+            {
+                ChangeAnimationState(PLAYER_IDLE);
+            }
         }
 
-        // Ground movement states
-        float horizontalInput = Input.GetAxis("Horizontal");
-        horizontalInput = Mathf.Round(horizontalInput * 100f) / 100f;
-
-        if (Mathf.Abs(horizontalInput) > 0f)
+        void ChangeAnimationState(string newAnimation)
         {
-            ChangeAnimationState(isSprinting ? PLAYER_SPRINT : PLAYER_RUN);
+            if (currentAnimation == PLAYER_DIE) return;
+            if (currentAnimation == newAnimation) return;
+            
+            animator.Play(newAnimation);
+            currentAnimation = newAnimation;
         }
-        else
+
+        public void TriggerDeath()
         {
-            ChangeAnimationState(PLAYER_IDLE);
+            isDead = true;
+            animator.Play(PLAYER_DIE);
+            currentAnimation = PLAYER_DIE;
+            rb.linearVelocity = Vector2.zero;
         }
-    }
-
-        public void ChangeAnimationState(string newAnimation)
-    {
-        // If currently playing death animation, don't change
-        if (currentAnimation == PLAYER_DIE) return;
-        
-        if (currentAnimation == newAnimation) return;
-        
-        animator.Play(newAnimation, 0, 0f);
-        currentAnimation = newAnimation;
-    }
-
-     public void TriggerDeath()
-    {
-        isDead = true;
-        // Play death animation and prevent it from transitioning to any other state
-        animator.Play(PLAYER_DIE, 0, 0f);
-        currentAnimation = PLAYER_DIE;
-    }
 
         public void ResetDeathState()
-    {
-        isDead = false;
-        currentAnimation = "";  // Reset current animation to allow new animations to play
-    }
-    void UpdateJumpState()
-    {
-        jump = false;
-        switch (jumpState)
         {
-            case JumpState.PrepareToJump:
-                jumpState = JumpState.Jumping;
-                jump = true;
-                stopJump = false;
-                break;
-            case JumpState.Jumping:
-                if (!IsGrounded)
-                {
-                    Schedule<PlayerJumped>().player = this;
-                    jumpState = JumpState.InFlight;
-                }
-                break;
-            case JumpState.InFlight:
-                if (IsGrounded)
-                {
-                    Schedule<PlayerLanded>().player = this;
-                    jumpState = JumpState.Landed;
-                }
-                break;
-            case JumpState.Landed:
-                jumpState = JumpState.Grounded;
-                break;
+            isDead = false;
+            currentAnimation = "";
         }
-    }
 
-        protected override void ComputeVelocity()
-    {
-        // Track if we were sprinting before jumping
-        if (IsGrounded)
+        void OnCollisionEnter2D(Collision2D collision)
         {
-            wasSprintingBeforeJump = Input.GetKey(KeyCode.LeftShift);
-            currentHorizontalSpeed = wasSprintingBeforeJump ? maxSpeed * sprintSpeedMultiplier : maxSpeed;
-        }
-        else
-        {
-            // In air, gradually reduce speed if it was higher than normal max speed
-            if (Mathf.Abs(currentHorizontalSpeed) > maxSpeed)
+            if (collision.gameObject.CompareTag("MovingPlatform"))
             {
-                currentHorizontalSpeed *= airDragMultiplier;
-                // Don't let it go below normal speed
-                currentHorizontalSpeed = Mathf.Max(currentHorizontalSpeed, maxSpeed);
+                foreach (ContactPoint2D contact in collision.contacts)
+                {
+                    if (contact.normal.y > 0.5f)
+                    {
+                        transform.SetParent(collision.transform);
+                        break;
+                    }
+                }
             }
         }
 
-        if (jump && IsGrounded)
+        void OnCollisionExit2D(Collision2D collision)
         {
-            velocity.y = jumpTakeOffSpeed * model.jumpModifier;
-            jump = false;
-        }
-        else if (stopJump)
-        {
-            stopJump = false;
-            if (velocity.y > 0)
+            if (collision.gameObject.CompareTag("MovingPlatform"))
             {
-                velocity.y = velocity.y * model.jumpDeceleration;
+                transform.SetParent(null);
             }
         }
-
-        if (move.x > 0.01f)
-            spriteRenderer.flipX = false;
-        else if (move.x < -0.01f)
-            spriteRenderer.flipX = true;
-
-        targetVelocity = move * currentHorizontalSpeed;
-    }
 
         public enum JumpState
         {
@@ -211,10 +231,8 @@ namespace Platformer.Mechanics
             PrepareToJump,
             Jumping,
             InFlight,
+            Falling,
             Landed
         }
     }
 }
-
-
-
