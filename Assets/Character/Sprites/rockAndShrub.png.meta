@@ -222,7 +222,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      rockAndShrub_0: 4542308916430183922
+      rockAndShrub_1: -6388767348226478870
+      rockAndShrub_2: 7056399422458735684
+      rockAndShrub_3: 864522792903768738
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
