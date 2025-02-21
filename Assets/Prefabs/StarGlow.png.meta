@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      StarGlow_0: -3042063244538337003
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

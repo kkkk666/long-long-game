@@ -144,42 +144,141 @@ namespace Platformer.Mechanics
         }
         }
 
-        private void FixedUpdate()
+  private void FixedUpdate()
+{
+    if (isDead) return;
+
+    // Ground Check
+    bool wasGrounded = isGrounded;
+    isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+
+    // Debug ground state changes
+    if (showDebugInfo && wasGrounded != isGrounded)
+    {
+        Debug.Log($"Ground state changed: {wasGrounded} -> {isGrounded}");
+    }
+
+    // Reset double jump when landing
+    if (isGrounded && !wasGrounded)
+    {
+        canDoubleJump = false;
+        hasDoubleJumped = false;
+        if (showDebugInfo) Debug.Log("Reset double jump state on landing");
+    }
+
+    // Movement
+    if (controlEnabled)
+    {
+        float currentSpeed = maxSpeed * (isSprinting && isGrounded ? sprintSpeedMultiplier : 1f);
+        Vector2 targetVelocity = new Vector2(moveInput.x * currentSpeed, rb.linearVelocity.y);
+
+        // Check if colliding with a wall
+        bool againstWall = CheckWallCollision();
+        if (againstWall && Mathf.Sign(moveInput.x) == Mathf.Sign(GetWallDirection()))
         {
-            if (isDead) return;
-
-            // Ground Check
-            bool wasGrounded = isGrounded;
-            isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-
-            // Debug ground state changes
-            if (showDebugInfo && wasGrounded != isGrounded)
-            {
-                Debug.Log($"Ground state changed: {wasGrounded} -> {isGrounded}");
-            }
-
-            // Reset double jump when landing
-            if (isGrounded && !wasGrounded)
-            {
-                canDoubleJump = false;
-                hasDoubleJumped = false;
-                if (showDebugInfo) Debug.Log("Reset double jump state on landing");
-            }
-
-            // Movement
-            if (controlEnabled)
-            {
-                float currentSpeed = maxSpeed * (isSprinting ? sprintSpeedMultiplier : 1f);
-                rb.linearVelocity = new Vector2(moveInput.x * currentSpeed, rb.linearVelocity.y);
-            }
-
-            // Sprite Flip
-            if (moveInput.x > 0.01f)
-                spriteRenderer.flipX = false;
-            else if (moveInput.x < -0.01f)
-                spriteRenderer.flipX = true;
+            // If pressing into a wall, don’t apply horizontal velocity
+            targetVelocity.x = 0f;
         }
 
+        rb.linearVelocity = targetVelocity;
+    }
+
+    
+
+    // Sprite Flip
+    if (moveInput.x > 0.01f)
+        spriteRenderer.flipX = false;
+    else if (moveInput.x < -0.01f)
+        spriteRenderer.flipX = true;
+}
+private bool CheckWallCollision()
+{
+    // Define the box size and check positions
+    Vector2 boxSize = new Vector2(0.1f, collider2d.bounds.size.y * 0.8f);
+    Vector2 rightCheck = (Vector2)transform.position + Vector2.right * (collider2d.bounds.extents.x + 0.05f);
+    Vector2 leftCheck = (Vector2)transform.position - Vector2.right * (collider2d.bounds.extents.x + 0.05f);
+
+    // Check for colliders on both sides
+    Collider2D[] rightHits = Physics2D.OverlapBoxAll(rightCheck, boxSize, 0f, groundLayer);
+    Collider2D[] leftHits = Physics2D.OverlapBoxAll(leftCheck, boxSize, 0f, groundLayer);
+
+    // Check if any hit has the "Obstacle" tag
+    bool hitRight = false;
+    bool hitLeft = false;
+
+    foreach (var hit in rightHits)
+    {
+        if (hit.CompareTag("Obstacle"))
+        {
+            hitRight = true;
+            break;
+        }
+    }
+
+    foreach (var hit in leftHits)
+    {
+        if (hit.CompareTag("Obstacle"))
+        {
+            hitLeft = true;
+            break;
+        }
+    }
+
+    if (showDebugInfo && (hitRight || hitLeft))
+    {
+        Debug.Log($"Wall detected - Right: {hitRight}, Left: {hitLeft}");
+    }
+
+    return hitRight || hitLeft;
+}
+
+// Determine wall direction (1 for right, -1 for left)
+private float GetWallDirection()
+{
+    Vector2 boxSize = new Vector2(0.1f, collider2d.bounds.size.y * 0.8f);
+    Vector2 rightCheck = (Vector2)transform.position + Vector2.right * (collider2d.bounds.extents.x + 0.05f);
+    Vector2 leftCheck = (Vector2)transform.position - Vector2.right * (collider2d.bounds.extents.x + 0.05f);
+
+    // Check for colliders on both sides
+    Collider2D[] rightHits = Physics2D.OverlapBoxAll(rightCheck, boxSize, 0f, groundLayer);
+    Collider2D[] leftHits = Physics2D.OverlapBoxAll(leftCheck, boxSize, 0f, groundLayer);
+
+    // Check right side for "Obstacle" tag
+    foreach (var hit in rightHits)
+    {
+        if (hit.CompareTag("Obstacle"))
+        {
+            return 1f;  // Wall on the right
+        }
+    }
+
+    // Check left side for "Obstacle" tag
+    foreach (var hit in leftHits)
+    {
+        if (hit.CompareTag("Obstacle"))
+        {
+            return -1f;  // Wall on the left
+        }
+    }
+
+    return 0f;  // No wall detected
+}
+
+// Optional: Visualize wall checks in the editor
+private void OnDrawGizmos()
+{
+    if (showDebugInfo)
+    {
+        Vector2 boxSize = new Vector2(0.1f, collider2d.bounds.size.y * 0.8f);
+        Vector2 rightCheck = (Vector2)transform.position + Vector2.right * (collider2d.bounds.extents.x + 0.05f);
+        Vector2 leftCheck = (Vector2)transform.position - Vector2.right * (collider2d.bounds.extents.x + 0.05f);
+
+        Gizmos.color = Physics2D.OverlapBox(rightCheck, boxSize, 0f, groundLayer) ? Color.red : Color.green;
+        Gizmos.DrawWireCube(rightCheck, boxSize);
+        Gizmos.color = Physics2D.OverlapBox(leftCheck, boxSize, 0f, groundLayer) ? Color.red : Color.green;
+        Gizmos.DrawWireCube(leftCheck, boxSize);
+    }
+}
         private void Jump()
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);  // Changed from linearVelocity to velocity
@@ -230,26 +329,27 @@ namespace Platformer.Mechanics
             }
         }
 
-        void UpdateAnimationState()
-        {
-            if (!isGrounded)
-            {
-                if (rb.linearVelocity.y > 0)
-                    ChangeAnimationState(PLAYER_JUMP);
-                else
-                    ChangeAnimationState(PLAYER_FALL);
-                return;
-            }
+       void UpdateAnimationState()
+{
+    if (!isGrounded)
+    {
+        if (rb.linearVelocity.y > 0)
+            ChangeAnimationState(PLAYER_JUMP);
+        else
+            ChangeAnimationState(PLAYER_FALL);
+        return;
+    }
 
-            if (Mathf.Abs(moveInput.x) > 0f)
-            {
-                ChangeAnimationState(isSprinting ? PLAYER_SPRINT : PLAYER_RUN);
-            }
-            else
-            {
-                ChangeAnimationState(PLAYER_IDLE);
-            }
-        }
+    if (Mathf.Abs(moveInput.x) > 0f)
+    {
+        // Only use sprint animation when grounded and sprinting
+        ChangeAnimationState(isSprinting && isGrounded ? PLAYER_SPRINT : PLAYER_RUN);
+    }
+    else
+    {
+        ChangeAnimationState(PLAYER_IDLE);
+    }
+}
 
         void ChangeAnimationState(string newAnimation)
         {
@@ -293,13 +393,18 @@ namespace Platformer.Mechanics
             }
         }
 
-        void OnCollisionExit2D(Collision2D collision)
-        {
-            if (collision.gameObject.CompareTag("MovingPlatform"))
-            {
-                transform.SetParent(null);
-            }
-        }
+       private void OnCollisionExit2D(Collision2D collision)
+{
+    if (collision.gameObject.CompareTag("MovingPlatform"))
+    {
+        transform.SetParent(null);
+    }
+    // When leaving collision, recheck grounded state
+    if (((1 << collision.gameObject.layer) & groundLayer) != 0)
+    {
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+    }
+}
 
         // Optional: Add OnGUI method for real-time debugging
         private void OnGUI()
@@ -312,6 +417,27 @@ namespace Platformer.Mechanics
                 GUI.Label(new Rect(10, 70, 200, 20), $"Velocity Y: {rb.linearVelocity.y:F2}");
             }
         }
+
+        private void OnCollisionStay2D(Collision2D collision)
+{
+    if (isDead) return;
+
+    // Only consider collisions with ground layer
+    if (((1 << collision.gameObject.layer) & groundLayer) != 0)
+    {
+        foreach (ContactPoint2D contact in collision.contacts)
+        {
+            // Check if the collision normal is pointing mostly upward (player is on top)
+            if (contact.normal.y > 0.5f) // Normal.y > 0.5 means the surface is below the player
+            {
+                isGrounded = true;
+                return;
+            }
+        }
+        // If no upward normal is found, ensure isGrounded is false unless overlap confirms it
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+    }
+}
 
         public enum JumpState
         {

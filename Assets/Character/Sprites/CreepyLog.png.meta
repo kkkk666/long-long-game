@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      CreepyLog_0: 7814023036300922643
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

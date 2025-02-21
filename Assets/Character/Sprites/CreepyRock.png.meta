@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      CreepyRock_0: 4658322167066175086
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

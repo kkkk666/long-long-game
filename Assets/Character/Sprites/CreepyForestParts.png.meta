@@ -447,7 +447,20 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      CreepyForestParts_0: 6909520303646902331
+      CreepyForestParts_1: -5617415760382331899
+      CreepyForestParts_10: 3286004006038840059
+      CreepyForestParts_11: -1949677843674763368
+      CreepyForestParts_12: -6210352501704680519
+      CreepyForestParts_2: 781211611532308721
+      CreepyForestParts_3: -6560718157638132983
+      CreepyForestParts_4: -5195752861915741251
+      CreepyForestParts_5: 1485312564702914559
+      CreepyForestParts_6: -2363021505635292410
+      CreepyForestParts_7: -1908365152764284828
+      CreepyForestParts_8: -9065564675715810419
+      CreepyForestParts_9: -7141777477804726845
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

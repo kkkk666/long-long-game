@@ -397,7 +397,18 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BabyDragonLand_0: -4529280951973894017
+      BabyDragonLand_1: 7327708324817568475
+      BabyDragonLand_10: -7702295794192744475
+      BabyDragonLand_2: -7673711865325641071
+      BabyDragonLand_3: -7028730488976277237
+      BabyDragonLand_4: 8332950514137872512
+      BabyDragonLand_5: 3041337502062331889
+      BabyDragonLand_6: -7514994399016102355
+      BabyDragonLand_7: 2049660947789052777
+      BabyDragonLand_8: -6922819924595327433
+      BabyDragonLand_9: -897186277493628904
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -472,7 +472,21 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BabyDragonJump 1_0: -6695353243572400153
+      BabyDragonJump 1_1: -5163857224071183599
+      BabyDragonJump 1_10: 1692077414581992397
+      BabyDragonJump 1_11: -6362715282364581124
+      BabyDragonJump 1_12: -1092109099085026438
+      BabyDragonJump 1_13: 2683774281988385873
+      BabyDragonJump 1_2: -8645690463295755558
+      BabyDragonJump 1_3: 6550328595106117210
+      BabyDragonJump 1_4: 6676023829508462741
+      BabyDragonJump 1_5: 5942797145930716021
+      BabyDragonJump 1_6: -4273648852904721080
+      BabyDragonJump 1_7: -5599471067479822220
+      BabyDragonJump 1_8: -3824782482185996598
+      BabyDragonJump 1_9: 1930421525801745483
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

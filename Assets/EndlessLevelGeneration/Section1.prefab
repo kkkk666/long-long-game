@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 9026485232651963586}
   m_Layer: 0
   m_Name: FloatingPlatform1 (1)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -363,11 +363,11 @@ MonoBehaviour:
     colliders: []
     _isRoot: 1
   bounds:
-    center: {x: 0.0000009536743, y: -0.11500013, z: 0}
-    extents: {x: 10.240001, y: 2.1549997, z: 0}
-    max: {x: 10.240002, y: 2.0399995, z: 0}
-    min: {x: -10.24, y: -2.2699997, z: 0}
-    size: {x: 20.480001, y: 4.3099995, z: 0}
+    center: {x: 0, y: -0.11500037, z: 0}
+    extents: {x: 10.24, y: 2.1549997, z: 0}
+    max: {x: 10.24, y: 2.0399995, z: 0}
+    min: {x: -10.24, y: -2.2700002, z: 0}
+    size: {x: 20.48, y: 4.3099995, z: 0}
   builders: []
   unpacked: 1
   alwaysDraw: 0
@@ -667,7 +667,7 @@ GameObject:
   - component: {fileID: 6264578735101340670}
   m_Layer: 0
   m_Name: FloatingPlatform1 (2)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1649,11 +1649,11 @@ MonoBehaviour:
     colliders: []
     _isRoot: 0
   bounds:
-    center: {x: 4.8118725, y: 1.4999998, z: -1.1656761}
-    extents: {x: 10.5, y: 4.9799995, z: 2.5182953}
+    center: {x: 4.8118725, y: 1.4999995, z: -1.1656761}
+    extents: {x: 10.5, y: 4.98, z: 2.5182953}
     max: {x: 15.3118725, y: 6.4799995, z: 1.3526192}
-    min: {x: -5.6881275, y: -3.48, z: -3.6839714}
-    size: {x: 21, y: 9.959999, z: 5.0365906}
+    min: {x: -5.6881275, y: -3.4800005, z: -3.6839714}
+    size: {x: 21, y: 9.96, z: 5.0365906}
   builders: []
   unpacked: 0
   alwaysDraw: 0
@@ -1811,7 +1811,7 @@ GameObject:
   - component: {fileID: 5243677935613574630}
   m_Layer: 0
   m_Name: FloatingPlatform1
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1946,7 +1946,7 @@ GameObject:
   - component: {fileID: 6300287433442297123}
   m_Layer: 0
   m_Name: Tilemap
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
