@@ -1,38 +1,39 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Platformer.Core;
+﻿using Platformer.Core;
 using Platformer.Mechanics;
 using Platformer.Model;
 using UnityEngine;
 
 namespace Platformer.Gameplay
 {
-    /// <summary>
-    /// Fired when the player has died.
-    /// </summary>
-    /// <typeparam name="PlayerDeath"></typeparam>
     public class PlayerDeath : Simulation.Event<PlayerDeath>
     {
         PlatformerModel model = Simulation.GetModel<PlatformerModel>();
+        
+        // Store death position
+        public Vector2 deathPosition;
 
         public override void Execute()
-    {
-        var player = model.player;
-        if (player.health.IsAlive)
         {
-            player.health.Die();
-            model.virtualCamera.Follow = null;
-            model.virtualCamera.LookAt = null;
-            player.controlEnabled = false;
+            var player = model.player;
+            if (player.health.IsAlive)
+            {
+                // Store the death position
+                deathPosition = player.transform.position;
+                
+                player.health.Die();
+                model.virtualCamera.Follow = null;
+                model.virtualCamera.LookAt = null;
+                player.controlEnabled = false;
 
-            if (player.audioSource && player.ouchAudio)
-                player.audioSource.PlayOneShot(player.ouchAudio);
-            
-            // Use the new death trigger method
-            player.GetComponent<PlayerController>().TriggerDeath();
-            
-            Simulation.Schedule<PlayerSpawn>(1);
-        }
+                if (player.audioSource && player.ouchAudio)
+                    player.audioSource.PlayOneShot(player.ouchAudio);
+                
+                player.GetComponent<PlayerController>().TriggerDeath();
+                
+                // Schedule respawn and pass death position
+                var spawnEvent = Simulation.Schedule<PlayerSpawn>(1);
+                spawnEvent.deathPosition = deathPosition;
+            }
         }
     }
 }

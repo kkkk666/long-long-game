@@ -58,7 +58,7 @@ namespace Dreamteck.Forever.Editor
             //Debug spline points
             if (segment.path != null)
             {
-                for (int i = 0; i < segment.path.spline.points.Length; i++)
+                    for (int i = 0; i < segment.path.spline.points.Length; i++)
                 {
                     Vector3 pos = segment.path.spline.points[i].position;
                     float handleSize = HandleUtility.GetHandleSize(segment.path.spline.points[i].position);

@@ -1,27 +1,36 @@
 using Platformer.Core;
 using Platformer.Mechanics;
 using Platformer.Model;
+using UnityEngine;
 
 namespace Platformer.Gameplay
 {
-    /// <summary>
-    /// Fired when the player is spawned after dying.
-    /// </summary>
     public class PlayerSpawn : Simulation.Event<PlayerSpawn>
     {
         PlatformerModel model = Simulation.GetModel<PlatformerModel>();
+        
+        // Add death position field
+        public Vector2 deathPosition;
 
         public override void Execute()
         {
             var player = model.player;
             player.collider2d.enabled = true;
             player.controlEnabled = false;
+            
+            // Find safe spawn point
+            Vector2 safeSpawnPoint = SpawnPointFinder.FindSafeSpawnPoint(
+                deathPosition, 
+                player.GetComponent<PlayerController>().groundLayer
+            );
+
             if (player.audioSource && player.respawnAudio)
                 player.audioSource.PlayOneShot(player.respawnAudio);
+            
             player.health.Increment();
-            player.Teleport(model.spawnPoint.transform.position);
+            player.Teleport(safeSpawnPoint);
             player.jumpState = PlayerController.JumpState.Grounded;
-             player.GetComponent<PlayerController>().ResetDeathState();
+            player.GetComponent<PlayerController>().ResetDeathState();
             model.virtualCamera.Follow = player.transform;
             model.virtualCamera.LookAt = player.transform;
             Simulation.Schedule<EnablePlayerInput>(2f);
