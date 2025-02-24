@@ -6,14 +6,17 @@ TagManager:
   tags:
   - TutorialRequirement
   - MovingPlatform
+  - Obstacle
+  - SpawnPoint
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - InvulnerablePlayer
   - Water
   - UI
-  - 
+  - Enemy
   - 
   - 
   - 

@@ -1,18 +1,25 @@
-﻿using UnityEngine;
+﻿﻿using UnityEngine;
 using Platformer.Gameplay;
 using static Platformer.Core.Simulation;
 using Platformer.Model;
 using Platformer.Core;
+using System.Collections;
 
 namespace Platformer.Mechanics
 {
     public class PlayerController : MonoBehaviour
     {
+
         [Header("Movement")]
-        public float maxSpeed = 7f;
+        public float baseSpeed = 7f;           // Starting speed
+        public float maxSpeed = 15f;           // Maximum speed cap
+        public float speedIncreaseRate = 0.1f; // How much to increase speed per second
+        public float currentSpeed;             // Current running speed
+        public float speedModifier = 3f;       // How much player can modify their speed
         public float jumpForce = 7f;
         public float doubleJumpForce = 7f;
-        public float sprintSpeedMultiplier = 2.5f;
+        public float stompForce = 15f;         // Force applied during stomp
+        public float stompDuration = 0.3f;     // Duration of the stomp
         
         [Header("Ground Check")]
         public Transform groundCheck;
@@ -20,7 +27,7 @@ namespace Platformer.Mechanics
         public LayerMask groundLayer;
 
         [Header("Debug")]
-        public bool showDebugInfo = true;  // Added for debugging
+        public bool showDebugInfo = false;  // Added for debugging
 
         [Header("Audio")]
         public AudioClip jumpAudio;
@@ -33,6 +40,19 @@ namespace Platformer.Mechanics
         public AudioSource audioSource;
         public Health health;
         public Animator animator;
+
+
+        [Header("Invulnerability")]
+        public bool isInvulnerable = false;
+        public float invulnerabilityDuration = 3f;
+        public float flashStartInterval = 0.5f;
+        public float flashEndInterval = 0.1f;
+        private float currentFlashInterval;
+        private float lastFlashTime;
+        private float invulnerabilityEndTime;
+        private Coroutine invulnerabilityCoroutine;
+        private int defaultLayer;
+        private int invulnerableLayer;
 
         // Control and State
         public bool controlEnabled = true;
@@ -53,10 +73,11 @@ namespace Platformer.Mechanics
         private bool isGrounded;
         private bool canDoubleJump = false;
         private bool hasDoubleJumped = false;
-        private bool isSprinting;
-        private Vector2 moveInput;
         private bool isDead;
+        private bool isStomping;
+        private float stompEndTime;
         private string currentAnimation;
+        private float gameStartTime;
         private readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
 
         // Animation States       
@@ -66,9 +87,13 @@ namespace Platformer.Mechanics
         private const string PLAYER_FALL = "BabyDragonLand 0";
         private const string PLAYER_SPRINT = "BabyDragonSprint";
         private const string PLAYER_DIE = "BabyDragonDie";
+        private const string PLAYER_STOMP = "BabyDragonLand 0"; // Reusing fall animation for stomp
 
         private void Awake()
         {
+            
+            defaultLayer = gameObject.layer;
+            invulnerableLayer = LayerMask.NameToLayer("InvulnerablePlayer");
             rb = GetComponent<Rigidbody2D>();
             spriteRenderer = GetComponent<SpriteRenderer>();
             
@@ -76,6 +101,10 @@ namespace Platformer.Mechanics
             rb.interpolation = RigidbodyInterpolation2D.Interpolate;
             rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+            // Initialize starting speed
+            currentSpeed = baseSpeed;
+            gameStartTime = Time.time;
         }
 
         private void Update()
@@ -84,18 +113,14 @@ namespace Platformer.Mechanics
 
             if (controlEnabled)
             {
-                // Input
-                moveInput.x = Input.GetAxisRaw("Horizontal");
-                isSprinting = Input.GetKey(KeyCode.LeftShift);
-
                 // Handle jumping
                 if (Input.GetButtonDown("Jump"))
                 {
                     if (isGrounded)
                     {
                         Jump();
-                        canDoubleJump = true;  // Enable double jump after initial jump
-                        hasDoubleJumped = false;  // Reset double jump state
+                        canDoubleJump = true;
+                        hasDoubleJumped = false;
                         
                         if (showDebugInfo) Debug.Log("First Jump performed");
                     }
@@ -107,18 +132,21 @@ namespace Platformer.Mechanics
                         
                         if (showDebugInfo) Debug.Log("Double Jump performed");
                     }
-                    else
-                    {
-                        if (showDebugInfo)
-                        {
-                            Debug.Log($"Jump failed - Conditions: isGrounded={isGrounded}, canDoubleJump={canDoubleJump}, hasDoubleJumped={hasDoubleJumped}");
-                        }
-                    }
                 }
-            }
-            else
-            {
-                moveInput = Vector2.zero;
+
+                // Stomp ability (press down during double jump)
+                if (hasDoubleJumped && !isGrounded && !isStomping && Input.GetAxisRaw("Vertical") < -0.5f)
+                {
+                    StartStomp();
+                    if (showDebugInfo) Debug.Log("Stomp initiated");
+                }
+
+                // Gradually increase speed over time
+                if (currentSpeed < maxSpeed)
+                {
+                    currentSpeed += speedIncreaseRate * Time.deltaTime;
+                    currentSpeed = Mathf.Min(currentSpeed, maxSpeed);
+                }
             }
 
             // Animation
@@ -128,7 +156,6 @@ namespace Platformer.Mechanics
             // Debug visualization of ground check
             if (showDebugInfo)
             {
-                // Draw debug lines to show ground check area
                 float segments = 16;
                 float angleStep = 360f / segments;
                 for (int i = 0; i < segments; i++)
@@ -140,216 +167,222 @@ namespace Platformer.Mechanics
                     Vector2 point2 = groundCheck.position + new Vector3(Mathf.Cos(angle2), Mathf.Sin(angle2)) * groundCheckRadius;
                     
                     Debug.DrawLine(point1, point2, isGrounded ? Color.green : Color.red);
+                }
             }
         }
-        }
 
-  private void FixedUpdate()
-{
-    if (isDead) return;
-
-    // Ground Check
-    bool wasGrounded = isGrounded;
-    isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-
-    // Debug ground state changes
-    if (showDebugInfo && wasGrounded != isGrounded)
-    {
-        Debug.Log($"Ground state changed: {wasGrounded} -> {isGrounded}");
-    }
-
-    // Reset double jump when landing
-    if (isGrounded && !wasGrounded)
-    {
-        canDoubleJump = false;
-        hasDoubleJumped = false;
-        if (showDebugInfo) Debug.Log("Reset double jump state on landing");
-    }
-
-    // Movement
-    if (controlEnabled)
-    {
-        float currentSpeed = maxSpeed * (isSprinting && isGrounded ? sprintSpeedMultiplier : 1f);
-        Vector2 targetVelocity = new Vector2(moveInput.x * currentSpeed, rb.linearVelocity.y);
-
-        // Check if colliding with a wall
-        bool againstWall = CheckWallCollision();
-        if (againstWall && Mathf.Sign(moveInput.x) == Mathf.Sign(GetWallDirection()))
+        private void FixedUpdate()
         {
-            // If pressing into a wall, don’t apply horizontal velocity
-            targetVelocity.x = 0f;
-        }
+            if (isDead) return;
 
-        rb.linearVelocity = targetVelocity;
-    }
+            // Ground Check
+            bool wasGrounded = isGrounded;
+            isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
+            if (showDebugInfo && wasGrounded != isGrounded)
+            {
+                Debug.Log($"Ground state changed: {wasGrounded} -> {isGrounded}");
+            }
+
+            // Reset double jump when landing
+            if (isGrounded && !wasGrounded)
+            {
+                canDoubleJump = false;
+                hasDoubleJumped = false;
+                if (showDebugInfo) Debug.Log("Reset double jump state on landing");
+            }
+// Check if stomp has ended
+if (isStomping && Time.time >= stompEndTime)
+{
+    isStomping = false;
+    if (showDebugInfo) Debug.Log("Stomp ended");
+}
+
+// Movement
+if (controlEnabled)
+{
+    // Get horizontal input (-1 for left, 1 for right)
+    float horizontalInput = Input.GetAxisRaw("Horizontal");
     
-
-    // Sprite Flip
-    if (moveInput.x > 0.01f)
-        spriteRenderer.flipX = false;
-    else if (moveInput.x < -0.01f)
-        spriteRenderer.flipX = true;
-}
-private bool CheckWallCollision()
-{
-    // Define the box size and check positions
-    Vector2 boxSize = new Vector2(0.1f, collider2d.bounds.size.y * 0.8f);
-    Vector2 rightCheck = (Vector2)transform.position + Vector2.right * (collider2d.bounds.extents.x + 0.05f);
-    Vector2 leftCheck = (Vector2)transform.position - Vector2.right * (collider2d.bounds.extents.x + 0.05f);
-
-    // Check for colliders on both sides
-    Collider2D[] rightHits = Physics2D.OverlapBoxAll(rightCheck, boxSize, 0f, groundLayer);
-    Collider2D[] leftHits = Physics2D.OverlapBoxAll(leftCheck, boxSize, 0f, groundLayer);
-
-    // Check if any hit has the "Obstacle" tag
-    bool hitRight = false;
-    bool hitLeft = false;
-
-    foreach (var hit in rightHits)
+    // Calculate speed modification based on input
+    float speedModification = horizontalInput * speedModifier;
+    
+    // Apply speed modification to current speed
+    float targetSpeed = currentSpeed + speedModification;
+    
+    // Ensure speed doesn't go below half of base speed or above maxSpeed
+    targetSpeed = Mathf.Clamp(targetSpeed, baseSpeed * 0.5f, maxSpeed);
+    
+    Vector2 targetVelocity;
+    
+    if (isStomping)
     {
-        if (hit.CompareTag("Obstacle"))
-        {
-            hitRight = true;
-            break;
-        }
+        // During stomp, maintain vertical velocity and stop horizontal movement
+        targetVelocity = new Vector2(0, -stompForce);
+    }
+    else
+    {
+        targetVelocity = new Vector2(targetSpeed, rb.linearVelocity.y);
     }
 
-    foreach (var hit in leftHits)
+    // Check if colliding with a wall
+    bool againstWall = CheckWallCollision();
+    if (againstWall && GetWallDirection() > 0) // Only check right wall for endless runner
     {
-        if (hit.CompareTag("Obstacle"))
-        {
-            hitLeft = true;
-            break;
-        }
+        targetVelocity.x = 0f;
     }
 
-    if (showDebugInfo && (hitRight || hitLeft))
-    {
-        Debug.Log($"Wall detected - Right: {hitRight}, Left: {hitLeft}");
-    }
-
-    return hitRight || hitLeft;
+    rb.linearVelocity = targetVelocity;
 }
 
-// Determine wall direction (1 for right, -1 for left)
-private float GetWallDirection()
-{
-    Vector2 boxSize = new Vector2(0.1f, collider2d.bounds.size.y * 0.8f);
-    Vector2 rightCheck = (Vector2)transform.position + Vector2.right * (collider2d.bounds.extents.x + 0.05f);
-    Vector2 leftCheck = (Vector2)transform.position - Vector2.right * (collider2d.bounds.extents.x + 0.05f);
-
-    // Check for colliders on both sides
-    Collider2D[] rightHits = Physics2D.OverlapBoxAll(rightCheck, boxSize, 0f, groundLayer);
-    Collider2D[] leftHits = Physics2D.OverlapBoxAll(leftCheck, boxSize, 0f, groundLayer);
-
-    // Check right side for "Obstacle" tag
-    foreach (var hit in rightHits)
-    {
-        if (hit.CompareTag("Obstacle"))
-        {
-            return 1f;  // Wall on the right
+// Always face right for endless runner
+spriteRenderer.flipX = false;
+            spriteRenderer.flipX = false;
         }
-    }
 
-    // Check left side for "Obstacle" tag
-    foreach (var hit in leftHits)
-    {
-        if (hit.CompareTag("Obstacle"))
+        private bool CheckWallCollision()
         {
-            return -1f;  // Wall on the left
+            Vector2 boxSize = new Vector2(0.1f, collider2d.bounds.size.y * 0.8f);
+            Vector2 rightCheck = (Vector2)transform.position + Vector2.right * (collider2d.bounds.extents.x + 0.05f);
+            Vector2 leftCheck = (Vector2)transform.position - Vector2.right * (collider2d.bounds.extents.x + 0.05f);
+
+            Collider2D[] rightHits = Physics2D.OverlapBoxAll(rightCheck, boxSize, 0f, groundLayer);
+            Collider2D[] leftHits = Physics2D.OverlapBoxAll(leftCheck, boxSize, 0f, groundLayer);
+
+            bool hitRight = false;
+            bool hitLeft = false;
+
+            foreach (var hit in rightHits)
+            {
+                if (hit.CompareTag("Obstacle"))
+                {
+                    hitRight = true;
+                    break;
+                }
+            }
+
+            foreach (var hit in leftHits)
+            {
+                if (hit.CompareTag("Obstacle"))
+                {
+                    hitLeft = true;
+                    break;
+                }
+            }
+
+            if (showDebugInfo && (hitRight || hitLeft))
+            {
+                Debug.Log($"Wall detected - Right: {hitRight}, Left: {hitLeft}");
+            }
+
+            return hitRight || hitLeft;
         }
-    }
 
-    return 0f;  // No wall detected
-}
+        private float GetWallDirection()
+        {
+            Vector2 boxSize = new Vector2(0.1f, collider2d.bounds.size.y * 0.8f);
+            Vector2 rightCheck = (Vector2)transform.position + Vector2.right * (collider2d.bounds.extents.x + 0.05f);
 
-// Optional: Visualize wall checks in the editor
-private void OnDrawGizmos()
-{
-    if (showDebugInfo)
-    {
-        Vector2 boxSize = new Vector2(0.1f, collider2d.bounds.size.y * 0.8f);
-        Vector2 rightCheck = (Vector2)transform.position + Vector2.right * (collider2d.bounds.extents.x + 0.05f);
-        Vector2 leftCheck = (Vector2)transform.position - Vector2.right * (collider2d.bounds.extents.x + 0.05f);
+            Collider2D[] rightHits = Physics2D.OverlapBoxAll(rightCheck, boxSize, 0f, groundLayer);
 
-        Gizmos.color = Physics2D.OverlapBox(rightCheck, boxSize, 0f, groundLayer) ? Color.red : Color.green;
-        Gizmos.DrawWireCube(rightCheck, boxSize);
-        Gizmos.color = Physics2D.OverlapBox(leftCheck, boxSize, 0f, groundLayer) ? Color.red : Color.green;
-        Gizmos.DrawWireCube(leftCheck, boxSize);
-    }
-}
+            foreach (var hit in rightHits)
+            {
+                if (hit.CompareTag("Obstacle"))
+                {
+                    return 1f;  // Wall on the right
+                }
+            }
+
+            return 0f;  // No wall detected
+        }
+
+          private IEnumerator InvulnerabilityRoutine()
+        {
+            isInvulnerable = true;
+            gameObject.layer = invulnerableLayer;
+            Physics2D.IgnoreLayerCollision(invulnerableLayer, LayerMask.NameToLayer("Enemy"), true);
+            invulnerabilityEndTime = Time.time + invulnerabilityDuration;
+            currentFlashInterval = flashStartInterval;
+            lastFlashTime = Time.time;
+
+            while (Time.time < invulnerabilityEndTime)
+            {
+                float timeLeft = invulnerabilityEndTime - Time.time;
+                float progress = 1 - (timeLeft / invulnerabilityDuration);
+                currentFlashInterval = Mathf.Lerp(flashStartInterval, flashEndInterval, progress);
+
+                if (Time.time - lastFlashTime >= currentFlashInterval)
+                {
+                    spriteRenderer.enabled = !spriteRenderer.enabled;
+                    lastFlashTime = Time.time;
+                }
+                yield return null;
+            }
+           
+            spriteRenderer.enabled = true;
+           
+            Physics2D.IgnoreLayerCollision(invulnerableLayer, LayerMask.NameToLayer("Enemy"), false);
+            gameObject.layer = defaultLayer;
+             isInvulnerable = false;
+        }
+        private void OnDrawGizmos()
+        {
+            if (showDebugInfo)
+            {
+                Vector2 boxSize = new Vector2(0.1f, collider2d.bounds.size.y * 0.8f);
+                Vector2 rightCheck = (Vector2)transform.position + Vector2.right * (collider2d.bounds.extents.x + 0.05f);
+                Vector2 leftCheck = (Vector2)transform.position - Vector2.right * (collider2d.bounds.extents.x + 0.05f);
+
+                Gizmos.color = Physics2D.OverlapBox(rightCheck, boxSize, 0f, groundLayer) ? Color.red : Color.green;
+                Gizmos.DrawWireCube(rightCheck, boxSize);
+                Gizmos.color = Physics2D.OverlapBox(leftCheck, boxSize, 0f, groundLayer) ? Color.red : Color.green;
+                Gizmos.DrawWireCube(leftCheck, boxSize);
+            }
+        }
+
         private void Jump()
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);  // Changed from linearVelocity to velocity
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             if (audioSource && jumpAudio)
                 audioSource.PlayOneShot(jumpAudio);
         }
 
         private void DoubleJump()
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, doubleJumpForce);  // Changed from linearVelocity to velocity
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, doubleJumpForce);
             if (audioSource && doubleJumpAudio)
                 audioSource.PlayOneShot(doubleJumpAudio);
             else if (audioSource && jumpAudio)
                 audioSource.PlayOneShot(jumpAudio);
         }
 
-        public void Bounce(float force)
+        private void StartStomp()
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, force);
+            isStomping = true;
+            stompEndTime = Time.time + stompDuration;
+            ChangeAnimationState(PLAYER_STOMP);
         }
 
-        public void Bounce(Vector2 direction)
+        void UpdateAnimationState()
         {
-            rb.linearVelocity = direction;
-        }
-
-        public void Teleport(Vector3 position)
-        {
-            rb.position = position;
-            rb.linearVelocity = Vector2.zero;
-            hasDoubleJumped = false;
-            canDoubleJump = false;
-        }
-
-        void UpdateJumpState()
-        {
-            if (isGrounded)
+            if (isStomping)
             {
-                jumpState = JumpState.Grounded;
+                ChangeAnimationState(PLAYER_STOMP);
+                return;
             }
-            else if (rb.linearVelocity.y > 0)
+
+            if (!isGrounded)
             {
-                jumpState = JumpState.InFlight;
+                if (rb.linearVelocity.y > 0)
+                    ChangeAnimationState(PLAYER_JUMP);
+                else
+                    ChangeAnimationState(PLAYER_FALL);
+                return;
             }
-            else if (rb.linearVelocity.y < 0)
-            {
-                jumpState = JumpState.Falling;
-            }
+
+            // Always show running animation when grounded, use sprint for higher speeds
+            ChangeAnimationState(currentSpeed > baseSpeed ? PLAYER_SPRINT : PLAYER_RUN);
         }
-
-       void UpdateAnimationState()
-{
-    if (!isGrounded)
-    {
-        if (rb.linearVelocity.y > 0)
-            ChangeAnimationState(PLAYER_JUMP);
-        else
-            ChangeAnimationState(PLAYER_FALL);
-        return;
-    }
-
-    if (Mathf.Abs(moveInput.x) > 0f)
-    {
-        // Only use sprint animation when grounded and sprinting
-        ChangeAnimationState(isSprinting && isGrounded ? PLAYER_SPRINT : PLAYER_RUN);
-    }
-    else
-    {
-        ChangeAnimationState(PLAYER_IDLE);
-    }
-}
 
         void ChangeAnimationState(string newAnimation)
         {
@@ -362,12 +395,15 @@ private void OnDrawGizmos()
 
         public void TriggerDeath()
         {
+            if (isInvulnerable) return;
+            
             isDead = true;
             animator.Play(PLAYER_DIE);
             currentAnimation = PLAYER_DIE;
             rb.linearVelocity = Vector2.zero;
             hasDoubleJumped = false;
             canDoubleJump = false;
+            currentSpeed = baseSpeed;
         }
 
         public void ResetDeathState()
@@ -376,10 +412,59 @@ private void OnDrawGizmos()
             currentAnimation = "";
             hasDoubleJumped = false;
             canDoubleJump = false;
+            currentSpeed = baseSpeed;
+
+            if (invulnerabilityCoroutine != null)
+                StopCoroutine(invulnerabilityCoroutine);
+
+            invulnerabilityCoroutine = StartCoroutine(InvulnerabilityRoutine());
+        }
+
+        public void Bounce(float force)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, force);
+        }
+
+        public void Bounce(Vector2 direction)
+        {
+            rb.linearVelocity = new Vector2(currentSpeed, direction.y);
+        }
+
+        public void Teleport(Vector3 position)
+        {
+            rb.position = position;
+            rb.linearVelocity = new Vector2(currentSpeed, 0);
+            hasDoubleJumped = false;
+            canDoubleJump = false;
+        }
+
+        void UpdateJumpState()
+        {
+            if (isGrounded)
+                jumpState = JumpState.Grounded;
+            else if (rb.linearVelocity.y > 0)
+                jumpState = JumpState.InFlight;
+            else if (rb.linearVelocity.y < 0)
+                jumpState = JumpState.Falling;
+        }
+
+         private void OnGUI()
+        {
+            if (showDebugInfo)
+            {
+                // Add these to your existing OnGUI
+                GUI.Label(new Rect(10, 150, 200, 20), $"Invulnerable: {isInvulnerable}");
+                if (isInvulnerable)
+                {
+                    GUI.Label(new Rect(10, 170, 200, 20), $"Invuln Time Left: {invulnerabilityEndTime - Time.time:F1}s");
+                    GUI.Label(new Rect(10, 190, 200, 20), $"Flash Interval: {currentFlashInterval:F3}s");
+                }
+            }
         }
 
         void OnCollisionEnter2D(Collision2D collision)
         {
+            if (isInvulnerable && collision.gameObject.CompareTag("Enemy")) return;
             if (collision.gameObject.CompareTag("MovingPlatform"))
             {
                 foreach (ContactPoint2D contact in collision.contacts)
@@ -393,51 +478,36 @@ private void OnDrawGizmos()
             }
         }
 
-       private void OnCollisionExit2D(Collision2D collision)
-{
-    if (collision.gameObject.CompareTag("MovingPlatform"))
-    {
-        transform.SetParent(null);
-    }
-    // When leaving collision, recheck grounded state
-    if (((1 << collision.gameObject.layer) & groundLayer) != 0)
-    {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-    }
-}
-
-        // Optional: Add OnGUI method for real-time debugging
-        private void OnGUI()
+        void OnCollisionExit2D(Collision2D collision)
         {
-            if (showDebugInfo)
+            if (collision.gameObject.CompareTag("MovingPlatform"))
             {
-                GUI.Label(new Rect(10, 10, 200, 20), $"Grounded: {isGrounded}");
-                GUI.Label(new Rect(10, 30, 200, 20), $"Can Double Jump: {canDoubleJump}");
-                GUI.Label(new Rect(10, 50, 200, 20), $"Has Double Jumped: {hasDoubleJumped}");
-                GUI.Label(new Rect(10, 70, 200, 20), $"Velocity Y: {rb.linearVelocity.y:F2}");
+                transform.SetParent(null);
+            }
+            if (((1 << collision.gameObject.layer) & groundLayer) != 0)
+            {
+                isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
             }
         }
 
-        private void OnCollisionStay2D(Collision2D collision)
-{
-    if (isDead) return;
-
-    // Only consider collisions with ground layer
-    if (((1 << collision.gameObject.layer) & groundLayer) != 0)
-    {
-        foreach (ContactPoint2D contact in collision.contacts)
+        void OnCollisionStay2D(Collision2D collision)
         {
-            // Check if the collision normal is pointing mostly upward (player is on top)
-            if (contact.normal.y > 0.5f) // Normal.y > 0.5 means the surface is below the player
+              if (isInvulnerable && collision.gameObject.CompareTag("Enemy")) return;
+            if (isDead) return;
+
+            if (((1 << collision.gameObject.layer) & groundLayer) != 0)
             {
-                isGrounded = true;
-                return;
+                foreach (ContactPoint2D contact in collision.contacts)
+                {
+                    if (contact.normal.y > 0.5f)
+                    {
+                        isGrounded = true;
+                        return;
+                    }
+                }
+                isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
             }
         }
-        // If no upward normal is found, ensure isGrounded is false unless overlap confirms it
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-    }
-}
 
         public enum JumpState
         {

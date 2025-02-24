@@ -19,6 +19,8 @@ namespace Platformer.Gameplay
             {
                 // Store the death position
                 deathPosition = player.transform.position;
+                // Decrease lives using ScoreManager
+                ScoreManager.Instance.RemoveLife();
                 
                 player.health.Die();
                 model.virtualCamera.Follow = null;

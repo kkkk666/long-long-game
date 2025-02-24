@@ -1,0 +1,39 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:5d59b70b30e2f4d82f8d2dd9fed51e94:d09ffaf61c4a492b465c6958e55da8b5:56ae5ed577a4cdc9e65a69c6a99a14ff$
+#
+:format=40300
+:texture=Heart.png
+:size=2048x768
+:pivotpoints=enabled
+:borders=disabled
+:alphahandling=ClearTransparentPixels
+
+HeartSpin.png0001;0;512;256;256; 0.5;0.5; 0;0;0;0
+HeartSpin.png0002;256;512;256;256; 0.5;0.5; 0;0;0;0
+HeartSpin.png0003;512;512;256;256; 0.5;0.5; 0;0;0;0
+HeartSpin.png0004;768;512;256;256; 0.5;0.5; 0;0;0;0
+HeartSpin.png0005;1024;512;256;256; 0.5;0.5; 0;0;0;0
+HeartSpin.png0006;1280;512;256;256; 0.5;0.5; 0;0;0;0
+HeartSpin.png0007;1536;512;256;256; 0.5;0.5; 0;0;0;0
+HeartSpin.png0008;1792;512;256;256; 0.5;0.5; 0;0;0;0
+HeartSpin.png0009;0;256;256;256; 0.5;0.5; 0;0;0;0
+HeartSpin.png0010;256;256;256;256; 0.5;0.5; 0;0;0;0
+HeartSpin.png0011;512;256;256;256; 0.5;0.5; 0;0;0;0
+HeartSpin.png0012;768;256;256;256; 0.5;0.5; 0;0;0;0
+HeartSpin.png0013;1024;256;256;256; 0.5;0.5; 0;0;0;0
+HeartSpin.png0014;1280;256;256;256; 0.5;0.5; 0;0;0;0
+HeartSpin.png0015;1536;256;256;256; 0.5;0.5; 0;0;0;0
+HeartSpin.png0016;1792;256;256;256; 0.5;0.5; 0;0;0;0
+HeartSpin.png0017;0;0;256;256; 0.5;0.5; 0;0;0;0
+HeartSpin.png0018;256;0;256;256; 0.5;0.5; 0;0;0;0
+HeartSpin.png0019;512;0;256;256; 0.5;0.5; 0;0;0;0
+HeartSpin.png0020;768;0;256;256; 0.5;0.5; 0;0;0;0
+HeartSpin.png0021;1024;0;256;256; 0.5;0.5; 0;0;0;0
+HeartSpin.png0022;1280;0;256;256; 0.5;0.5; 0;0;0;0
+HeartSpin.png0023;1536;0;256;256; 0.5;0.5; 0;0;0;0
+HeartSpin.png0024;1792;0;256;256; 0.5;0.5; 0;0;0;0

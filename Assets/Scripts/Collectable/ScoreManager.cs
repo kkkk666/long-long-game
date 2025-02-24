@@ -7,11 +7,12 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager Instance { get; private set; }
     
     [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private float countDuration = 0.5f; // Duration of counting animation
-    [SerializeField] private float updateStep = 1f; // How many numbers to count per step
+    [SerializeField] private TextMeshProUGUI livesText;
+    [SerializeField] private float countDuration = 0.5f;
     
-    private int trueScore = 0;         // The actual score value
-    private int displayedScore = 0;    // The currently displayed score
+    private int score = 0;
+    private int displayedScore = 0;
+    private int lives = 3;
     private Coroutine countingCoroutine;
 
     private void Awake()
@@ -28,54 +29,73 @@ public class ScoreManager : MonoBehaviour
 
     private void Start()
     {
-        UpdateScoreDisplay(displayedScore);
+        UpdateScoreDisplay(score);
+        UpdateLivesDisplay();
     }
 
     public void AddScore(int points)
     {
-        // Update the true score immediately
-        trueScore += points;
+        score += points;
         
-        // Stop any existing counting coroutine
         if (countingCoroutine != null)
         {
             StopCoroutine(countingCoroutine);
         }
         
-        // Start new counting coroutine from current displayed score to true score
-        countingCoroutine = StartCoroutine(CountTo(trueScore));
+        countingCoroutine = StartCoroutine(CountScore());
     }
 
-    private IEnumerator CountTo(int target)
+    private IEnumerator CountScore()
     {
-        float elapsedTime = 0;
-        float startScore = displayedScore;
+        float elapsed = 0f;
+        int startScore = displayedScore;
+        int targetScore = score;
         
-        while (elapsedTime < countDuration)
+        while (elapsed < countDuration)
         {
-            elapsedTime += Time.deltaTime;
-            float percentage = elapsedTime / countDuration;
+            elapsed += Time.deltaTime;
+            float percent = elapsed / countDuration;
             
-            // Use Lerp to smoothly interpolate between displayed and target score
-            displayedScore = Mathf.RoundToInt(Mathf.Lerp(startScore, target, percentage));
+            displayedScore = startScore + Mathf.RoundToInt((targetScore - startScore) * percent);
             UpdateScoreDisplay(displayedScore);
             
             yield return null;
         }
         
-        // Ensure we end up exactly at the target score
-        displayedScore = target;
+        displayedScore = targetScore;
         UpdateScoreDisplay(displayedScore);
+        countingCoroutine = null;
     }
 
-    private void UpdateScoreDisplay(int score)
+    private void UpdateScoreDisplay(int scoreToDisplay)
     {
-        scoreText.text = score.ToString();
+        scoreText.text = scoreToDisplay.ToString();
     }
 
-    // Helper method to get the true score (if needed)
     public int GetScore()
     {
-        return trueScore;
+        return score;
+    }
+
+    public void AddLife(int amount = 1)
+    {
+        lives += amount;
+        UpdateLivesDisplay();
+    }
+
+    public void RemoveLife()
+    {
+        lives--;
+        UpdateLivesDisplay();
+    }
+
+    public int GetLives()
+    {
+        return lives;
+    }
+
+    private void UpdateLivesDisplay()
+    {
+        livesText.text = $"{lives}";
     }
 }
