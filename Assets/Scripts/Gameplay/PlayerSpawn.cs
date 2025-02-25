@@ -12,6 +12,7 @@ namespace Platformer.Gameplay
         // Add death position field
         public Vector2 deathPosition;
 
+        [System.Obsolete]
         public override void Execute()
         {
             var player = model.player;
