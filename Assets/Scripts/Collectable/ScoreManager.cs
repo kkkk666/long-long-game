@@ -12,7 +12,7 @@ public class ScoreManager : MonoBehaviour
     
     private int score = 0;
     private int displayedScore = 0;
-    private int lives = 3;
+    public int lives = 3;
     private Coroutine countingCoroutine;
 
     private void Awake()
@@ -20,11 +20,47 @@ public class ScoreManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            
+            // Register to the scene loaded event
+            UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
             Destroy(gameObject);
         }
+    }
+    
+    // Reset score and lives when a new scene is loaded
+    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
+    {
+        // Reset score and lives
+        ResetScoreManager();
+    }
+    
+    // Reset the score manager to initial values
+    public void ResetScoreManager()
+    {
+       
+        score = 0;
+        displayedScore = 0;
+        lives = 3; // Reset to default lives
+        
+        // Update displays
+        UpdateScoreDisplay(score);
+        UpdateLivesDisplay();
+        
+        // Stop any counting coroutine
+        if (countingCoroutine != null)
+        {
+            StopCoroutine(countingCoroutine);
+            countingCoroutine = null;
+        }
+    }
+    
+    private void OnDestroy()
+    {
+        // Unregister from the scene loaded event
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void Start()

@@ -56,5 +56,13 @@ namespace Platformer.Mechanics
         {
             currentHP = maxHP;
         }
+
+        /// <summary>
+        /// Reset health to maximum value
+        /// </summary>
+        public void ResetHealth()
+        {
+            currentHP = maxHP;
+        }
     }
 }

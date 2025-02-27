@@ -1,0 +1,33 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:fb0247b87d6b4d33a5559ec2bda8ad6d:1248c3c65eb8e08e1a47a1bb823c220e:fdbc5b4a1e3b4b699d85c7a37a03ee8e$
+#
+:format=40300
+:texture=BabyDragonStomp.png
+:size=1536x768
+:pivotpoints=enabled
+:borders=disabled
+:alphahandling=ClearTransparentPixels
+
+BabyDragonStomp_00010;0;512;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonStomp_00011;256;512;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonStomp_00012;512;512;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonStomp_00013;768;512;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonStomp_00014;1024;512;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonStomp_00015;1280;512;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonStomp_00016;0;256;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonStomp_00017;256;256;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonStomp_00018;512;256;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonStomp_00019;768;256;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonStomp_00020;1024;256;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonStomp_00021;1280;256;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonStomp_00022;0;0;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonStomp_00023;256;0;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonStomp_00024;512;0;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonStomp_00025;768;0;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonStomp_00026;1024;0;256;256; 0.5;0.5; 0;0;0;0
+BabyDragonStomp_00027;1280;0;256;256; 0.5;0.5; 0;0;0;0

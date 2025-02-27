@@ -1,22 +1,28 @@
 version: 2
 tpsheetFileNames:
 - Assets/Character/Sprites/BabyDragonDie.tpsheet
+- Assets/Character/Sprites/BabyDragonDoubleJump.tpsheet
 - Assets/Character/Sprites/BabyDragonIdle.tpsheet
 - Assets/Character/Sprites/BabyDragonJump.tpsheet
 - Assets/Character/Sprites/BabyDragonSprint.tpsheet
+- Assets/Character/Sprites/BabyDragonStomp.tpsheet
 - Assets/Character/Sprites/Heart.tpsheet
 - Assets/codeandweb.com/Example/SpriteSheet/sprites.tpsheet
 textureFileNames:
 - Assets/Character/Sprites/BabyDragonDie.png
+- Assets/Character/Sprites/BabyDragonDoubleJump.png
 - Assets/Character/Sprites/BabyDragonIdle.png
 - Assets/Character/Sprites/BabyDragonJump.png
 - Assets/Character/Sprites/BabyDragonSprint.png
+- Assets/Character/Sprites/BabyDragonStomp.png
 - Assets/Character/Sprites/Heart.png
 - Assets/codeandweb.com/Example/SpriteSheet/sprites.png
 normalmapFileNames:
 - 
 - 
+- 
 - Assets/Character/Sprites/BabyDragonJump_n.png
+- 
 - 
 - 
 - Assets/codeandweb.com/Example/SpriteSheet/sprites_n.png

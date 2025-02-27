@@ -74,7 +74,7 @@ namespace Platformer.Mechanics
         private bool canDoubleJump = false;
         private bool hasDoubleJumped = false;
         private bool isDead;
-        private bool isStomping;
+        public bool isStomping;
         private float stompEndTime;
         private string currentAnimation;
         private float gameStartTime;
@@ -84,10 +84,14 @@ namespace Platformer.Mechanics
         private const string PLAYER_IDLE = "BabyDragonIdle";
         private const string PLAYER_RUN = "BabyDragonWalk";
         private const string PLAYER_JUMP = "BabyDragonJump";
+        private const string PLAYER_DOUBLEJUMP = "BabyDragonDoubleJump";
         private const string PLAYER_FALL = "BabyDragonLand 0";
         private const string PLAYER_SPRINT = "BabyDragonSprint";
         private const string PLAYER_DIE = "BabyDragonDie";
-        private const string PLAYER_STOMP = "BabyDragonLand 0"; // Reusing fall animation for stomp
+        private const string PLAYER_STOMP = "Stomp"; 
+
+        [Header("Effects")]
+        public GameObject doubleJumpEffectPrefab; // Reference to your particle effect prefab
 
         private void Awake()
         {
@@ -105,6 +109,64 @@ namespace Platformer.Mechanics
             // Initialize starting speed
             currentSpeed = baseSpeed;
             gameStartTime = Time.time;
+            
+            // Register to scene loaded event
+            UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+
+        private void OnDestroy()
+        {
+            // Unregister from scene loaded event
+            UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+        
+        // Reset player state when a new scene is loaded
+        private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
+        {
+            ResetPlayerState();
+        }
+        
+        // Reset all player state variables
+        public void ResetPlayerState()
+        {
+            
+            
+            // Reset movement state
+            currentSpeed = baseSpeed;
+            gameStartTime = Time.time;
+            
+            // Reset jump state
+            jumpState = JumpState.Grounded;
+            isGrounded = false;
+            canDoubleJump = false;
+            hasDoubleJumped = false;
+            
+            // Reset stomp state
+            isStomping = false;
+            
+            // Reset death state
+            ResetDeathState();
+            
+            // Reset health
+            if (health != null)
+            {
+                health.ResetHealth();
+            }
+            
+            // Enable control
+            controlEnabled = true;
+            
+            // Reset position if needed
+            if (rb != null)
+            {
+                rb.linearVelocity = Vector2.zero;
+            }
+            
+            // Make sure player is active
+            gameObject.SetActive(true);
+            
+            // Reset animation
+            ChangeAnimationState(PLAYER_IDLE);
         }
 
         private void Update()
@@ -134,8 +196,8 @@ namespace Platformer.Mechanics
                     }
                 }
 
-                // Stomp ability (press down during double jump)
-                if (hasDoubleJumped && !isGrounded && !isStomping && Input.GetAxisRaw("Vertical") < -0.5f)
+                // Stomp ability (press down during any jump)
+                if (!isGrounded && !isStomping && Input.GetAxisRaw("Vertical") < -0.5f)
                 {
                     StartStomp();
                     if (showDebugInfo) Debug.Log("Stomp initiated");
@@ -350,10 +412,65 @@ spriteRenderer.flipX = false;
         private void DoubleJump()
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, doubleJumpForce);
+            
+            // Play double jump audio
             if (audioSource && doubleJumpAudio)
                 audioSource.PlayOneShot(doubleJumpAudio);
             else if (audioSource && jumpAudio)
                 audioSource.PlayOneShot(jumpAudio);
+            
+            // Spawn the double jump effect
+            if (doubleJumpEffectPrefab != null)
+            {
+                // Calculate a position slightly in front of the player based on their velocity
+                // This compensates for the player's forward movement
+                Vector3 effectPosition = groundCheck.position + new Vector3(currentSpeed * 0.05f, 0, 0);
+                
+                // Instantiate the effect
+                GameObject effect = Instantiate(doubleJumpEffectPrefab, effectPosition, Quaternion.identity);
+                
+                // Get the particle system component
+                ParticleSystem particles = effect.GetComponent<ParticleSystem>();
+                if (particles != null)
+                {
+                    // Make the particle system inherit the player's velocity
+                    var mainModule = particles.main;
+                    var inheritVelocity = particles.inheritVelocity;
+                    
+                    // If the particle system has an inherit velocity module, use it
+                    if (inheritVelocity.enabled)
+                    {
+                        inheritVelocity.mode = ParticleSystemInheritVelocityMode.Initial;
+                        // Set a multiplier that looks good for your game
+                        inheritVelocity.curveMultiplier = 0.5f;
+                    }
+                    else
+                    {
+                        // Otherwise, try to add some initial velocity to the particles
+                        var velocityOverLifetime = particles.velocityOverLifetime;
+                        if (velocityOverLifetime.enabled)
+                        {
+                            velocityOverLifetime.x = currentSpeed * 0.5f;
+                        }
+                    }
+                    
+                    // Play the particle system
+                    particles.Play();
+                    
+                    // Destroy the game object after the particle system has finished
+                    float duration = particles.main.duration + particles.main.startLifetime.constantMax;
+                    Destroy(effect, duration);
+                }
+                else
+                {
+                    // If no particle system found, destroy after a default time
+                    Destroy(effect, 2f);
+                }
+                
+                // Make the effect a child of the player so it moves with the player
+                // Only do this if you want the effect to follow the player after creation
+                // effect.transform.SetParent(transform, true);
+            }
         }
 
         private void StartStomp()
@@ -374,7 +491,13 @@ spriteRenderer.flipX = false;
             if (!isGrounded)
             {
                 if (rb.linearVelocity.y > 0)
-                    ChangeAnimationState(PLAYER_JUMP);
+                {
+                    // Use double jump animation if player has double jumped
+                    if (hasDoubleJumped)
+                        ChangeAnimationState(PLAYER_DOUBLEJUMP);
+                    else
+                        ChangeAnimationState(PLAYER_JUMP);
+                }
                 else
                     ChangeAnimationState(PLAYER_FALL);
                 return;

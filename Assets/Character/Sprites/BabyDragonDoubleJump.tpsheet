@@ -1,0 +1,50 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:0666b1572182e7d4e64b804c75e78ac2:c7854c1eb5470df8ff4c9139fef17e86:222443378a7f44357ea1adfaf8ac8f64$
+#
+:format=40300
+:texture=BabyDragonDoubleJump.png
+:size=1792x1280
+:pivotpoints=enabled
+:borders=disabled
+:alphahandling=ClearTransparentPixels
+
+BabyDragon_DoubleJump_00001;0;1024;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00002;256;1024;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00003;512;1024;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00004;768;1024;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00005;1024;1024;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00006;1280;1024;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00007;1536;1024;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00008;0;768;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00009;256;768;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00010;512;768;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00011;768;768;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00012;1024;768;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00013;1280;768;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00014;1536;768;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00015;0;512;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00016;256;512;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00017;512;512;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00018;768;512;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00019;1024;512;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00020;1280;512;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00021;1536;512;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00022;0;256;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00023;256;256;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00024;512;256;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00025;768;256;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00026;1024;256;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00027;1280;256;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00028;1536;256;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00029;0;0;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00030;256;0;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00031;512;0;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00032;768;0;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00033;1024;0;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00034;1024;0;256;256; 0.5;0.5; 0;0;0;0
+BabyDragon_DoubleJump_00035;1024;0;256;256; 0.5;0.5; 0;0;0;0
