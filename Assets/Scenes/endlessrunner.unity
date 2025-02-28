@@ -2054,16 +2054,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcd1a6ea6bfa32f4e9d948534b6981d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  virtualCamera: {fileID: 1946717928}
-  maxHorizontalOffset: 3
-  baseSpeed: 7
-  maxSpeed: 15
-  smoothTime: 0.3
-  framingTransposer: {fileID: 0}
-  playerController: {fileID: 0}
-  speedAdjuster: {fileID: 0}
-  defaultTrackedObjectOffset: {x: 0, y: 0}
-  currentVelocity: {x: 0, y: 0}
 --- !u!224 &633350588 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4009130065122623658, guid: 9a1bd12ebb35d4dc997aa0c5494eda9b,
@@ -2372,6 +2362,11 @@ PrefabInstance:
     - target: {fileID: 4009130065698333723, guid: 9a1bd12ebb35d4dc997aa0c5494eda9b,
         type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4009130065698333724, guid: 9a1bd12ebb35d4dc997aa0c5494eda9b,
+        type: 3}
+      propertyPath: panels.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4009130065698333724, guid: 9a1bd12ebb35d4dc997aa0c5494eda9b,
@@ -3799,6 +3794,12 @@ PrefabInstance:
       propertyPath: sprintSpeedMultiplier
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114230831923080080, guid: 7d60c822c3f1b408ea7a00ecdb5e047a,
+        type: 3}
+      propertyPath: doubleJumpEffectPrefab
+      value: 
+      objectReference: {fileID: 2425026235299677040, guid: 2d40d7af61496f44182e51c569d4c4c9,
+        type: 3}
     - target: {fileID: 212064061491315838, guid: 7d60c822c3f1b408ea7a00ecdb5e047a,
         type: 3}
       propertyPath: m_Size.x
