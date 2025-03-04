@@ -18,7 +18,11 @@ namespace Platformer.Gameplay
 
         public override void Execute()
         {
-            AudioSource.PlayClipAtPoint(token.tokenCollectAudio, token.transform.position);
+            // Only play the audio if the token and its audio clip exist
+            if (token != null && token.tokenCollectAudio != null)
+            {
+                AudioSource.PlayClipAtPoint(token.tokenCollectAudio, token.transform.position);
+            }
         }
     }
 }

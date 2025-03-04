@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/endlessrunner.unity
+    path: Assets/Scenes/endlessrunner_Meadow.unity
     guid: 35778513c780b3c4ebf10049a99063c8
   - enabled: 1
     path: Assets/Scenes/StartScreen.unity

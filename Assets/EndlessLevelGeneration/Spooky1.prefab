@@ -1017,7 +1017,7 @@ GameObject:
   - component: {fileID: 2088271412399017762}
   - component: {fileID: 8364067529279217881}
   m_Layer: 0
-  m_Name: Section1
+  m_Name: Spooky1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

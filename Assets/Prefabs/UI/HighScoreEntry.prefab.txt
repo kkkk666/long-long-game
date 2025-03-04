@@ -1,0 +1,37 @@
+High Score Entry Prefab Creation Instructions:
+
+1. In Unity, right-click in the Project window under Assets/Prefabs/UI (create this folder if it doesn't exist)
+2. Select Create > UI > Horizontal Layout Group
+3. Name it "HighScoreEntry"
+4. In the Inspector, set the following properties for the Horizontal Layout Group:
+   - Padding: Left=10, Right=10, Top=5, Bottom=5
+   - Child Alignment: Middle Left
+   - Spacing: 10
+   - Child Force Expand: Width=false, Height=false
+   - Control Child Size: Width=true, Height=true
+
+5. Add four TextMeshProUGUI components as children:
+   - Child 1: "RankText" - Width=50, Height=30
+   - Child 2: "NameText" - Width=200, Height=30
+   - Child 3: "ScoreText" - Width=100, Height=30
+   - Child 4: "DateText" - Width=100, Height=30
+
+6. Configure each TextMeshProUGUI component:
+   - Font Size: 18
+   - Alignment: Middle Center for RankText, ScoreText, DateText; Middle Left for NameText
+   - Color: White or any color that fits your game's theme
+   - Font Style: Bold for RankText
+
+7. Set default text:
+   - RankText: "1"
+   - NameText: "Player"
+   - ScoreText: "0"
+   - DateText: "01/01/2023"
+
+8. Add a background Image component to the root GameObject:
+   - Color: Semi-transparent black (RGBA: 0, 0, 0, 0.5)
+   - Image Type: Sliced (if you have a UI sprite with borders)
+
+9. Apply the prefab by clicking the "Apply" button at the top of the Inspector.
+
+This prefab will be used by the HighScoreUI script to display each high score entry in the leaderboard. 

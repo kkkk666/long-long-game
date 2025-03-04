@@ -424,52 +424,52 @@ spriteRenderer.flipX = false;
             {
                 // Calculate a position slightly in front of the player based on their velocity
                 // This compensates for the player's forward movement
-                Vector3 effectPosition = groundCheck.position + new Vector3(currentSpeed * 0.05f, 0, 0);
+                Vector3 effectPosition = groundCheck.position + new Vector3(currentSpeed * 0.1f, 0, 0);
                 
                 // Instantiate the effect
                 GameObject effect = Instantiate(doubleJumpEffectPrefab, effectPosition, Quaternion.identity);
                 
-                // Get the particle system component
-                ParticleSystem particles = effect.GetComponent<ParticleSystem>();
-                if (particles != null)
+                // Make sure the effect was created successfully
+                if (effect != null)
                 {
-                    // Make the particle system inherit the player's velocity
-                    var mainModule = particles.main;
-                    var inheritVelocity = particles.inheritVelocity;
-                    
-                    // If the particle system has an inherit velocity module, use it
-                    if (inheritVelocity.enabled)
+                    // Get the particle system component
+                    ParticleSystem particles = effect.GetComponent<ParticleSystem>();
+                    if (particles != null)
                     {
-                        inheritVelocity.mode = ParticleSystemInheritVelocityMode.Initial;
-                        // Set a multiplier that looks good for your game
-                        inheritVelocity.curveMultiplier = 0.5f;
+                        // Make the particle system inherit the player's velocity
+                        var mainModule = particles.main;
+                        var inheritVelocity = particles.inheritVelocity;
+                        
+                        // If the particle system has an inherit velocity module, use it
+                        if (inheritVelocity.enabled)
+                        {
+                            inheritVelocity.mode = ParticleSystemInheritVelocityMode.Initial;
+                            // Set a multiplier that looks good for your game
+                            inheritVelocity.curveMultiplier = 0.5f;
+                        }
+                        else
+                        {
+                            // Otherwise, try to add some initial velocity to the particles
+                            var velocityOverLifetime = particles.velocityOverLifetime;
+                            if (velocityOverLifetime.enabled)
+                            {
+                                velocityOverLifetime.x = currentSpeed * 0.5f;
+                            }
+                        }
+                        
+                        // Play the particle system
+                        particles.Play();
+                        
+                        // Destroy the game object after the particle system has finished
+                        float duration = particles.main.duration + particles.main.startLifetime.constantMax;
+                        Destroy(effect, duration);
                     }
                     else
                     {
-                        // Otherwise, try to add some initial velocity to the particles
-                        var velocityOverLifetime = particles.velocityOverLifetime;
-                        if (velocityOverLifetime.enabled)
-                        {
-                            velocityOverLifetime.x = currentSpeed * 0.5f;
-                        }
+                        // If no particle system found, destroy after a default time
+                        Destroy(effect, 2f);
                     }
-                    
-                    // Play the particle system
-                    particles.Play();
-                    
-                    // Destroy the game object after the particle system has finished
-                    float duration = particles.main.duration + particles.main.startLifetime.constantMax;
-                    Destroy(effect, duration);
                 }
-                else
-                {
-                    // If no particle system found, destroy after a default time
-                    Destroy(effect, 2f);
-                }
-                
-                // Make the effect a child of the player so it moves with the player
-                // Only do this if you want the effect to follow the player after creation
-                // effect.transform.SetParent(transform, true);
             }
         }
 

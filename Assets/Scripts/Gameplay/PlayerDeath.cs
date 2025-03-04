@@ -29,7 +29,7 @@ namespace Platformer.Gameplay
         private static void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
         {
             // Reset the game over flag when a new scene is loaded
-            Debug.Log("Scene loaded: " + scene.name + " - Resetting game over state");
+           // Debug.Log("Scene loaded: " + scene.name + " - Resetting game over state");
             gameOverTriggered = false;
             
             // Reset time scale in case it was set to 0
@@ -70,7 +70,7 @@ namespace Platformer.Gameplay
                     
                     // Game Over - Show the END SCREEN UI
                     // Log what we're trying to do
-                    Debug.Log("Game over triggered - attempting to show end screen");
+                    //Debug.Log("Game over triggered - attempting to show end screen");
                     
                     // Find all Canvas objects including inactive ones
                     Canvas[] allCanvases = Resources.FindObjectsOfTypeAll<Canvas>();
@@ -81,15 +81,27 @@ namespace Platformer.Gameplay
                         if (canvas.name == "ENDSCREEN")
                         {
                             endScreen = canvas.gameObject;
-                            Debug.Log("Found ENDSCREEN Canvas: " + canvas.name);
+                            //Debug.Log("Found ENDSCREEN Canvas: " + canvas.name);
                             break;
                         }
                     }
                     
                     if (endScreen != null)
                     {
-                        Debug.Log("Activating end screen: " + endScreen.name);
+                        //Dbug.Log("Activating end screen: " + endScreen.name);
                         endScreen.SetActive(true);
+                        
+                        // Get the HighScoreUI component and initialize it
+                        HighScoreUI highScoreUI = endScreen.GetComponentInChildren<HighScoreUI>(true);
+                        if (highScoreUI != null)
+                        {
+                            // The HighScoreUI will handle displaying scores in its OnEnable method
+                            //Debug.Log("Found HighScoreUI component");
+                        }
+                        else
+                        {
+                            //Debug.LogWarning("HighScoreUI component not found on end screen");
+                        }
                         
                         // Disable player completely to prevent further interactions
                         player.gameObject.SetActive(false);
@@ -99,7 +111,7 @@ namespace Platformer.Gameplay
                     }
                     else
                     {
-                        Debug.LogError("ENDSCREEN Canvas not found! Please check the exact name in the hierarchy.");
+                        //Debug.LogError("ENDSCREEN Canvas not found! Please check the exact name in the hierarchy.");
                     }
                 }
                 else
