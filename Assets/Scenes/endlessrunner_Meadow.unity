@@ -4277,6 +4277,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114230831923080080, guid: 7d60c822c3f1b408ea7a00ecdb5e047a,
         type: 3}
+      propertyPath: jumpAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: 026017144bfc64142943c288df148ffc, type: 3}
+    - target: {fileID: 114230831923080080, guid: 7d60c822c3f1b408ea7a00ecdb5e047a,
+        type: 3}
       propertyPath: jumpForce
       value: 7
       objectReference: {fileID: 0}
@@ -4314,7 +4319,7 @@ PrefabInstance:
         type: 3}
       propertyPath: doubleJumpAudio
       value: 
-      objectReference: {fileID: 8300000, guid: 67975c08d56ceb147bad38572d805aa8, type: 3}
+      objectReference: {fileID: 8300000, guid: bea4709ba857f354bba65e5a76ce5a12, type: 3}
     - target: {fileID: 114230831923080080, guid: 7d60c822c3f1b408ea7a00ecdb5e047a,
         type: 3}
       propertyPath: doubleJumpForce
@@ -6642,10 +6647,10 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 8a674fd8b84d22249a03fe20753393c5,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 5833894e2899f1840ac04193ca462e39, type: 3}
-  m_Resource: {fileID: 8300000, guid: 5833894e2899f1840ac04193ca462e39, type: 3}
+  m_audioClip: {fileID: 8300000, guid: a77dff56d6b944b4cbc532a43cca2ada, type: 3}
+  m_Resource: {fileID: 8300000, guid: a77dff56d6b944b4cbc532a43cca2ada, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.07
+  m_Volume: 0.262
   m_Pitch: 1
   Loop: 1
   Mute: 0

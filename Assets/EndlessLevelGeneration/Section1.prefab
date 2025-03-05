@@ -760,7 +760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84160a72c2e09a545811d2567051f24b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffectPrefab: {fileID: 4389662223576981119, guid: 02a7eb52a33a2de4fafd64660a1fe663,
+  breakEffectPrefab: {fileID: 8086062528414156447, guid: 272300188f077e1429595f10fcc01f86,
     type: 3}
   breakSound: {fileID: 8300000, guid: 3b8a223e06c615147aa4284241209648, type: 3}
   destroyDelay: 0.1
@@ -2365,11 +2365,11 @@ MonoBehaviour:
     - {fileID: 975121985942977774}
     _isRoot: 0
   bounds:
-    center: {x: 4.8186502, y: 1.4999994, z: 0.7100024}
-    extents: {x: 10.506778, y: 4.98, z: 0.7100024}
-    max: {x: 15.325428, y: 6.4799995, z: 1.4200048}
-    min: {x: -5.688127, y: -3.4800007, z: 0}
-    size: {x: 21.013556, y: 9.96, z: 1.4200048}
+    center: {x: 4.8186507, y: 1.4999995, z: 0.7100024}
+    extents: {x: 10.506779, y: 4.98, z: 0.7100024}
+    max: {x: 15.325429, y: 6.4799995, z: 1.4200048}
+    min: {x: -5.6881275, y: -3.4800005, z: 0}
+    size: {x: 21.013557, y: 9.96, z: 1.4200048}
   builders: []
   unpacked: 0
   alwaysDraw: 0
@@ -3771,7 +3771,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84160a72c2e09a545811d2567051f24b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffectPrefab: {fileID: 4389662223576981119, guid: 02a7eb52a33a2de4fafd64660a1fe663,
+  breakEffectPrefab: {fileID: 8086062528414156447, guid: 272300188f077e1429595f10fcc01f86,
     type: 3}
   breakSound: {fileID: 8300000, guid: 3b8a223e06c615147aa4284241209648, type: 3}
   destroyDelay: 0.1
