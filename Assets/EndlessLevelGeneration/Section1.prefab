@@ -236,7 +236,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9193003341521812246}
   - component: {fileID: 3990644227986752423}
-  - component: {fileID: 7856807186913755262}
   - component: {fileID: 6849797996923940481}
   - component: {fileID: 3392193848197718841}
   m_Layer: 0
@@ -255,8 +254,8 @@ Transform:
   m_GameObject: {fileID: 3175221757635391842}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.81, y: 4.1982, z: 0}
-  m_LocalScale: {x: 1.0247933, y: 1.0007, z: 1}
+  m_LocalPosition: {x: 4.8068, y: 4.1982, z: 0}
+  m_LocalScale: {x: 1.0266753, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4982228663673066434}
@@ -317,19 +316,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7856807186913755262
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3175221757635391842}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a229c636674274e12bb4f79ddcae0d49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementScale: {x: 0.25, y: 0.25, z: 0.25}
 --- !u!54 &6849797996923940481
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -409,11 +395,11 @@ MonoBehaviour:
     colliders: []
     _isRoot: 1
   bounds:
-    center: {x: 0, y: -0.11499989, z: 0}
-    extents: {x: 10.240001, y: 2.1549997, z: 0}
-    max: {x: 10.240001, y: 2.04, z: 0}
-    min: {x: -10.240001, y: -2.2699997, z: 0}
-    size: {x: 20.480001, y: 4.3099995, z: 0}
+    center: {x: 0, y: -0.11500001, z: 0}
+    extents: {x: 10.24, y: 2.155, z: 0}
+    max: {x: 10.24, y: 2.04, z: 0}
+    min: {x: -10.24, y: -2.27, z: 0}
+    size: {x: 20.48, y: 4.31, z: 0}
   builders: []
   unpacked: 1
   alwaysDraw: 0
@@ -521,7 +507,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3211227803998778092}
   - component: {fileID: 7179652173811337553}
-  - component: {fileID: 9101533862135700196}
   m_Layer: 0
   m_Name: MountainBackground
   m_TagString: Untagged
@@ -599,19 +584,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &9101533862135700196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3948081380822722087}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a229c636674274e12bb4f79ddcae0d49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementScale: {x: 0.5, y: 0.5, z: 0.5}
 --- !u!1 &4271360070105144990
 GameObject:
   m_ObjectHideFlags: 0
@@ -2365,11 +2337,11 @@ MonoBehaviour:
     - {fileID: 975121985942977774}
     _isRoot: 0
   bounds:
-    center: {x: 4.8186507, y: 1.4999995, z: 0.7100024}
-    extents: {x: 10.506779, y: 4.98, z: 0.7100024}
-    max: {x: 15.325429, y: 6.4799995, z: 1.4200048}
-    min: {x: -5.6881275, y: -3.4800005, z: 0}
-    size: {x: 21.013557, y: 9.96, z: 1.4200048}
+    center: {x: 4.8172874, y: 1.4999994, z: 0.7100024}
+    extents: {x: 10.505415, y: 4.98, z: 0.7100024}
+    max: {x: 15.322702, y: 6.4799995, z: 1.4200048}
+    min: {x: -5.6881275, y: -3.4800007, z: 0}
+    size: {x: 21.01083, y: 9.96, z: 1.4200048}
   builders: []
   unpacked: 0
   alwaysDraw: 0
@@ -3651,7 +3623,7 @@ Transform:
   m_GameObject: {fileID: 7179898194278743297}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.819, y: 0.024520546, z: 0}
+  m_LocalPosition: {x: 14.813, y: 0.024520546, z: 0}
   m_LocalScale: {x: 0.7912948, y: 0.78152573, z: 0.78152573}
   m_ConstrainProportionsScale: 0
   m_Children: []
