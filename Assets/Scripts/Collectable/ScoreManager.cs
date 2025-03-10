@@ -8,11 +8,13 @@ public class ScoreManager : MonoBehaviour
     
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI livesText;
+    [SerializeField] private TextMeshProUGUI jewelsText;
     [SerializeField] private float countDuration = 0.5f;
     
     private int score = 0;
     private int displayedScore = 0;
     public int lives = 3;
+    private int jewels = 0;
     private Coroutine countingCoroutine;
 
     private void Awake()
@@ -40,14 +42,15 @@ public class ScoreManager : MonoBehaviour
     // Reset the score manager to initial values
     public void ResetScoreManager()
     {
-       
         score = 0;
         displayedScore = 0;
         lives = 3; // Reset to default lives
+        jewels = 0;
         
         // Update displays
         UpdateScoreDisplay(score);
         UpdateLivesDisplay();
+        UpdateJewelsDisplay();
         
         // Stop any counting coroutine
         if (countingCoroutine != null)
@@ -67,6 +70,7 @@ public class ScoreManager : MonoBehaviour
     {
         UpdateScoreDisplay(score);
         UpdateLivesDisplay();
+        UpdateJewelsDisplay();
     }
 
     public void AddScore(int points)
@@ -105,7 +109,8 @@ public class ScoreManager : MonoBehaviour
 
     private void UpdateScoreDisplay(int scoreToDisplay)
     {
-        scoreText.text = scoreToDisplay.ToString();
+        if (scoreText != null)
+            scoreText.text = scoreToDisplay.ToString();
     }
 
     public int GetScore()
@@ -132,6 +137,24 @@ public class ScoreManager : MonoBehaviour
 
     private void UpdateLivesDisplay()
     {
-        livesText.text = $"{lives}";
+        if (livesText != null)
+            livesText.text = $"{lives}";
+    }
+
+    public void AddJewel()
+    {
+        jewels++;
+        UpdateJewelsDisplay();
+    }
+
+    public int GetJewels()
+    {
+        return jewels;
+    }
+
+    private void UpdateJewelsDisplay()
+    {
+        if (jewelsText != null)
+            jewelsText.text = $"{jewels}";
     }
 }

@@ -12,6 +12,10 @@ public class CoinFlyAnimation : MonoBehaviour
     [SerializeField] private GameObject flyingLifePrefab;
     [SerializeField] private Transform livesUITarget;
     
+    [Header("Jewel Animation")]
+    [SerializeField] private GameObject flyingJewelPrefab;
+    [SerializeField] private Transform jewelUITarget;
+    
     [Header("Animation Settings")]
     [SerializeField] private float flyDuration = 0.5f;
     [SerializeField] private AnimationCurve speedCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
@@ -21,8 +25,10 @@ public class CoinFlyAnimation : MonoBehaviour
     private Canvas mainCanvas;
     private Coroutine coinPulseCoroutine;
     private Coroutine lifesPulseCoroutine;
+    private Coroutine jewelPulseCoroutine;
     private Vector3 originalCoinTargetScale;
     private Vector3 originalLifeTargetScale;
+    private Vector3 originalJewelTargetScale;
 
     private void Start()
     {
@@ -35,6 +41,10 @@ public class CoinFlyAnimation : MonoBehaviour
         if (livesUITarget != null)
         {
             originalLifeTargetScale = livesUITarget.localScale;
+        }
+        if (jewelUITarget != null)
+        {
+            originalJewelTargetScale = jewelUITarget.localScale;
         }
     }
 
@@ -56,6 +66,16 @@ public class CoinFlyAnimation : MonoBehaviour
             return;
         }
         StartCoroutine(AnimateLifeFly(worldPosition));
+    }
+
+    public void StartJewelFlyAnimation(Vector3 worldPosition)
+    {
+        if (flyingJewelPrefab == null || jewelUITarget == null)
+        {
+            Debug.LogWarning("Missing jewel prefab or target for animation");
+            return;
+        }
+        StartCoroutine(AnimateJewelFly(worldPosition));
     }
 
     private IEnumerator AnimateCoinFly(Vector3 startWorldPos)
@@ -98,6 +118,26 @@ public class CoinFlyAnimation : MonoBehaviour
         lifesPulseCoroutine = StartCoroutine(PulseLifeUI());
     }
 
+    private IEnumerator AnimateJewelFly(Vector3 startWorldPos)
+    {
+        GameObject uiObject = Instantiate(flyingJewelPrefab, mainCanvas.transform);
+        RectTransform rect = uiObject.GetComponent<RectTransform>();
+
+        Vector2 screenPosition = Camera.main.WorldToScreenPoint(startWorldPos);
+        rect.position = screenPosition;
+        Vector2 endPosition = jewelUITarget.position;
+        
+        yield return AnimateObject(rect, screenPosition, endPosition);
+        
+        Destroy(uiObject);
+        
+        if (jewelPulseCoroutine != null)
+        {
+            StopCoroutine(jewelPulseCoroutine);
+        }
+        jewelPulseCoroutine = StartCoroutine(PulseJewelUI());
+    }
+
     private IEnumerator AnimateObject(RectTransform rect, Vector2 startPosition, Vector2 endPosition)
     {
         float elapsed = 0f;
@@ -129,6 +169,12 @@ public class CoinFlyAnimation : MonoBehaviour
     {
         yield return PulseUI(livesUITarget, originalLifeTargetScale);
         lifesPulseCoroutine = null;
+    }
+
+    private IEnumerator PulseJewelUI()
+    {
+        yield return PulseUI(jewelUITarget, originalJewelTargetScale);
+        jewelPulseCoroutine = null;
     }
 
     private IEnumerator PulseUI(Transform target, Vector3 originalScale)
@@ -177,6 +223,15 @@ public class CoinFlyAnimation : MonoBehaviour
             if (livesUITarget != null)
             {
                 livesUITarget.localScale = originalLifeTargetScale;
+            }
+        }
+
+        if (jewelPulseCoroutine != null)
+        {
+            StopCoroutine(jewelPulseCoroutine);
+            if (jewelUITarget != null)
+            {
+                jewelUITarget.localScale = originalJewelTargetScale;
             }
         }
     }
