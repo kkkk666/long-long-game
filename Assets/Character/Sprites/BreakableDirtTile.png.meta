@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BreakableDirtTile_0: 4452943537749250980
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

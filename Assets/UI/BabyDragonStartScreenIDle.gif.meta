@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BabyDragonStartScreenIDle_0: 541966872258247663
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

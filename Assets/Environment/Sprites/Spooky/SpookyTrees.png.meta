@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      SpookyTrees_0: 4803022507362227070
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

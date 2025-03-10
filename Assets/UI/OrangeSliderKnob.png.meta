@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      OrangeSliderKnob_0: -990757546793707250
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      spookyStump_0: 4997980401414866277
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

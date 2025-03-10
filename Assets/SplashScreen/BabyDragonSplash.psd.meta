@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BabyDragonSplash_0: 3064896930703896986
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
