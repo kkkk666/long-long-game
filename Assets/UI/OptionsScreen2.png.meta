@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 57535a1797fae144495322cb9563b332
+guid: da4d634dbc5974f6ab2dea982a132d6e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7811720919561420163
-    second: OptionsScreen_0
-  - first:
-      213: 5179433435995459625
-    second: OptionsScreen_1
+      213: -7189279774702400217
+    second: OptionsScreen2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,19 +97,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
     buildTarget: iOS
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -129,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: OptionsScreen_0
+      name: OptionsScreen2_0
       rect:
         serializedVersion: 2
-        x: 21
-        y: 196
-        width: 981
-        height: 775
+        x: 0
+        y: 0
+        width: 662
+        height: 888
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,30 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 38d32feb9cec86c60800000000000000
-      internalID: 7811720919561420163
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: OptionsScreen_1
-      rect:
-        serializedVersion: 2
-        x: 758
-        y: 124
-        width: 238
-        height: 54
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9205a4aa44b01e740800000000000000
-      internalID: 5179433435995459625
+      spriteID: 72d86f5a22c8a3c90800000000000000
+      internalID: -7189279774702400217
       vertices: []
       indices: 
       edges: []
@@ -185,9 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      OptionsScreen_0: 7811720919561420163
-      OptionsScreen_1: 5179433435995459625
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

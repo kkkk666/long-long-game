@@ -10,12 +10,14 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI livesText;
     [SerializeField] private TextMeshProUGUI jewelsText;
     [SerializeField] private float countDuration = 0.5f;
+    [SerializeField] private float defaultFontSize = 36f; // Default font size for 1-2 digit numbers
     
     private int score = 0;
     private int displayedScore = 0;
     public int lives = 3;
     private int jewels = 0;
     private Coroutine countingCoroutine;
+    private float currentFontSize;
 
     private void Awake()
     {
@@ -25,6 +27,13 @@ public class ScoreManager : MonoBehaviour
             
             // Register to the scene loaded event
             UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+            
+            // Store the initial font size
+            if (scoreText != null)
+            {
+                currentFontSize = scoreText.fontSize;
+                defaultFontSize = currentFontSize;
+            }
         }
         else
         {
@@ -110,7 +119,25 @@ public class ScoreManager : MonoBehaviour
     private void UpdateScoreDisplay(int scoreToDisplay)
     {
         if (scoreText != null)
+        {
             scoreText.text = scoreToDisplay.ToString();
+            
+            // Calculate number of digits
+            int digitCount = scoreToDisplay == 0 ? 1 : Mathf.FloorToInt(Mathf.Log10(scoreToDisplay)) + 1;
+            
+            // Adjust font size based on digit count
+            if (digitCount > 2)
+            {
+                // Reduce font size by 25% for each additional digit beyond 2
+                float scaleFactor = 1f / (1f + (digitCount - 2) * 0.25f);
+                scoreText.fontSize = defaultFontSize * scaleFactor;
+            }
+            else
+            {
+                // Reset to default font size for 1-2 digits
+                scoreText.fontSize = defaultFontSize;
+            }
+        }
     }
 
     public int GetScore()

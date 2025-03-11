@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 57535a1797fae144495322cb9563b332
+guid: 52435ed9b03f2464a8b57be053bca2c2
 TextureImporter:
   internalIDToNameTable:
   - first:
       213: 7811720919561420163
     second: OptionsScreen_0
-  - first:
-      213: 5179433435995459625
-    second: OptionsScreen_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,13 +46,13 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteBorder: {x: 78, y: 93, z: 73, w: 75}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -100,19 +97,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
     buildTarget: iOS
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -132,12 +116,12 @@ TextureImporter:
       name: OptionsScreen_0
       rect:
         serializedVersion: 2
-        x: 21
-        y: 196
-        width: 981
-        height: 775
+        x: 0
+        y: 0
+        width: 662
+        height: 888
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -150,34 +134,12 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: OptionsScreen_1
-      rect:
-        serializedVersion: 2
-        x: 758
-        y: 124
-        width: 238
-        height: 54
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9205a4aa44b01e740800000000000000
-      internalID: 5179433435995459625
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
-    internalID: 0
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
@@ -187,7 +149,6 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       OptionsScreen_0: 7811720919561420163
-      OptionsScreen_1: 5179433435995459625
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
