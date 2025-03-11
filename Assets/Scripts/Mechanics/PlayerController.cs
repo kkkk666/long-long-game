@@ -14,8 +14,15 @@ namespace Platformer.Mechanics
         public float baseSpeed = 7f;           // Starting speed
         public float maxSpeed = 15f;           // Maximum speed cap
         public float speedIncreaseRate = 0.1f; // How much to increase speed per second
-        public float currentSpeed;             // Current running speed
         public float speedModifier = 3f;       // How much player can modify their speed
+        public float returnToBaseSpeed = 2f;   // How fast speed returns to base speed
+        private float currentBaseSpeed;        // Current base running speed that increases over time
+        private float temporarySpeedModifier;  // Temporary speed modification from player input
+        public float currentSpeed             // Current actual speed (baseSpeed + temporary modifier)
+        {
+            get { return currentBaseSpeed + temporarySpeedModifier; }
+            private set { /* Empty setter to maintain compatibility */ }
+        }
         public float jumpForce = 7f;
         public float doubleJumpForce = 7f;
         public float stompForce = 15f;         // Force applied during stomp
@@ -93,6 +100,15 @@ namespace Platformer.Mechanics
         [Header("Effects")]
         public GameObject doubleJumpEffectPrefab; // Reference to your particle effect prefab
 
+        [Header("Touch Controls")]
+        public float minSwipeDistance = 50f;        // Minimum distance for a swipe to be detected
+        public float maxTapTime = 0.2f;             // Maximum time for a tap to be registered
+
+        // Touch control variables
+        private Vector2 touchStart;
+        private float touchStartTime;
+        private bool isSwiping;
+
         private void Awake()
         {
             
@@ -106,8 +122,9 @@ namespace Platformer.Mechanics
             rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 
-            // Initialize starting speed
-            currentSpeed = baseSpeed;
+            // Initialize starting speeds
+            currentBaseSpeed = baseSpeed;
+            temporarySpeedModifier = 0f;
             gameStartTime = Time.time;
             
             // Register to scene loaded event
@@ -132,7 +149,8 @@ namespace Platformer.Mechanics
             
             
             // Reset movement state
-            currentSpeed = baseSpeed;
+            currentBaseSpeed = baseSpeed;
+            temporarySpeedModifier = 0f;
             gameStartTime = Time.time;
             
             // Reset jump state
@@ -175,39 +193,36 @@ namespace Platformer.Mechanics
 
             if (controlEnabled)
             {
-                // Handle jumping
+                // Handle touch input
+                HandleTouchInput();
+
+                // Keep existing keyboard input for testing/cross-platform
                 if (Input.GetButtonDown("Jump"))
                 {
-                    if (isGrounded)
-                    {
-                        Jump();
-                        canDoubleJump = true;
-                        hasDoubleJumped = false;
-                        
-                        if (showDebugInfo) Debug.Log("First Jump performed");
-                    }
-                    else if (!isGrounded && canDoubleJump && !hasDoubleJumped)
-                    {
-                        DoubleJump();
-                        hasDoubleJumped = true;
-                        canDoubleJump = false;
-                        
-                        if (showDebugInfo) Debug.Log("Double Jump performed");
-                    }
+                    HandleJumpInput();
                 }
 
-                // Stomp ability (press down during any jump)
+                // Stomp ability (now handled in touch input and keeping keyboard for testing)
                 if (!isGrounded && !isStomping && Input.GetAxisRaw("Vertical") < -0.5f)
                 {
                     StartStomp();
-                    if (showDebugInfo) Debug.Log("Stomp initiated");
                 }
 
-                // Gradually increase speed over time
-                if (currentSpeed < maxSpeed)
+                // Gradually increase base speed over time
+                if (currentBaseSpeed < maxSpeed)
                 {
-                    currentSpeed += speedIncreaseRate * Time.deltaTime;
-                    currentSpeed = Mathf.Min(currentSpeed, maxSpeed);
+                    currentBaseSpeed += speedIncreaseRate * Time.deltaTime;
+                    currentBaseSpeed = Mathf.Min(currentBaseSpeed, maxSpeed);
+                }
+
+                // Return temporary speed modifier back to 0
+                if (temporarySpeedModifier > 0)
+                {
+                    temporarySpeedModifier = Mathf.Max(0, temporarySpeedModifier - returnToBaseSpeed * Time.deltaTime);
+                }
+                else if (temporarySpeedModifier < 0)
+                {
+                    temporarySpeedModifier = Mathf.Min(0, temporarySpeedModifier + returnToBaseSpeed * Time.deltaTime);
                 }
             }
 
@@ -629,6 +644,96 @@ spriteRenderer.flipX = false;
                     }
                 }
                 isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+            }
+        }
+
+        private void HandleTouchInput()
+        {
+            if (Input.touchCount > 0)
+            {
+                Touch touch = Input.GetTouch(0);
+
+                switch (touch.phase)
+                {
+                    case TouchPhase.Began:
+                        touchStart = touch.position;
+                        touchStartTime = Time.time;
+                        isSwiping = false;
+                        break;
+
+                    case TouchPhase.Moved:
+                        if (!isSwiping)
+                        {
+                            float swipeDistance = Vector2.Distance(touch.position, touchStart);
+                            if (swipeDistance > minSwipeDistance)
+                            {
+                                isSwiping = true;
+                                Vector2 swipeDirection = touch.position - touchStart;
+
+                                // Determine swipe direction
+                                float angle = Mathf.Atan2(swipeDirection.y, swipeDirection.x) * Mathf.Rad2Deg;
+
+                                if (angle > -45 && angle < 45) // Right swipe
+                                {
+                                    temporarySpeedModifier = speedModifier;
+                                }
+                                else if (angle > 135 || angle < -135) // Left swipe
+                                {
+                                    temporarySpeedModifier = -speedModifier;
+                                }
+                                else if (angle < -45 && angle > -135) // Down swipe
+                                {
+                                    if (!isGrounded && !isStomping)
+                                    {
+                                        StartStomp();
+                                    }
+                                }
+                            }
+                        }
+                        break;
+
+                    case TouchPhase.Ended:
+                        float touchDuration = Time.time - touchStartTime;
+                        if (!isSwiping && touchDuration < maxTapTime)
+                        {
+                            // Handle jump and double jump with single taps
+                            if (isGrounded)
+                            {
+                                Jump();
+                                canDoubleJump = true;
+                                hasDoubleJumped = false;
+                                if (showDebugInfo) Debug.Log("First Jump performed");
+                            }
+                            else if (!isGrounded && canDoubleJump && !hasDoubleJumped)
+                            {
+                                DoubleJump();
+                                hasDoubleJumped = true;
+                                canDoubleJump = false;
+                                if (showDebugInfo) Debug.Log("Double Jump performed");
+                            }
+                        }
+                        break;
+                }
+            }
+        }
+
+        private void HandleJumpInput()
+        {
+            if (isGrounded)
+            {
+                Jump();
+                canDoubleJump = true;
+                hasDoubleJumped = false;
+                
+                if (showDebugInfo) Debug.Log("First Jump performed");
+            }
+            else if (!isGrounded && canDoubleJump && !hasDoubleJumped)
+            {
+                DoubleJump();
+                hasDoubleJumped = true;
+                canDoubleJump = false;
+                
+                if (showDebugInfo) Debug.Log("Double Jump performed");
             }
         }
 
