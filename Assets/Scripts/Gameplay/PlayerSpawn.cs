@@ -34,7 +34,9 @@ namespace Platformer.Gameplay
             player.GetComponent<PlayerController>().ResetDeathState();
             model.virtualCamera.Follow = player.transform;
             model.virtualCamera.LookAt = player.transform;
-            Simulation.Schedule<EnablePlayerInput>(2f);
+            
+            // Enable controls after a shorter delay (0.5 seconds)
+            Simulation.Schedule<EnablePlayerInput>(0.5f);
         }
     }
 }

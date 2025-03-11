@@ -343,8 +343,8 @@ Transform:
   m_GameObject: {fileID: 3175221757635391842}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.8316, y: 4.1982, z: 0}
-  m_LocalScale: {x: 1.0247933, y: 1.0007, z: 1}
+  m_LocalPosition: {x: 4.8077, y: 4.1982, z: 0}
+  m_LocalScale: {x: 1.0271516, y: 1.0007, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4982228663673066434}
@@ -497,10 +497,10 @@ MonoBehaviour:
     colliders: []
     _isRoot: 1
   bounds:
-    center: {x: 0, y: -0.11500037, z: 0}
+    center: {x: 0, y: -0.11500025, z: 0}
     extents: {x: 10.240001, y: 2.1549997, z: 0}
     max: {x: 10.240001, y: 2.0399995, z: 0}
-    min: {x: -10.240001, y: -2.2700002, z: 0}
+    min: {x: -10.240001, y: -2.27, z: 0}
     size: {x: 20.480001, y: 4.3099995, z: 0}
   builders: []
   unpacked: 1
@@ -1788,7 +1788,7 @@ MonoBehaviour:
   drawEntranceAndExit: 1
   drawBounds: 1
   drawCustomPaths: 1
-  editorChildCount: 25
+  editorChildCount: 24
 --- !u!1 &6390409138697550433
 GameObject:
   m_ObjectHideFlags: 0
