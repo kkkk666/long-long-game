@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b5e5eeb6cf9d7e641b03a4ba2f443188
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 246019
+  packageName: Webhooks for Discord
+  packageVersion: 1.8
+  assetPath: Assets/ShadowGroveGames/Webhooks for Discord/Examples/1. Send Simple
+    Message/1. Send Simple Message.unity
+  uploadId: 656195

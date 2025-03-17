@@ -1,0 +1,16 @@
+{
+    "name": "org.Shadow-Grove.WebhooksForDiscord.Examples",
+    "rootNamespace": "ShadowGroveGames.WebhooksForDiscord.Examples",
+    "references": [
+        "GUID:0c4409026e0b15f42b7cf08fe9b441d8"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

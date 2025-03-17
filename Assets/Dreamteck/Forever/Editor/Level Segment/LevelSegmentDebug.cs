@@ -53,30 +53,31 @@ namespace Dreamteck.Forever.Editor
 
         public static void DrawGeneratedSpline(LevelSegment segment)
         {
+            if (segment == null || segment.path == null || segment.path.spline == null || segment.path.spline.points == null) return;
+            
             Vector3 cameraPos = SceneView.currentDrawingSceneView.camera.transform.position;
             Handles.color = ForeverPrefs.pointColor;
-            //Debug spline points
-            if (segment.path != null)
+            
+            for (int i = 0; i < segment.path.spline.points.Length; i++)
             {
-                    for (int i = 0; i < segment.path.spline.points.Length; i++)
+                Vector3 pos = segment.path.spline.points[i].position;
+                float handleSize = HandleUtility.GetHandleSize(segment.path.spline.points[i].position);
+                Handles.DrawSolidDisc(pos, cameraPos - pos, handleSize * 0.1f);
+                Handles.DrawLine(pos, pos + segment.path.spline.points[i].normal * segment.drawSampleScale);
+                if (segment.path.spline.type == Spline.Type.Bezier)
                 {
-                    Vector3 pos = segment.path.spline.points[i].position;
-                    float handleSize = HandleUtility.GetHandleSize(segment.path.spline.points[i].position);
-                    Handles.DrawSolidDisc(pos, cameraPos - pos, handleSize * 0.1f);
-                    Handles.DrawLine(pos, pos + segment.path.spline.points[i].normal * segment.drawSampleScale);
-                    if (segment.path.spline.type == Spline.Type.Bezier)
-                    {
-                        Handles.DrawDottedLine(segment.path.spline.points[i].position, segment.path.spline.points[i].tangent, 10f);
-                        Handles.DrawDottedLine(segment.path.spline.points[i].position, segment.path.spline.points[i].tangent2, 10f);
-                        Handles.DrawWireDisc(segment.path.spline.points[i].tangent, cameraPos - segment.path.spline.points[i].tangent, handleSize * 0.075f);
-                        Handles.DrawWireDisc(segment.path.spline.points[i].tangent2, cameraPos - segment.path.spline.points[i].tangent2, handleSize * 0.075f);
-                    }
+                    Handles.DrawDottedLine(segment.path.spline.points[i].position, segment.path.spline.points[i].tangent, 10f);
+                    Handles.DrawDottedLine(segment.path.spline.points[i].position, segment.path.spline.points[i].tangent2, 10f);
+                    Handles.DrawWireDisc(segment.path.spline.points[i].tangent, cameraPos - segment.path.spline.points[i].tangent, handleSize * 0.075f);
+                    Handles.DrawWireDisc(segment.path.spline.points[i].tangent2, cameraPos - segment.path.spline.points[i].tangent2, handleSize * 0.075f);
                 }
             }
         }
 
         public static void DrawGeneratedSamples(LevelSegment segment)
         {
+            if (segment == null || segment.path == null || segment.path.samples == null) return;
+            
             //Debug spline samples
             for (int i = 0; i < segment.path.samples.Length; i++)
             {

@@ -1,0 +1,14 @@
+{
+    "name": "org.Shadow-Grove.WebhooksForDiscord.Scripts",
+    "rootNamespace": "ShadowGroveGames.WebhooksForDiscord.Scripts",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

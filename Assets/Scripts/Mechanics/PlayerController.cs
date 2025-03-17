@@ -536,8 +536,8 @@ spriteRenderer.flipX = false;
             if (isInvulnerable) return;
             
             isDead = true;
-            animator.Play(PLAYER_DIE);
-            currentAnimation = PLAYER_DIE;
+            animator.SetBool("dead", true);
+            ChangeAnimationState(PLAYER_DIE);
             rb.linearVelocity = Vector2.zero;
             hasDoubleJumped = false;
             canDoubleJump = false;

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 7ff8c33ba4db4494580e4dd86b8ce7e0
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 246019
+  packageName: Webhooks for Discord
+  packageVersion: 1.8
+  assetPath: Assets/ShadowGroveGames/Webhooks for Discord/Scripts/DTO/Converter/IntegerToColorConverter.cs
+  uploadId: 656195

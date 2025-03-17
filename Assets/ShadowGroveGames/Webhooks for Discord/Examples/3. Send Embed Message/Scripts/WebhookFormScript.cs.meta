@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: d261902a76c11af42862e777a0c4f233
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 246019
+  packageName: Webhooks for Discord
+  packageVersion: 1.8
+  assetPath: Assets/ShadowGroveGames/Webhooks for Discord/Examples/3. Send Embed
+    Message/Scripts/WebhookFormScript.cs
+  uploadId: 656195

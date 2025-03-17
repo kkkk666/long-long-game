@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 912c8de521c215147a4a289d14ca6cf4
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 246019
+  packageName: Webhooks for Discord
+  packageVersion: 1.8
+  assetPath: Assets/ShadowGroveGames/Webhooks for Discord/Editor/org.Shadow-Grove.WebhooksForDiscord.Editor.asmdef
+  uploadId: 656195

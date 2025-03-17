@@ -46,7 +46,7 @@ public class JewelCollectable : MonoBehaviour
         );
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public void OnTriggerEnter2D(Collider2D other)
     {
         var player = other.gameObject.GetComponent<PlayerController>();
         if (player == null) return;

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: bbc8113683860bd45a466b2a1cf290fa
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 246019
+  packageName: Webhooks for Discord
+  packageVersion: 1.8
+  assetPath: Assets/ShadowGroveGames/Webhooks for Discord/Scripts/Extentions/NameValueCollectionExtention.cs
+  uploadId: 656195

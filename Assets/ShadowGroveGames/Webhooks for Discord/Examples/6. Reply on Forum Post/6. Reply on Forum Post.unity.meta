@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6cfe38bfcdb8d364a8c369ef73f214ec
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 246019
+  packageName: Webhooks for Discord
+  packageVersion: 1.8
+  assetPath: Assets/ShadowGroveGames/Webhooks for Discord/Examples/6. Reply on Forum
+    Post/6. Reply on Forum Post.unity
+  uploadId: 656195

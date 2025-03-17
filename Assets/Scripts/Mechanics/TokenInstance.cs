@@ -17,6 +17,9 @@ namespace Platformer.Mechanics
         public bool randomAnimationStartTime = false;
         [Tooltip("List of frames that make up the animation.")]
         public Sprite[] idleAnimation, collectedAnimation;
+        [SerializeField] private ParticleSystem collectionEffect;
+        [SerializeField] private CoinFlyAnimation coinFlyAnimation;
+        [SerializeField] private int pointValue = 10;
 
         internal Sprite[] sprites = new Sprite[0];
         internal SpriteRenderer _renderer;
@@ -31,27 +34,62 @@ namespace Platformer.Mechanics
             if (randomAnimationStartTime)
                 frame = Random.Range(0, sprites.Length);
             sprites = idleAnimation;
+
+            if (coinFlyAnimation == null)
+            {
+                coinFlyAnimation = FindFirstObjectByType<CoinFlyAnimation>();
+                if (coinFlyAnimation == null)
+                {
+                    Debug.LogError("CoinFlyAnimation not found in scene!");
+                }
+            }
         }
 
-        void OnTriggerEnter2D(Collider2D other)
+        public void OnTriggerEnter2D(Collider2D other)
         {
-            //only execute OnPlayerEnter if the player collides with this token.
             var player = other.gameObject.GetComponent<PlayerController>();
-            if (player != null) OnPlayerEnter(player);
-        }
+            if (player == null) return;
 
-        void OnPlayerEnter(PlayerController player)
-        {
             if (collected) return;
+
+            // Spawn particles if assigned
+            if (collectionEffect != null)
+            {
+                ParticleSystem particles = Instantiate(collectionEffect, transform.position, Quaternion.identity);
+                Destroy(particles.gameObject, particles.main.duration);
+            }
+
+            // Play collection sound
+            if (tokenCollectAudio != null)
+            {
+                AudioSource.PlayClipAtPoint(tokenCollectAudio, transform.position);
+            }
+
+            // Update animation
             frame = 0;
             sprites = collectedAnimation;
             if (controller != null)
                 collected = true;
 
-            // Only trigger the collection event
+            // Trigger coin animation if available
+            if (coinFlyAnimation != null)
+            {
+                coinFlyAnimation.StartCoinFlyAnimation(transform.position);
+            }
+
+            // Add score
+            if (ScoreManager.Instance != null)
+            {
+                ScoreManager.Instance.AddScore(pointValue);
+            }
+
+            // Trigger the collection event
             var ev = Schedule<PlayerTokenCollision>();
             ev.token = this;
             ev.player = player;
+
+            // Destroy the token
+            Destroy(gameObject);
         }
     }
 }

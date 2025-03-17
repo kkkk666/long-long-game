@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 30ada74feba960046b8b2bc9218d8cbb
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 246019
+  packageName: Webhooks for Discord
+  packageVersion: 1.8
+  assetPath: Assets/ShadowGroveGames/Webhooks for Discord/Editor/Setup/GettingStartedEditorWindow.cs
+  uploadId: 656195

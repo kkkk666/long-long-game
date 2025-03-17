@@ -1,0 +1,16 @@
+{
+    "name": "org.Shadow-Grove.WebhooksForDiscord.Editor",
+    "rootNamespace": "ShadowGroveGames.WebhooksForDiscord.Editor",
+    "references": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

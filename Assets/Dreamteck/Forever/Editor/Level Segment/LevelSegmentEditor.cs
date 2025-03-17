@@ -819,81 +819,74 @@ namespace Dreamteck.Forever.Editor
 
         void DuringSceneGUI(SceneView currentSceneView)
         {
-#if DREAMTECK_SPLINES
-            for (int i = 0; i < splines.Length; i++)
+            try
             {
-                if (splines[i] != null) DSSplineDrawer.DrawSplineComputer(splines[i]);
-            }
+#if DREAMTECK_SPLINES
+                for (int i = 0; i < splines.Length; i++)
+                {
+                    if (splines[i] != null) DSSplineDrawer.DrawSplineComputer(splines[i]);
+                }
 #endif
 
-            if (Application.isPlaying)
-            {
-                for (int i = 0; i < sceneSegments.Length; i++)
+                if (Application.isPlaying)
                 {
-                    if (sceneSegments[i].drawCustomPaths)
+                    for (int i = 0; i < sceneSegments.Length; i++)
                     {
-                        LevelSegmentDebug.DrawCustomPaths(sceneSegments[i]);
-                    }
-                    if (sceneSegments[i].drawGeneratedSpline)
-                    {
-                        if (sceneSegments[i].type == LevelSegment.Type.Extruded)
+                        if (sceneSegments[i] == null) continue;
+                        
+                        if (sceneSegments[i].drawCustomPaths)
                         {
-                            LevelSegmentDebug.DrawGeneratedSpline(sceneSegments[i]);
+                            LevelSegmentDebug.DrawCustomPaths(sceneSegments[i]);
+                        }
+                        if (sceneSegments[i].drawGeneratedSpline)
+                        {
+                            if (sceneSegments[i].type == LevelSegment.Type.Extruded)
+                            {
+                                LevelSegmentDebug.DrawGeneratedSpline(sceneSegments[i]);
+                            }
+                        }
+                        if (sceneSegments[i].drawGeneratedSamples)
+                        {
+                            LevelSegmentDebug.DrawGeneratedSamples(sceneSegments[i]);
                         }
                     }
-                    if (sceneSegments[i].drawGeneratedSamples)
-                    {
-                        LevelSegmentDebug.DrawGeneratedSamples(sceneSegments[i]);
-                    }
                 }
-            }
-            else
-            {
-                for (int i = 0; i < sceneSegments.Length; i++)
+                else
                 {
-                    if (sceneSegments[i].drawCustomPaths) LevelSegmentDebug.DrawCustomPaths(sceneSegments[i]);
-                    if (sceneSegments[i].type == LevelSegment.Type.Custom) continue;
-                    if (sceneSegments[i].drawBounds) LevelSegmentDebug.DrawBounds(sceneSegments[i]);
-                }
+                    for (int i = 0; i < sceneSegments.Length; i++)
+                    {
+                        if (sceneSegments[i] == null) continue;
+                        
+                        if (sceneSegments[i].drawCustomPaths) LevelSegmentDebug.DrawCustomPaths(sceneSegments[i]);
+                        if (sceneSegments[i].type == LevelSegment.Type.Custom) continue;
+                        if (sceneSegments[i].drawBounds) LevelSegmentDebug.DrawBounds(sceneSegments[i]);
+                    }
 
-                if (sceneSegments.Length == 1 && selectedProperties.Count > 0)
-                {
-                    Handles.BeginGUI();
-                    for (int i = 0; i < selectedProperties.Count; i++)
+                    if (sceneSegments.Length == 1 && selectedProperties.Count > 0)
                     {
-                        Vector2 screenPosition = HandleUtility.WorldToGUIPoint(sceneSegments[0].objectProperties[selectedProperties[i]].transform.transform.position);
-                        DreamteckEditorGUI.Label(new Rect(screenPosition.x - 120 + sceneSegments[0].objectProperties[selectedProperties[i]].transform.transform.name.Length * 4, screenPosition.y, 120, 25), sceneSegments[0].objectProperties[selectedProperties[i]].transform.transform.name);
+                        try
+                        {
+                            Handles.BeginGUI();
+                            for (int i = 0; i < selectedProperties.Count; i++)
+                            {
+                                Vector2 screenPosition = HandleUtility.WorldToGUIPoint(sceneSegments[0].objectProperties[selectedProperties[i]].transform.transform.position);
+                                DreamteckEditorGUI.Label(new Rect(screenPosition.x - 120 + sceneSegments[0].objectProperties[selectedProperties[i]].transform.transform.name.Length * 4, screenPosition.y, 120, 25), sceneSegments[0].objectProperties[selectedProperties[i]].transform.transform.name);
+                            }
+                        }
+                        finally
+                        {
+                            Handles.EndGUI();
+                        }
                     }
-                    Handles.EndGUI();
+                }
+                if (pathEditor != null)
+                {
+                    pathEditor.DrawScene(SceneView.currentDrawingSceneView);
                 }
             }
-            if (pathEditor != null)
+            catch (System.Exception ex)
             {
-                pathEditor.DrawScene(SceneView.currentDrawingSceneView);
-            }
-
-            for (int i = 0; i < sceneSegments.Length; i++)
-            {
-                if (!sceneSegments[i].drawEntranceAndExit) continue;
-                if(sceneSegments[i].type == LevelSegment.Type.Custom)
-                {
-                    if (sceneSegments[i].customEntrance != null)
-                    {
-                        float handleSize = HandleUtility.GetHandleSize(sceneSegments[i].customEntrance.position);
-                        Handles.color = ForeverPrefs.entranceColor;
-                        Handles.DrawSolidDisc(sceneSegments[i].customEntrance.position, Camera.current.transform.position - sceneSegments[i].customEntrance.position, handleSize * 0.1f);
-                        Handles.ArrowHandleCap(0, sceneSegments[i].customEntrance.position, sceneSegments[i].customEntrance.rotation, handleSize * 0.5f, EventType.Repaint);
-                        Handles.Label(sceneSegments[i].customEntrance.position + Camera.current.transform.up * handleSize * 0.3f, "Entrance");
-                    }
-                    if (sceneSegments[i].customExit != null)
-                    {
-                        Handles.color = ForeverPrefs.exitColor;
-                        float handleSize = HandleUtility.GetHandleSize(sceneSegments[i].customExit.position);
-                        Handles.DrawSolidDisc(sceneSegments[i].customExit.position, Camera.current.transform.position - sceneSegments[i].customExit.position, handleSize * 0.1f);
-                        Handles.ArrowHandleCap(0, sceneSegments[i].customExit.position, sceneSegments[i].customExit.rotation, handleSize * 0.5f, EventType.Repaint);
-                        Handles.Label(sceneSegments[i].customExit.position + Camera.current.transform.up * HandleUtility.GetHandleSize(sceneSegments[i].customExit.position) * 0.3f, "Exit");
-                    } 
-                }
+                Debug.LogError("Error in DuringSceneGUI: " + ex.Message + "\n" + ex.StackTrace);
             }
         }
 

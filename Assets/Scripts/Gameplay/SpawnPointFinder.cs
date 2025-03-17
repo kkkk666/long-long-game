@@ -12,7 +12,6 @@ namespace Platformer.Mechanics
         private const float PATROL_PATH_BUFFER = 3f;     // Buffer distance from patrol paths
 
         [System.Obsolete]
-
         public static Vector2 FindSafeSpawnPoint(Vector2 deathPosition, LayerMask groundLayer)
         {
             Vector2 currentCheckPoint = deathPosition;
@@ -52,7 +51,7 @@ namespace Platformer.Mechanics
 
                     foreach (Collider2D overlap in overlaps)
                     {
-                        if (overlap.CompareTag("Player"))  // Enemy tag
+                        if (overlap.CompareTag("Enemy"))  // Enemy tag
                         {
                             isUnsafe = true;
                             break;
@@ -65,7 +64,13 @@ namespace Platformer.Mechanics
                         isUnsafe = IsPointNearPatrolPaths(potentialSpawnPoint, patrolPaths);
                     }
 
-                    // If spot is safe from both immediate collisions and patrol paths
+                    // Check if point is near any spring platforms
+                    if (!isUnsafe)
+                    {
+                        isUnsafe = !SpringPlatform.IsSafeForRespawn(potentialSpawnPoint, 1.5f);
+                    }
+
+                    // If spot is safe from both immediate collisions, patrol paths, and spring platforms
                     if (!isUnsafe)
                     {
                         return potentialSpawnPoint;
@@ -77,19 +82,36 @@ namespace Platformer.Mechanics
             }
 
             // If no safe spot found, return original spawn point
-            return GameObject.FindGameObjectWithTag("Respawn").transform.position;
+            var spawnPoint = GameObject.FindGameObjectWithTag("Respawn");
+            if (spawnPoint != null)
+            {
+                // Make sure the spawn point is not near any spring platforms
+                Vector2 originalSpawnPos = spawnPoint.transform.position;
+                if (SpringPlatform.IsSafeForRespawn(originalSpawnPos, 1.5f))
+                {
+                    return originalSpawnPos;
+                }
+                else
+                {
+                    // If spawn point is unsafe, try to find a safe spot above it
+                    Vector2 safeSpawnPos = originalSpawnPos;
+                    safeSpawnPos.y += 2f;
+                    return safeSpawnPos;
+                }
+            }
+            
+            // Absolute fallback: Return a position high above the death position
+            return deathPosition + Vector2.up * 5f;
         }
 
         private static bool IsPointNearPatrolPaths(Vector2 point, List<(Vector2 start, Vector2 end)> patrolPaths)
         {
             foreach (var path in patrolPaths)
             {
-                // Check if point is too close to patrol path using line segment distance
-                float distanceToPath = DistanceToLineSegment(point, path.start, path.end);
-                if (distanceToPath < PATROL_PATH_BUFFER)
-                {
-                    return true; // Point is too close to a patrol path
-                }
+                // Check distance to line segment
+                float distance = DistanceToLineSegment(point, path.start, path.end);
+                if (distance < PATROL_PATH_BUFFER)
+                    return true;
             }
             return false;
         }
@@ -100,10 +122,8 @@ namespace Platformer.Mechanics
             float len = line.magnitude;
             if (len == 0f) return Vector2.Distance(point, start);
 
-            // Project point onto line segment
             float t = Mathf.Clamp01(Vector2.Dot(point - start, line) / (len * len));
             Vector2 projection = start + t * line;
-
             return Vector2.Distance(point, projection);
         }
     }
