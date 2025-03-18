@@ -92,7 +92,7 @@ namespace Platformer.Mechanics
         private const string PLAYER_RUN = "BabyDragonWalk";
         private const string PLAYER_JUMP = "BabyDragonJump";
         private const string PLAYER_DOUBLEJUMP = "BabyDragonDoubleJump";
-        private const string PLAYER_FALL = "BabyDragonLand 0";
+        private const string PLAYER_FALL = "BabyDragonLand_0";
         private const string PLAYER_SPRINT = "BabyDragonSprint";
         private const string PLAYER_DIE = "BabyDragonDie";
         private const string PLAYER_STOMP = "Stomp"; 
@@ -524,6 +524,9 @@ spriteRenderer.flipX = false;
 
         void ChangeAnimationState(string newAnimation)
         {
+            // Log the requested animation state
+            Debug.Log($"Requesting animation state: {newAnimation}");
+            
             if (currentAnimation == PLAYER_DIE) return;
             if (currentAnimation == newAnimation) return;
             
@@ -537,7 +540,13 @@ spriteRenderer.flipX = false;
             
             isDead = true;
             animator.SetBool("dead", true);
-            ChangeAnimationState(PLAYER_DIE);
+            
+            // Check if the death animation is playing
+            if (!animator.GetCurrentAnimatorStateInfo(0).IsName(PLAYER_DIE))
+            {
+                ChangeAnimationState(PLAYER_DIE);
+            }
+            
             rb.linearVelocity = Vector2.zero;
             hasDoubleJumped = false;
             canDoubleJump = false;
