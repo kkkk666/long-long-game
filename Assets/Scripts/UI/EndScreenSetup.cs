@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using Platformer.Gameplay;
@@ -79,8 +80,7 @@ public class EndScreenSetup : MonoBehaviour
         Time.timeScale = 1;
         
         // Reload the current scene
-        UnityEngine.SceneManagement.SceneManager.LoadScene(
-            UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     
     private void GoToMainMenu()
@@ -92,7 +92,7 @@ public class EndScreenSetup : MonoBehaviour
         Time.timeScale = 1;
         
         // Load the main menu scene
-        UnityEngine.SceneManagement.SceneManager.LoadScene("StartScreen");
+        SceneManager.LoadScene("StartScreen");
     }
 }
 

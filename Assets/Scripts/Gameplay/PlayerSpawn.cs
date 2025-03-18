@@ -32,8 +32,13 @@ namespace Platformer.Gameplay
             player.Teleport(safeSpawnPoint);
             player.jumpState = PlayerController.JumpState.Grounded;
             player.GetComponent<PlayerController>().ResetDeathState();
-            model.virtualCamera.Follow = player.transform;
-            model.virtualCamera.LookAt = player.transform;
+            
+            // Ensure camera follows player
+            if (model.virtualCamera != null)
+            {
+                model.virtualCamera.Follow = player.transform;
+                model.virtualCamera.LookAt = player.transform;
+            }
             
             // Enable controls after a shorter delay (0.5 seconds)
             Simulation.Schedule<EnablePlayerInput>(0.5f);

@@ -52,8 +52,8 @@ namespace Platformer.Gameplay
                 ScoreManager.Instance.RemoveLife();
                 
                 player.health.Die();
-                model.virtualCamera.Follow = null;
-                model.virtualCamera.LookAt = null;
+                // model.virtualCamera.Follow = null;
+                // model.virtualCamera.LookAt = null;
                 player.controlEnabled = false;
 
                 if (player.audioSource && player.ouchAudio)

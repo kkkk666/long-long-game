@@ -17,7 +17,6 @@ public class CameraShake : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
             
             virtualCamera = GetComponent<CinemachineVirtualCamera>();
             if (virtualCamera != null)

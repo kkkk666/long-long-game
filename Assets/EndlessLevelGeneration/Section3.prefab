@@ -1934,8 +1934,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collectionRadius: 10
   useScreenBounds: 1
+  screenBoundsExpansion: 0.1
   collectionEffect: {fileID: 0}
-  collectionSound: {fileID: 0}
+  collectionSound: {fileID: 8300000, guid: 736da5930f91241eaa4c94513920c969, type: 3}
+  shakeIntensity: 1
+  shakeDuration: 1
 --- !u!212 &6714958753873185027
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2665,11 +2668,11 @@ MonoBehaviour:
     colliders: []
     _isRoot: 0
   bounds:
-    center: {x: 4.8118706, y: 1.4999998, z: 0.6515201}
-    extents: {x: 10.5, y: 4.9799995, z: 0.7010991}
-    max: {x: 15.311871, y: 6.4799995, z: 1.3526192}
-    min: {x: -5.6881294, y: -3.48, z: -0.049579017}
-    size: {x: 21, y: 9.959999, z: 1.4021982}
+    center: {x: 4.8118744, y: 1.4999995, z: 0.6515201}
+    extents: {x: 10.5, y: 4.98, z: 0.7010991}
+    max: {x: 15.311874, y: 6.4799995, z: 1.3526192}
+    min: {x: -5.6881256, y: -3.4800005, z: -0.049579017}
+    size: {x: 21, y: 9.96, z: 1.4021982}
   builders: []
   unpacked: 0
   alwaysDraw: 0
