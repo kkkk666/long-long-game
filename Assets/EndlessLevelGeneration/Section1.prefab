@@ -200,11 +200,11 @@ MonoBehaviour:
     name: Coin
   - pickupPrefab: {fileID: 9025026712571825086, guid: 7477236430926cc44bfac694d97a45d1,
       type: 3}
-    spawnRatio: 0.05
+    spawnRatio: 0.01
     name: Life
   - pickupPrefab: {fileID: 5221460090455353340, guid: 6425e85563494cd4ebcdc6ef2ea44f3f,
       type: 3}
-    spawnRatio: 0.15
+    spawnRatio: 0.19
     name: Jewel
   noSpawnRatio: 0.294
   minSpacing: 1
@@ -424,9 +424,9 @@ MonoBehaviour:
     colliders: []
     _isRoot: 1
   bounds:
-    center: {x: 0.00000047683716, y: -0.11500001, z: 0}
+    center: {x: 0, y: -0.11500001, z: 0}
     extents: {x: 10.24, y: 2.155, z: 0}
-    max: {x: 10.240001, y: 2.04, z: 0}
+    max: {x: 10.24, y: 2.04, z: 0}
     min: {x: -10.24, y: -2.27, z: 0}
     size: {x: 20.48, y: 4.31, z: 0}
   builders: []
@@ -1114,11 +1114,11 @@ MonoBehaviour:
     name: Coin
   - pickupPrefab: {fileID: 9025026712571825086, guid: 7477236430926cc44bfac694d97a45d1,
       type: 3}
-    spawnRatio: 0.05
+    spawnRatio: 0.01
     name: Life
   - pickupPrefab: {fileID: 5221460090455353340, guid: 6425e85563494cd4ebcdc6ef2ea44f3f,
       type: 3}
-    spawnRatio: 0.15
+    spawnRatio: 0.19
     name: Jewel
   noSpawnRatio: 0.294
   minSpacing: 1
@@ -1179,7 +1179,6 @@ Transform:
   - {fileID: 7046493970101557938}
   - {fileID: 6627689368192246741}
   - {fileID: 6759527658328937962}
-  - {fileID: 3320035244310335410}
   - {fileID: 3955243658873718560}
   - {fileID: 2706757035259934082}
   - {fileID: 7368047710340942981}
@@ -2075,37 +2074,6 @@ MonoBehaviour:
     spriteRenderer: {fileID: 6858915103630316484}
     colliders: []
     _isRoot: 0
-  - transform: {fileID: 3320035244310335410}
-    localRotation: {x: 0, y: 0, z: 0, w: 1}
-    extrudedMesh: {fileID: 0}
-    extrusionSpriteVertices: []
-    extrusionSpriteUVs: []
-    extrusionSpriteRect:
-      serializedVersion: 2
-      x: 0
-      y: 0
-      width: 0
-      height: 0
-    extrudedCollisionMesh: {fileID: 0}
-    _extrusionSettings:
-      meshColliderHandling: 0
-      boundsInclusion: -1
-      indexing: 0
-      applyRotation: 1
-      keepUpright: 0
-      upVector: {x: 0, y: 1, z: 0}
-      applyScale: 0
-      bendMesh: 0
-      bendSprite: 0
-      bendPolygonCollider: 0
-      applyMeshColors: 0
-    _settingsComponent: {fileID: 0}
-    overrideSettingsComponent: 0
-    meshFilter: {fileID: 0}
-    meshCollider: {fileID: 0}
-    spriteRenderer: {fileID: 4269761831936965946}
-    colliders: []
-    _isRoot: 0
   - transform: {fileID: 3955243658873718560}
     localRotation: {x: 0, y: 0, z: 0, w: 1}
     extrudedMesh: {fileID: 0}
@@ -2401,7 +2369,7 @@ MonoBehaviour:
   drawEntranceAndExit: 1
   drawBounds: 1
   drawCustomPaths: 1
-  editorChildCount: 36
+  editorChildCount: 35
 --- !u!1 &5266543589217262192
 GameObject:
   m_ObjectHideFlags: 0
@@ -2690,11 +2658,11 @@ MonoBehaviour:
     name: Coin
   - pickupPrefab: {fileID: 9025026712571825086, guid: 7477236430926cc44bfac694d97a45d1,
       type: 3}
-    spawnRatio: 0.05
+    spawnRatio: 0.01
     name: Life
   - pickupPrefab: {fileID: 5221460090455353340, guid: 6425e85563494cd4ebcdc6ef2ea44f3f,
       type: 3}
-    spawnRatio: 0.15
+    spawnRatio: 0.19
     name: Jewel
   noSpawnRatio: 0.294
   minSpacing: 1
@@ -5011,139 +4979,6 @@ SpriteRenderer:
     type: 3}
   m_PrefabInstance: {fileID: 2148816918060451054}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &3101430398618000246
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 4982228663673066434}
-    m_Modifications:
-    - target: {fileID: 367427052344464580, guid: 7477236430926cc44bfac694d97a45d1,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.1619122
-      objectReference: {fileID: 0}
-    - target: {fileID: 367427052344464580, guid: 7477236430926cc44bfac694d97a45d1,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.14409004
-      objectReference: {fileID: 0}
-    - target: {fileID: 367427052344464580, guid: 7477236430926cc44bfac694d97a45d1,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.18522307
-      objectReference: {fileID: 0}
-    - target: {fileID: 367427052344464580, guid: 7477236430926cc44bfac694d97a45d1,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 7.997
-      objectReference: {fileID: 0}
-    - target: {fileID: 367427052344464580, guid: 7477236430926cc44bfac694d97a45d1,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.241
-      objectReference: {fileID: 0}
-    - target: {fileID: 367427052344464580, guid: 7477236430926cc44bfac694d97a45d1,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 367427052344464580, guid: 7477236430926cc44bfac694d97a45d1,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 367427052344464580, guid: 7477236430926cc44bfac694d97a45d1,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 367427052344464580, guid: 7477236430926cc44bfac694d97a45d1,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 367427052344464580, guid: 7477236430926cc44bfac694d97a45d1,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 367427052344464580, guid: 7477236430926cc44bfac694d97a45d1,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 367427052344464580, guid: 7477236430926cc44bfac694d97a45d1,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 367427052344464580, guid: 7477236430926cc44bfac694d97a45d1,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6252340610944511816, guid: 7477236430926cc44bfac694d97a45d1,
-        type: 3}
-      propertyPath: m_Id
-      value: e92cbd72-b1b0-4293-a4aa-c021c6aab1e9
-      objectReference: {fileID: 0}
-    - target: {fileID: 9025026712571825086, guid: 7477236430926cc44bfac694d97a45d1,
-        type: 3}
-      propertyPath: m_Name
-      value: Life (1)
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6252340610944511816, guid: 7477236430926cc44bfac694d97a45d1, type: 3}
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 9025026712571825086, guid: 7477236430926cc44bfac694d97a45d1,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1808928580756665273}
-  m_SourcePrefab: {fileID: 100100000, guid: 7477236430926cc44bfac694d97a45d1, type: 3}
---- !u!4 &3320035244310335410 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 367427052344464580, guid: 7477236430926cc44bfac694d97a45d1,
-    type: 3}
-  m_PrefabInstance: {fileID: 3101430398618000246}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &4269761831936965946 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 1174106071647053388, guid: 7477236430926cc44bfac694d97a45d1,
-    type: 3}
-  m_PrefabInstance: {fileID: 3101430398618000246}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6211919062108737736 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9025026712571825086, guid: 7477236430926cc44bfac694d97a45d1,
-    type: 3}
-  m_PrefabInstance: {fileID: 3101430398618000246}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1808928580756665273
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6211919062108737736}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: aa0e076750414f74fb8bcc9a5ac0e403, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &3570325971045577865
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5589,12 +5424,12 @@ PrefabInstance:
     - target: {fileID: 6991783627150595490, guid: 6425e85563494cd4ebcdc6ef2ea44f3f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.801
+      value: 12.62
       objectReference: {fileID: 0}
     - target: {fileID: 6991783627150595490, guid: 6425e85563494cd4ebcdc6ef2ea44f3f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.02
+      value: 0.98
       objectReference: {fileID: 0}
     - target: {fileID: 6991783627150595490, guid: 6425e85563494cd4ebcdc6ef2ea44f3f,
         type: 3}

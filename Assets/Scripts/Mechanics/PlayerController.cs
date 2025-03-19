@@ -524,8 +524,8 @@ spriteRenderer.flipX = false;
 
         void ChangeAnimationState(string newAnimation)
         {
-            // Log the requested animation state
-            Debug.Log($"Requesting animation state: {newAnimation}");
+    
+    
             
             if (currentAnimation == PLAYER_DIE) return;
             if (currentAnimation == newAnimation) return;

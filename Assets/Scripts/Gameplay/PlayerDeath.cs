@@ -2,6 +2,8 @@
 using Platformer.Mechanics;
 using Platformer.Model;
 using UnityEngine;
+using ShadowGroveGames.WebhooksForDiscord.Scripts;
+using CozyFramework; 
 
 namespace Platformer.Gameplay
 {
@@ -52,8 +54,7 @@ namespace Platformer.Gameplay
                 ScoreManager.Instance.RemoveLife();
                 
                 player.health.Die();
-                // model.virtualCamera.Follow = null;
-                // model.virtualCamera.LookAt = null;
+         
                 player.controlEnabled = false;
 
                 if (player.audioSource && player.ouchAudio)
@@ -66,7 +67,17 @@ namespace Platformer.Gameplay
                 {
                     // Set the game over flag to prevent further deaths
                     gameOverTriggered = true;
-                    
+                    string userName = PlayerManager.Instance.PlayerUsername;
+                    int finalScore = ScoreManager.Instance.GetScore(); // Get the actual score
+
+                    // Submit score to Unity leaderboard
+                    _ = CozyAPI.Instance.SubmitScoreToLeaderboard("HIGHEST_SCORE", finalScore);
+                    Debug.Log($"Submitting final score to leaderboard: {finalScore}");
+
+                    DiscordWebhook.Create("https://discord.com/api/webhooks/1351517390940405880/_ZaimGah7CrNBqOmrxiaUvWiV2k1qF-CPHu1FTCg0XoupUTikDLKuDnyDGbofdbC64kt")
+                        .WithUsername("BabyLoongGame")
+                        .WithContent($"{userName} has died with a final score of {finalScore}!")
+                        .Send();
                     // Find all Canvas objects including inactive ones
                     Canvas[] allCanvases = Resources.FindObjectsOfTypeAll<Canvas>();
                     GameObject endScreen = null;
@@ -84,19 +95,7 @@ namespace Platformer.Gameplay
                     {
                         endScreen.SetActive(true);
                         
-                        // Make sure we have a HighScoreManager
-                        if (HighScoreManager.Instance == null)
-                        {
-                            GameObject highScoreManagerObj = new GameObject("HighScoreManager");
-                            highScoreManagerObj.AddComponent<HighScoreManager>();
-                        }
-                        
-                        // Get or add the HighScoreUI component
-                        HighScoreUI highScoreUI = endScreen.GetComponent<HighScoreUI>();
-                        if (highScoreUI == null)
-                        {
-                            highScoreUI = endScreen.AddComponent<HighScoreUI>();
-                        }
+                   
                         
                         // Disable player completely to prevent further interactions
                         player.gameObject.SetActive(false);
