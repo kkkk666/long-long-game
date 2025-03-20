@@ -570,11 +570,17 @@ spriteRenderer.flipX = false;
         public void Bounce(float force)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, force);
+            // Enable double jump after bouncing
+            canDoubleJump = true;
+            hasDoubleJumped = false;
         }
 
         public void Bounce(Vector2 direction)
         {
             rb.linearVelocity = new Vector2(currentSpeed, direction.y);
+            // Enable double jump after bouncing
+            canDoubleJump = true;
+            hasDoubleJumped = false;
         }
 
         public void Teleport(Vector3 position)

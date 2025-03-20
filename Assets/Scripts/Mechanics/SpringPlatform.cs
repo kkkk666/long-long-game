@@ -21,6 +21,7 @@ public class SpringPlatform : MonoBehaviour
     private bool isExpanding = false;
     private float animationTime = 0f;
     private PlayerController currentPlayer = null;
+    private bool isProcessingCollision = false;
 
     // Static list to track all spring platforms
     private static List<SpringPlatform> allSpringPlatforms = new List<SpringPlatform>();
@@ -57,7 +58,7 @@ public class SpringPlatform : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (isCompressing || isExpanding) return;
+        if (isCompressing || isExpanding || isProcessingCollision) return;
 
         PlayerController player = collision.gameObject.GetComponent<PlayerController>();
         if (player != null)
@@ -67,6 +68,7 @@ public class SpringPlatform : MonoBehaviour
             {
                 if (contact.normal.y < -0.5f) // Player is above the spring
                 {
+                    isProcessingCollision = true;
                     currentPlayer = player;
                     
                     // Make player invulnerable
@@ -75,11 +77,16 @@ public class SpringPlatform : MonoBehaviour
                         player.StartCoroutine(TemporaryInvulnerability());
                     }
 
-                    // Cancel stomp state
+                    // Handle stomp state
                     if (player.isStomping)
                     {
                         player.isStomping = false;
                         bounceForce *= 1.5f; // Give extra bounce force when stomping
+                        
+                        // Ensure player is above the platform
+                        Vector3 playerPos = player.transform.position;
+                        playerPos.y = transform.position.y + GetComponent<Collider2D>().bounds.size.y;
+                        player.transform.position = playerPos;
                     }
                     
                     StartCompression();
@@ -148,6 +155,7 @@ public class SpringPlatform : MonoBehaviour
                 isExpanding = false;
                 transform.localScale = originalScale;
                 transform.position = originalPosition;
+                isProcessingCollision = false;
             }
         }
     }

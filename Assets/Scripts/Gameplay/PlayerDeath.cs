@@ -2,6 +2,7 @@
 using Platformer.Mechanics;
 using Platformer.Model;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using ShadowGroveGames.WebhooksForDiscord.Scripts;
 using CozyFramework; 
 
@@ -24,11 +25,11 @@ namespace Platformer.Gameplay
             gameOverTriggered = false;
             
             // Register to the scene loaded event to reset the flag when a new scene is loaded
-            UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         
         // Static method to handle scene loading
-        private static void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
+        private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             // Reset the game over flag when a new scene is loaded
             gameOverTriggered = false;
@@ -54,7 +55,8 @@ namespace Platformer.Gameplay
                 ScoreManager.Instance.RemoveLife();
                 
                 player.health.Die();
-         
+                model.virtualCamera.Follow = null;
+                model.virtualCamera.LookAt = null;
                 player.controlEnabled = false;
 
                 if (player.audioSource && player.ouchAudio)
@@ -62,10 +64,16 @@ namespace Platformer.Gameplay
                 
                 player.GetComponent<PlayerController>().TriggerDeath();
                 
+                // Show death graphic
+                DeathGraphicDisplay deathGraphic = Object.FindFirstObjectByType<DeathGraphicDisplay>();
+                if (deathGraphic != null)
+                {
+                    deathGraphic.ShowDeathGraphic();
+                }
+                
                 // Check if player has no more lives
                 if (ScoreManager.Instance.lives <= 0)
                 {
-                    // Set the game over flag to prevent further deaths
                     gameOverTriggered = true;
                     string userName = PlayerManager.Instance.PlayerUsername;
                     int finalScore = ScoreManager.Instance.GetScore(); // Get the actual score
@@ -78,19 +86,9 @@ namespace Platformer.Gameplay
                         .WithUsername("BabyLoongGame")
                         .WithContent($"{userName} has died with a final score of {finalScore}!")
                         .Send();
-                    // Find all Canvas objects including inactive ones
-                    Canvas[] allCanvases = Resources.FindObjectsOfTypeAll<Canvas>();
-                    GameObject endScreen = null;
                     
-                    foreach (Canvas canvas in allCanvases)
-                    {
-                        if (canvas.name == "ENDSCREEN")
-                        {
-                            endScreen = canvas.gameObject;
-                            break;
-                        }
-                    }
-                    
+                    // Find and activate the end screen
+                    GameObject endScreen = GameObject.Find("ENDSCREEN");
                     if (endScreen != null)
                     {
                         endScreen.SetActive(true);
@@ -102,10 +100,6 @@ namespace Platformer.Gameplay
                         
                         // Freeze the game
                         Time.timeScale = 0;
-                    }
-                    else
-                    {
-                        Debug.LogError("ENDSCREEN Canvas not found! Please check the exact name in the hierarchy.");
                     }
                 }
                 else
