@@ -2125,7 +2125,7 @@ MonoBehaviour:
       applyRotation: 1
       keepUpright: 0
       upVector: {x: 0, y: 1, z: 0}
-      applyScale: 0
+      applyScale: 1
       bendMesh: 0
       bendSprite: 0
       bendPolygonCollider: 0
@@ -6697,12 +6697,12 @@ PrefabInstance:
     - target: {fileID: 396330639059484354, guid: 7cc58b4a8e12243688ec4b776f22f951,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.272408
+      value: 12.75
       objectReference: {fileID: 0}
     - target: {fileID: 396330639059484354, guid: 7cc58b4a8e12243688ec4b776f22f951,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.93721384
+      value: 4.85
       objectReference: {fileID: 0}
     - target: {fileID: 396330639059484354, guid: 7cc58b4a8e12243688ec4b776f22f951,
         type: 3}

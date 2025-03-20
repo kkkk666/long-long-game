@@ -372,8 +372,8 @@ Transform:
   m_GameObject: {fileID: 3175221757635391842}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.8077, y: 4.1982, z: 0}
-  m_LocalScale: {x: 1.0271516, y: 1.0007, z: 1}
+  m_LocalPosition: {x: 4.8058, y: 4.1982, z: 0}
+  m_LocalScale: {x: 1.027558, y: 1.0007, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4982228663673066434}
@@ -526,10 +526,10 @@ MonoBehaviour:
     colliders: []
     _isRoot: 1
   bounds:
-    center: {x: -0.0000023841858, y: -0.11500025, z: 0}
+    center: {x: 0, y: -0.11500025, z: 0}
     extents: {x: 10.24, y: 2.1549997, z: 0}
-    max: {x: 10.239998, y: 2.0399995, z: 0}
-    min: {x: -10.240003, y: -2.27, z: 0}
+    max: {x: 10.24, y: 2.0399995, z: 0}
+    min: {x: -10.24, y: -2.27, z: 0}
     size: {x: 20.48, y: 4.3099995, z: 0}
   builders: []
   unpacked: 1
@@ -1067,7 +1067,7 @@ MonoBehaviour:
       applyRotation: 1
       keepUpright: 0
       upVector: {x: 0, y: 1, z: 0}
-      applyScale: 0
+      applyScale: 1
       bendMesh: 0
       bendSprite: 0
       bendPolygonCollider: 0
@@ -1098,7 +1098,7 @@ MonoBehaviour:
       applyRotation: 1
       keepUpright: 0
       upVector: {x: 0, y: 1, z: 0}
-      applyScale: 0
+      applyScale: 1
       bendMesh: 0
       bendSprite: 0
       bendPolygonCollider: 0
@@ -1129,7 +1129,7 @@ MonoBehaviour:
       applyRotation: 1
       keepUpright: 0
       upVector: {x: 0, y: 1, z: 0}
-      applyScale: 0
+      applyScale: 1
       bendMesh: 0
       bendSprite: 0
       bendPolygonCollider: 0
@@ -1160,7 +1160,7 @@ MonoBehaviour:
       applyRotation: 1
       keepUpright: 0
       upVector: {x: 0, y: 1, z: 0}
-      applyScale: 0
+      applyScale: 1
       bendMesh: 0
       bendSprite: 0
       bendPolygonCollider: 0
@@ -1191,7 +1191,7 @@ MonoBehaviour:
       applyRotation: 1
       keepUpright: 0
       upVector: {x: 0, y: 1, z: 0}
-      applyScale: 0
+      applyScale: 1
       bendMesh: 0
       bendSprite: 0
       bendPolygonCollider: 0
@@ -1222,7 +1222,7 @@ MonoBehaviour:
       applyRotation: 1
       keepUpright: 0
       upVector: {x: 0, y: 1, z: 0}
-      applyScale: 0
+      applyScale: 1
       bendMesh: 0
       bendSprite: 0
       bendPolygonCollider: 0
@@ -1253,7 +1253,7 @@ MonoBehaviour:
       applyRotation: 1
       keepUpright: 0
       upVector: {x: 0, y: 1, z: 0}
-      applyScale: 0
+      applyScale: 1
       bendMesh: 0
       bendSprite: 0
       bendPolygonCollider: 0
@@ -1284,7 +1284,7 @@ MonoBehaviour:
       applyRotation: 1
       keepUpright: 0
       upVector: {x: 0, y: 1, z: 0}
-      applyScale: 0
+      applyScale: 1
       bendMesh: 0
       bendSprite: 0
       bendPolygonCollider: 0
@@ -1315,7 +1315,7 @@ MonoBehaviour:
       applyRotation: 1
       keepUpright: 0
       upVector: {x: 0, y: 1, z: 0}
-      applyScale: 0
+      applyScale: 1
       bendMesh: 0
       bendSprite: 0
       bendPolygonCollider: 0
@@ -1346,7 +1346,7 @@ MonoBehaviour:
       applyRotation: 1
       keepUpright: 0
       upVector: {x: 0, y: 1, z: 0}
-      applyScale: 0
+      applyScale: 1
       bendMesh: 0
       bendSprite: 0
       bendPolygonCollider: 0
@@ -1377,7 +1377,7 @@ MonoBehaviour:
       applyRotation: 1
       keepUpright: 0
       upVector: {x: 0, y: 1, z: 0}
-      applyScale: 0
+      applyScale: 1
       bendMesh: 0
       bendSprite: 0
       bendPolygonCollider: 0
@@ -1408,7 +1408,7 @@ MonoBehaviour:
       applyRotation: 1
       keepUpright: 0
       upVector: {x: 0, y: 1, z: 0}
-      applyScale: 0
+      applyScale: 1
       bendMesh: 0
       bendSprite: 0
       bendPolygonCollider: 0
@@ -1439,7 +1439,7 @@ MonoBehaviour:
       applyRotation: 1
       keepUpright: 0
       upVector: {x: 0, y: 1, z: 0}
-      applyScale: 0
+      applyScale: 1
       bendMesh: 0
       bendSprite: 0
       bendPolygonCollider: 0
@@ -1470,7 +1470,7 @@ MonoBehaviour:
       applyRotation: 1
       keepUpright: 0
       upVector: {x: 0, y: 1, z: 0}
-      applyScale: 0
+      applyScale: 1
       bendMesh: 0
       bendSprite: 0
       bendPolygonCollider: 0
@@ -1501,7 +1501,7 @@ MonoBehaviour:
       applyRotation: 1
       keepUpright: 0
       upVector: {x: 0, y: 1, z: 0}
-      applyScale: 0
+      applyScale: 1
       bendMesh: 0
       bendSprite: 0
       bendPolygonCollider: 0
@@ -1532,7 +1532,7 @@ MonoBehaviour:
       applyRotation: 1
       keepUpright: 0
       upVector: {x: 0, y: 1, z: 0}
-      applyScale: 0
+      applyScale: 1
       bendMesh: 0
       bendSprite: 0
       bendPolygonCollider: 0
@@ -1563,7 +1563,7 @@ MonoBehaviour:
       applyRotation: 1
       keepUpright: 0
       upVector: {x: 0, y: 1, z: 0}
-      applyScale: 0
+      applyScale: 1
       bendMesh: 0
       bendSprite: 0
       bendPolygonCollider: 0
@@ -1617,8 +1617,8 @@ Transform:
   m_GameObject: {fileID: 6155498441173446313}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.8134, y: 12.15, z: 0}
-  m_LocalScale: {x: 1.0259461, y: 1.7778, z: 1}
+  m_LocalPosition: {x: 4.8115, y: 12.15, z: 0}
+  m_LocalScale: {x: 1.0263522, y: 1.7778, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4982228663673066434}
@@ -3064,12 +3064,12 @@ PrefabInstance:
     - target: {fileID: 396330639059484354, guid: 7cc58b4a8e12243688ec4b776f22f951,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.109543
+      value: 6.97
       objectReference: {fileID: 0}
     - target: {fileID: 396330639059484354, guid: 7cc58b4a8e12243688ec4b776f22f951,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.91098404
+      value: 3.75
       objectReference: {fileID: 0}
     - target: {fileID: 396330639059484354, guid: 7cc58b4a8e12243688ec4b776f22f951,
         type: 3}
