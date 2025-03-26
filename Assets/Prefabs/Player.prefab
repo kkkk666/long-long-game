@@ -51,22 +51,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 709ee11994a2f44658e5fc9887c45081, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseSpeed: 7
   maxSpeed: 3
-  sprintSpeedMultiplier: 2.5
+  speedIncreaseRate: 0.1
+  speedModifier: 3
+  returnToBaseSpeed: 2
   jumpForce: 14
+  doubleJumpForce: 7
+  stompForce: 15
+  stompDuration: 0.3
   groundCheck: {fileID: 4647905584941853789}
   groundCheckRadius: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
+  showDebugInfo: 0
   jumpAudio: {fileID: 8300000, guid: 67975c08d56ceb147bad38572d805aa8, type: 3}
+  doubleJumpAudio: {fileID: 0}
   respawnAudio: {fileID: 8300000, guid: e18959d46b63f3c4c8cc020a433cf848, type: 3}
   ouchAudio: {fileID: 8300000, guid: 6c05149e5a2fba64ba172e25a61074b7, type: 3}
   collider2d: {fileID: 0}
   audioSource: {fileID: 0}
+  health: {fileID: 0}
   animator: {fileID: 0}
+  isInvulnerable: 0
+  invulnerabilityDuration: 3
+  flashStartInterval: 0.5
+  flashEndInterval: 0.1
   controlEnabled: 1
   jumpState: 0
+  isStomping: 0
+  doubleJumpEffectPrefab: {fileID: 0}
+  minSwipeDistance: 50
+  maxTapTime: 0.2
 --- !u!212 &212064061491315838
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -116,7 +133,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.28, y: 1.26}
+  m_Size: {x: 2.56, y: 2.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -320,7 +337,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 2.56, y: 2.56}
-    newSize: {x: 1.28, y: 1.26}
+    newSize: {x: 2.56, y: 2.56}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
