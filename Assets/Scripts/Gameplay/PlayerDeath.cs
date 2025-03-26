@@ -79,7 +79,7 @@ namespace Platformer.Gameplay
                     int finalScore = ScoreManager.Instance.GetScore(); // Get the actual score
 
                     // Submit score to Unity leaderboard
-                    _ = CozyAPI.Instance.SubmitScoreToLeaderboard("HIGHEST_SCORE", finalScore);
+                    _ = CozyAPI.Instance.SubmitScoreToLeaderboard("highscore", finalScore);
                     Debug.Log($"Submitting final score to leaderboard: {finalScore}");
 
                     DiscordWebhook.Create("https://discord.com/api/webhooks/1351517390940405880/_ZaimGah7CrNBqOmrxiaUvWiV2k1qF-CPHu1FTCg0XoupUTikDLKuDnyDGbofdbC64kt")
@@ -88,18 +88,50 @@ namespace Platformer.Gameplay
                         .Send();
                     
                     // Find and activate the end screen
+                    Debug.Log("Attempting to find ENDSCREEN GameObject...");
+                    
+                    // First try to find it directly
                     GameObject endScreen = GameObject.Find("ENDSCREEN");
+                    
+                    // If not found, try to find it through all objects in the scene
+                    if (endScreen == null)
+                    {
+                        Debug.Log("ENDSCREEN not found directly, searching through all objects...");
+                        Canvas[] allCanvases = Object.FindObjectsByType<Canvas>(FindObjectsSortMode.None);
+                        foreach (Canvas canvas in allCanvases)
+                        {
+                            if (canvas.gameObject.name == "ENDSCREEN")
+                            {
+                                endScreen = canvas.gameObject;
+                                Debug.Log("Found ENDSCREEN through Canvas search!");
+                                break;
+                            }
+                        }
+                    }
+                    
                     if (endScreen != null)
                     {
+                        Debug.Log("Found ENDSCREEN GameObject, activating it...");
                         endScreen.SetActive(true);
-                        
-                   
                         
                         // Disable player completely to prevent further interactions
                         player.gameObject.SetActive(false);
                         
                         // Freeze the game
                         Time.timeScale = 0;
+                    }
+                    else
+                    {
+                        Debug.LogError("ENDSCREEN GameObject not found in the scene!");
+                        // Try to find it in the scene hierarchy
+                        GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+                        foreach (GameObject obj in allObjects)
+                        {
+                            if (obj.name.Contains("ENDSCREEN"))
+                            {
+                                Debug.Log($"Found ENDSCREEN in scene hierarchy: {obj.name}");
+                            }
+                        }
                     }
                 }
                 else

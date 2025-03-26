@@ -10,8 +10,8 @@ public class SmartBomb : MonoBehaviour
     [SerializeField] private float screenBoundsExpansion = 0.1f; // 30% expansion of screen bounds
     [SerializeField] private ParticleSystem collectionEffect;
     [SerializeField] private AudioClip collectionSound;
-    [SerializeField] private float shakeIntensity = 1f;
-    [SerializeField] private float shakeDuration = 1f;
+    
+ 
 
     private Camera mainCamera;
     private PlayerController player;
@@ -46,9 +46,9 @@ public class SmartBomb : MonoBehaviour
             Vector2 expandedMax = new Vector2(screenMax.x + (width * screenBoundsExpansion), screenMax.y + (height * screenBoundsExpansion));
             
             // Collect all items in lists
-            var tokens = new List<TokenInstance>(FindObjectsOfType<TokenInstance>());
-            var jewels = new List<JewelCollectable>(FindObjectsOfType<JewelCollectable>());
-            var lives = new List<LivesCollectable>(FindObjectsOfType<LivesCollectable>());
+            var tokens = new List<TokenInstance>(FindObjectsByType<TokenInstance>(FindObjectsSortMode.None));
+            var jewels = new List<JewelCollectable>(FindObjectsByType<JewelCollectable>(FindObjectsSortMode.None));
+            var lives = new List<LivesCollectable>(FindObjectsByType<LivesCollectable>(FindObjectsSortMode.None));
 
             int collectedTokens = 0;
             int collectedJewels = 0;

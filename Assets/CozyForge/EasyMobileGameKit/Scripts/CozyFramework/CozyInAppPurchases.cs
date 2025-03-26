@@ -3,10 +3,11 @@ using Unity.Services.Core;
 using Unity.Services.Core.Environments;
 using UnityEngine;
 using UnityEngine.Purchasing;
+using UnityEngine.Purchasing.Extension;
 
 namespace CozyFramework
 {
-    public class CozyInAppPurchases : MonoBehaviour, IStoreListener
+    public class CozyInAppPurchases : MonoBehaviour, IStoreListener, IDetailedStoreListener
     {
         private IStoreController storeController;
         private IExtensionProvider extensionProvider;
@@ -88,7 +89,7 @@ namespace CozyFramework
                 });
             }
             
-            UnityPurchasing.Initialize(this, builder);
+            UnityPurchasing.Initialize(this as IDetailedStoreListener, builder);
 #else
             // On WebGL, Unity IAP is not supported
             Debug.LogWarning("Unity IAP is not supported on WebGL builds.");
@@ -155,6 +156,11 @@ namespace CozyFramework
         public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
         {
             Debug.LogError("Purchase failed: " + product.definition.id + " - Reason: " + failureReason);
+        }
+
+        public void OnPurchaseFailed(Product product, PurchaseFailureDescription failureDescription)
+        {
+            Debug.LogError($"Purchase failed: {product.definition.id} - {failureDescription.message}");
         }
         
         public void HandleShopPurchase(string productId)
