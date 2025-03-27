@@ -38,6 +38,10 @@ namespace Dreamteck.Forever
         /// </summary>
         public Level[] levels = new Level[0];
 
+        [Header("2D Runner Settings")]
+        [SerializeField] public bool _use2DRunnerCleanup = true;
+        [SerializeField] public float _cleanupDistanceThreshold = 5.0f; // How far behind the player before cleanup
+
         public List<ForeverLevel> loadedLevels
         {
             get { return _loadedLevels; }
@@ -1133,10 +1137,43 @@ namespace Dreamteck.Forever
 
         private IEnumerator CleanupRoutine()
         {
-            yield return StartCoroutine(DestroySegmentRoutine(0));
-            if (_segments.Count > _maxSegments)
+            if (_use2DRunnerCleanup)
             {
-                StartCoroutine(CleanupRoutine());
+                yield return StartCoroutine(CleanupRunner2DRoutine());
+            }
+            else
+            {
+                yield return StartCoroutine(DestroySegmentRoutine(0));
+                if (_segments.Count > _maxSegments)
+                {
+                    StartCoroutine(CleanupRoutine());
+                }
+            }
+        }
+
+        private IEnumerator CleanupRunner2DRoutine()
+        {
+            // Get current player position
+            Vector3 playerPos = transform.position;
+            
+            // Check segments from oldest to newest
+            for (int i = _segments.Count - 1; i >= 0; i--)
+            {
+                // Get the end position of the segment
+                SplineSample endSample = new SplineSample();
+                _segments[i].Evaluate(1.0, ref endSample);
+                
+                // If segment is far enough behind player, destroy it
+                if (endSample.position.x < playerPos.x - _cleanupDistanceThreshold)
+                {
+                    yield return StartCoroutine(DestroySegmentRoutine(i));
+                }
+                else
+                {
+                    // Since segments are ordered, if this one isn't far enough behind
+                    // newer ones won't be either
+                    break;
+                }
             }
         }
 

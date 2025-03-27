@@ -11,8 +11,7 @@ namespace Platformer.Mechanics
         private const int MAX_ATTEMPTS = 50;             // Maximum number of horizontal shifts to try
         private const float PATROL_PATH_BUFFER = 3f;     // Buffer distance from patrol paths
 
-        [System.Obsolete]
-        public static Vector2 FindSafeSpawnPoint(Vector2 deathPosition, LayerMask groundLayer)
+        public static Vector2 FindSafeSpawnPoint(Vector2 deathPosition, LayerMask groundLayer, float spawnRadius = 1.5f)
         {
             Vector2 currentCheckPoint = deathPosition;
             currentCheckPoint.y += SPAWN_HEIGHT_OFFSET;
@@ -46,7 +45,7 @@ namespace Platformer.Mechanics
                     Vector2 potentialSpawnPoint = groundHit.point + Vector2.up * 0.5f;
                     
                     // Check for immediate enemy collisions
-                    Collider2D[] overlaps = Physics2D.OverlapCircleAll(potentialSpawnPoint, 0.5f);
+                    Collider2D[] overlaps = Physics2D.OverlapCircleAll(potentialSpawnPoint, spawnRadius);
                     bool isUnsafe = false;
 
                     foreach (Collider2D overlap in overlaps)
@@ -67,7 +66,7 @@ namespace Platformer.Mechanics
                     // Check if point is near any spring platforms
                     if (!isUnsafe)
                     {
-                        isUnsafe = !SpringPlatform.IsSafeForRespawn(potentialSpawnPoint, 1.5f);
+                        isUnsafe = !SpringPlatform.IsSafeForRespawn(potentialSpawnPoint, spawnRadius);
                     }
 
                     // If spot is safe from both immediate collisions, patrol paths, and spring platforms
@@ -87,7 +86,7 @@ namespace Platformer.Mechanics
             {
                 // Make sure the spawn point is not near any spring platforms
                 Vector2 originalSpawnPos = spawnPoint.transform.position;
-                if (SpringPlatform.IsSafeForRespawn(originalSpawnPos, 1.5f))
+                if (SpringPlatform.IsSafeForRespawn(originalSpawnPos, spawnRadius))
                 {
                     return originalSpawnPos;
                 }
@@ -102,6 +101,12 @@ namespace Platformer.Mechanics
             
             // Absolute fallback: Return a position high above the death position
             return deathPosition + Vector2.up * 5f;
+        }
+
+        [System.Obsolete]
+        public static Vector2 FindSafeSpawnPoint(Vector2 deathPosition, LayerMask groundLayer)
+        {
+            return FindSafeSpawnPoint(deathPosition, groundLayer, 1.5f);
         }
 
         private static bool IsPointNearPatrolPaths(Vector2 point, List<(Vector2 start, Vector2 end)> patrolPaths)

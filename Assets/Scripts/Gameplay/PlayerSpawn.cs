@@ -12,7 +12,6 @@ namespace Platformer.Gameplay
         // Add death position field
         public Vector2 deathPosition;
 
-        [System.Obsolete]
         public override void Execute()
         {
             var player = model.player;
@@ -22,7 +21,8 @@ namespace Platformer.Gameplay
             // Find safe spawn point
             Vector2 safeSpawnPoint = SpawnPointFinder.FindSafeSpawnPoint(
                 deathPosition, 
-                player.GetComponent<PlayerController>().groundLayer
+                player.GetComponent<PlayerController>().groundLayer,
+                1.5f  // Default spawn radius
             );
 
             if (player.audioSource && player.respawnAudio)
