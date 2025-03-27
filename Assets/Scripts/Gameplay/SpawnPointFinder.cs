@@ -10,11 +10,14 @@ namespace Platformer.Mechanics
         private const float HORIZONTAL_OFFSET = 1f;      // How far to move left when unsafe spot is found
         private const int MAX_ATTEMPTS = 50;             // Maximum number of horizontal shifts to try
         private const float PATROL_PATH_BUFFER = 3f;     // Buffer distance from patrol paths
+        private const float HAZARD_BUFFER = 2f;          // Buffer distance from hazards
+        private const float GROUND_OFFSET = 0.5f;        // How far above ground to spawn
+        private const float INITIAL_LEFT_OFFSET = 3f;    // How far left to start searching from death position
 
         public static Vector2 FindSafeSpawnPoint(Vector2 deathPosition, LayerMask groundLayer, float spawnRadius = 1.5f)
         {
-            Vector2 currentCheckPoint = deathPosition;
-            currentCheckPoint.y += SPAWN_HEIGHT_OFFSET;
+            // Start checking from left of the death position
+            Vector2 currentCheckPoint = deathPosition + Vector2.up * SPAWN_HEIGHT_OFFSET - Vector2.right * INITIAL_LEFT_OFFSET;
 
             // Cache all enemy patrol paths
             var enemies = Object.FindObjectsOfType<EnemyController>();
@@ -30,6 +33,15 @@ namespace Platformer.Mechanics
                 }
             }
 
+            // Cache all hazards
+            var hazards = Object.FindObjectsOfType<HazardObject>();
+            var hazardPositions = new List<Vector2>();
+            foreach (var hazard in hazards)
+            {
+                hazardPositions.Add(hazard.transform.position);
+            }
+
+            // Try to find a safe spot
             for (int attempts = 0; attempts < MAX_ATTEMPTS; attempts++)
             {
                 // Raycast down to find ground
@@ -42,65 +54,56 @@ namespace Platformer.Mechanics
 
                 if (groundHit.collider != null)
                 {
-                    Vector2 potentialSpawnPoint = groundHit.point + Vector2.up * 0.5f;
+                    Vector2 potentialSpawnPoint = groundHit.point + Vector2.up * GROUND_OFFSET;
                     
-                    // Check for immediate enemy collisions
-                    Collider2D[] overlaps = Physics2D.OverlapCircleAll(potentialSpawnPoint, spawnRadius);
-                    bool isUnsafe = false;
-
-                    foreach (Collider2D overlap in overlaps)
+                    // Check if this point is safe from patrol paths
+                    if (!IsPointNearPatrolPaths(potentialSpawnPoint, patrolPaths))
                     {
-                        if (overlap.CompareTag("Enemy"))  // Enemy tag
+                        // Check if this point is safe from hazards
+                        if (!IsPointNearHazards(potentialSpawnPoint, hazardPositions))
                         {
-                            isUnsafe = true;
-                            break;
+                            // Check if this point is safe from spring platforms
+                            if (SpringPlatform.IsSafeForRespawn(potentialSpawnPoint, spawnRadius))
+                            {
+                                // Verify the spawn point is above ground
+                                RaycastHit2D verifyHit = Physics2D.Raycast(
+                                    potentialSpawnPoint + Vector2.up * 0.1f,
+                                    Vector2.down,
+                                    0.2f,
+                                    groundLayer
+                                );
+
+                                if (verifyHit.collider != null)
+                                {
+                                    return potentialSpawnPoint;
+                                }
+                            }
                         }
-                    }
-
-                    // If no immediate collision, check patrol paths
-                    if (!isUnsafe)
-                    {
-                        isUnsafe = IsPointNearPatrolPaths(potentialSpawnPoint, patrolPaths);
-                    }
-
-                    // Check if point is near any spring platforms
-                    if (!isUnsafe)
-                    {
-                        isUnsafe = !SpringPlatform.IsSafeForRespawn(potentialSpawnPoint, spawnRadius);
-                    }
-
-                    // If spot is safe from both immediate collisions, patrol paths, and spring platforms
-                    if (!isUnsafe)
-                    {
-                        return potentialSpawnPoint;
                     }
                 }
 
-                // If unsafe, shift left and try again
+                // Move left and try again
                 currentCheckPoint.x -= HORIZONTAL_OFFSET;
             }
 
-            // If no safe spot found, return original spawn point
-            var spawnPoint = GameObject.FindGameObjectWithTag("Respawn");
-            if (spawnPoint != null)
-            {
-                // Make sure the spawn point is not near any spring platforms
-                Vector2 originalSpawnPos = spawnPoint.transform.position;
-                if (SpringPlatform.IsSafeForRespawn(originalSpawnPos, spawnRadius))
-                {
-                    return originalSpawnPos;
-                }
-                else
-                {
-                    // If spawn point is unsafe, try to find a safe spot above it
-                    Vector2 safeSpawnPos = originalSpawnPos;
-                    safeSpawnPos.y += 2f;
-                    return safeSpawnPos;
-                }
-            }
+            // If no safe spot found, try to find a safe spot above and to the left of the death position
+            Vector2 fallbackPosition = deathPosition + Vector2.up * 5f - Vector2.right * INITIAL_LEFT_OFFSET;
             
-            // Absolute fallback: Return a position high above the death position
-            return deathPosition + Vector2.up * 5f;
+            // Verify the fallback position has ground below it
+            RaycastHit2D fallbackHit = Physics2D.Raycast(
+                fallbackPosition,
+                Vector2.down,
+                MAX_RAYCAST_DISTANCE,
+                groundLayer
+            );
+
+            if (fallbackHit.collider != null)
+            {
+                return fallbackHit.point + Vector2.up * GROUND_OFFSET;
+            }
+
+            // Absolute fallback: Return a position high above and to the left of the death position
+            return deathPosition + Vector2.up * 5f - Vector2.right * INITIAL_LEFT_OFFSET;
         }
 
         [System.Obsolete]
@@ -121,13 +124,27 @@ namespace Platformer.Mechanics
             return false;
         }
 
+        private static bool IsPointNearHazards(Vector2 point, List<Vector2> hazardPositions)
+        {
+            foreach (var hazardPos in hazardPositions)
+            {
+                float distance = Vector2.Distance(point, hazardPos);
+                if (distance < HAZARD_BUFFER)
+                    return true;
+            }
+            return false;
+        }
+
         private static float DistanceToLineSegment(Vector2 point, Vector2 start, Vector2 end)
         {
             Vector2 line = end - start;
             float len = line.magnitude;
             if (len == 0f) return Vector2.Distance(point, start);
-
-            float t = Mathf.Clamp01(Vector2.Dot(point - start, line) / (len * len));
+            
+            float t = Vector2.Dot(point - start, line) / (len * len);
+            if (t < 0f) return Vector2.Distance(point, start);
+            if (t > 1f) return Vector2.Distance(point, end);
+            
             Vector2 projection = start + t * line;
             return Vector2.Distance(point, projection);
         }

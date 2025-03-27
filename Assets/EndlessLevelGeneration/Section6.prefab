@@ -207,8 +207,8 @@ Transform:
   m_GameObject: {fileID: 2030527539729401831}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.89, y: 10.13, z: 0}
-  m_LocalScale: {x: 0.72283435, y: 0.87051797, z: 1}
+  m_LocalPosition: {x: 2.9649, y: 10.13, z: 0}
+  m_LocalScale: {x: 0.54212576, y: 0.87051797, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4982228663673066434}
@@ -1981,6 +1981,37 @@ MonoBehaviour:
     spriteRenderer: {fileID: 5377017004813234876}
     colliders: []
     _isRoot: 0
+  - transform: {fileID: 8252423012327526416}
+    localRotation: {x: 0, y: 0, z: 0, w: 1}
+    extrudedMesh: {fileID: 0}
+    extrusionSpriteVertices: []
+    extrusionSpriteUVs: []
+    extrusionSpriteRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    extrudedCollisionMesh: {fileID: 0}
+    _extrusionSettings:
+      meshColliderHandling: 0
+      boundsInclusion: -1
+      indexing: 0
+      applyRotation: 1
+      keepUpright: 0
+      upVector: {x: 0, y: 1, z: 0}
+      applyScale: 0
+      bendMesh: 0
+      bendSprite: 0
+      bendPolygonCollider: 0
+      applyMeshColors: 0
+    _settingsComponent: {fileID: 0}
+    overrideSettingsComponent: 0
+    meshFilter: {fileID: 0}
+    meshCollider: {fileID: 0}
+    spriteRenderer: {fileID: 7441072551931458547}
+    colliders: []
+    _isRoot: 0
   - transform: {fileID: 6289823149652654323}
     localRotation: {x: 0, y: 0, z: 0, w: 1}
     extrudedMesh: {fileID: 0}
@@ -2027,7 +2058,7 @@ MonoBehaviour:
   drawEntranceAndExit: 1
   drawBounds: 1
   drawCustomPaths: 1
-  editorChildCount: 21
+  editorChildCount: 22
 --- !u!1 &6155498441173446313
 GameObject:
   m_ObjectHideFlags: 0
@@ -3647,6 +3678,18 @@ Transform:
 --- !u!212 &5377017004813234876 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 1033776134686905754, guid: 3f10257a3d3ad4e4c9d02a17a894b059,
+    type: 3}
+  m_PrefabInstance: {fileID: 4956129549292840742}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &7441072551931458547 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2559088708915696853, guid: 3f10257a3d3ad4e4c9d02a17a894b059,
+    type: 3}
+  m_PrefabInstance: {fileID: 4956129549292840742}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8252423012327526416 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3909628677068961590, guid: 3f10257a3d3ad4e4c9d02a17a894b059,
     type: 3}
   m_PrefabInstance: {fileID: 4956129549292840742}
   m_PrefabAsset: {fileID: 0}
