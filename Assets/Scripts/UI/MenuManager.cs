@@ -2,24 +2,33 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using CozyFramework;
 
-
-
 public class MenuManager : MonoBehaviour
 {
     public void LoadStartScreen()
     {
-        SceneManager.LoadScene("StartScreen"); // Use your start screen scene name
-         GameObject cozyManager = GameObject.Find("CozyManager");
+        // Find and deactivate the ENDSCREEN if it exists
+        GameObject cozyManager = GameObject.Find("CozyManager");
         if (cozyManager != null)
         {
-           //get the child object named Canvas
-           GameObject canvas = cozyManager.transform.Find("Canvas").gameObject;
-           if (canvas != null)
-           {
-            //set the canvas to active
-            canvas.SetActive(true);
-           }
+            Transform endScreenTransform = cozyManager.transform.Find("ENDSCREEN");
+            if (endScreenTransform != null)
+            {
+                endScreenTransform.gameObject.SetActive(false);
+            }
+        }
 
+        // Load the start screen scene
+        SceneManager.LoadScene("StartScreen");
+        
+        // Reactivate the CozyManager's Canvas
+        cozyManager = GameObject.Find("CozyManager");
+        if (cozyManager != null)
+        {
+            GameObject canvas = cozyManager.transform.Find("Canvas").gameObject;
+            if (canvas != null)
+            {
+                canvas.SetActive(true);
+            }
         }
     }
     

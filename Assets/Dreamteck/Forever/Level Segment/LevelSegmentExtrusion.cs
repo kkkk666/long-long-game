@@ -349,6 +349,7 @@ namespace Dreamteck.Forever
                         data.current.InverseTransform();
                     }
                 ));
+             
                 gameObject.SetActive(true);
                 _extruded = true;
             }

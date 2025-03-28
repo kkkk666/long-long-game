@@ -88,50 +88,33 @@ namespace Platformer.Gameplay
                         .Send();
                     
                     // Find and activate the end screen
-                    Debug.Log("Attempting to find ENDSCREEN GameObject...");
+                    Debug.Log("Attempting to find ENDSCREEN through CozyManager...");
                     
-                    // First try to find it directly
-                    GameObject endScreen = GameObject.Find("ENDSCREEN");
-                    
-                    // If not found, try to find it through all objects in the scene
-                    if (endScreen == null)
+                    // Find CozyManager in the StartScreen scene
+                    GameObject cozyManager = GameObject.Find("CozyManager");
+                    if (cozyManager != null)
                     {
-                        Debug.Log("ENDSCREEN not found directly, searching through all objects...");
-                        Canvas[] allCanvases = Object.FindObjectsByType<Canvas>(FindObjectsSortMode.None);
-                        foreach (Canvas canvas in allCanvases)
+                        // Find the ENDSCREEN in CozyManager's children
+                        Transform endScreenTransform = cozyManager.transform.Find("ENDSCREEN");
+                        if (endScreenTransform != null)
                         {
-                            if (canvas.gameObject.name == "ENDSCREEN")
-                            {
-                                endScreen = canvas.gameObject;
-                                Debug.Log("Found ENDSCREEN through Canvas search!");
-                                break;
-                            }
+                            Debug.Log("Found ENDSCREEN in CozyManager, activating it...");
+                            endScreenTransform.gameObject.SetActive(true);
+                            
+                            // Disable player completely to prevent further interactions
+                            player.gameObject.SetActive(false);
+                            
+                            // Freeze the game
+                            Time.timeScale = 0;
                         }
-                    }
-                    
-                    if (endScreen != null)
-                    {
-                        Debug.Log("Found ENDSCREEN GameObject, activating it...");
-                        endScreen.SetActive(true);
-                        
-                        // Disable player completely to prevent further interactions
-                        player.gameObject.SetActive(false);
-                        
-                        // Freeze the game
-                        Time.timeScale = 0;
+                        else
+                        {
+                            Debug.LogError("ENDSCREEN not found in CozyManager!");
+                        }
                     }
                     else
                     {
-                        Debug.LogError("ENDSCREEN GameObject not found in the scene!");
-                        // Try to find it in the scene hierarchy
-                        GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
-                        foreach (GameObject obj in allObjects)
-                        {
-                            if (obj.name.Contains("ENDSCREEN"))
-                            {
-                                Debug.Log($"Found ENDSCREEN in scene hierarchy: {obj.name}");
-                            }
-                        }
+                        Debug.LogError("CozyManager not found in the scene!");
                     }
                 }
                 else
