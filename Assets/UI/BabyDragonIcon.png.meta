@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 88274dd06eb090d439bf615accfa7492
+guid: bef30e7d82da9bb4da56fc6d00efaeed
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 541966872258247663
-    second: BabyDragonStartScreenIDle_0
+      213: 4998268728177398139
+    second: BabyDragonIcon_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BabyDragonStartScreenIDle_0
+      name: BabyDragonIcon_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 512
-        height: 512
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: feb7bf4bff3758700800000000000000
-      internalID: 541966872258247663
+      spriteID: b7115f22dea6d5540800000000000000
+      internalID: 4998268728177398139
       vertices: []
       indices: 
       edges: []
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      BabyDragonStartScreenIDle_0: 541966872258247663
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

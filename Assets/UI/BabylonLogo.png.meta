@@ -172,7 +172,9 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BabylonLogo_0: -4429668232202437000
+      BabylonLogo_1: -1018838838983529880
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
