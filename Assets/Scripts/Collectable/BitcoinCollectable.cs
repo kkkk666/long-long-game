@@ -17,7 +17,7 @@ public class BitcoinCollectable : MonoBehaviour
         Collider2D collider = GetComponent<Collider2D>();
         if (collider == null)
         {
-            Debug.LogError($"No Collider2D found on {gameObject.name}!");
+          //  Debug.LogError($"No Collider2D found on {gameObject.name}!");
         }
         else
         {

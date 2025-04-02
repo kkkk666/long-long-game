@@ -14,6 +14,10 @@ public class SpringPlatform : MonoBehaviour
     [SerializeField] private float compressedScale = 0.5f;
     [SerializeField] private AnimationCurve bounceCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
     
+    [Header("Audio")]
+    [SerializeField] private AudioClip springSound;
+    private AudioSource audioSource;
+    
     private Vector3 originalScale;
     private Vector3 originalPosition;
     private float originalHeight;
@@ -54,6 +58,11 @@ public class SpringPlatform : MonoBehaviour
         originalScale = transform.localScale;
         originalPosition = transform.position;
         originalHeight = GetComponent<Collider2D>().bounds.size.y;
+        
+        // Initialize audio source
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+        audioSource.outputAudioMixerGroup = Resources.Load<UnityEngine.Audio.AudioMixerGroup>("SFX");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -87,6 +96,12 @@ public class SpringPlatform : MonoBehaviour
                         Vector3 playerPos = player.transform.position;
                         playerPos.y = transform.position.y + GetComponent<Collider2D>().bounds.size.y;
                         player.transform.position = playerPos;
+                    }
+                    
+                    // Play spring sound
+                    if (springSound != null && audioSource != null)
+                    {
+                        audioSource.PlayOneShot(springSound);
                     }
                     
                     StartCompression();

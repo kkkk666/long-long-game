@@ -1,25 +1,13 @@
 fileFormatVersion: 2
-guid: 43b012a201c44b04b8f7d3e5ac89e02c
+guid: 1c2864e5369d6004ea70a0bf88bad9d2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3479406279213865732
-    second: OhNo_0
+      213: -7762350047352875558
+    second: Pause_0
   - first:
-      213: -7438698306597942872
-    second: OhNo_1
-  - first:
-      213: 1308919973922429958
-    second: OhNo_2
-  - first:
-      213: 8060315184402520436
-    second: OhNo_3
-  - first:
-      213: -4592988080584501095
-    second: OhNo_4
-  - first:
-      213: 4070550124294961815
-    second: OhNo_5
+      213: 7690072442612862611
+    second: Pause_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -128,23 +116,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: OhNo_0
+      name: Pause_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 512
-        height: 256
+        x: 92
+        y: 67
+        width: 115
+        height: 389
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cf4a13a7c6aa6bfc0800000000000000
-      internalID: -3479406279213865732
+      spriteID: ad59b4532c7964490800000000000000
+      internalID: -7762350047352875558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pause_1
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 67
+        width: 115
+        height: 389
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39ec5fe8420a8ba60800000000000000
+      internalID: 7690072442612862611
       vertices: []
       indices: 
       edges: []
@@ -153,7 +163,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 2f161c27907d3a9499e4e848c83f091c
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -163,12 +173,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      OhNo_0: -3479406279213865732
-      OhNo_1: -7438698306597942872
-      OhNo_2: 1308919973922429958
-      OhNo_3: 8060315184402520436
-      OhNo_4: -4592988080584501095
-      OhNo_5: 4070550124294961815
+      Pause_0: -7762350047352875558
+      Pause_1: 7690072442612862611
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -38,14 +38,14 @@ public class HazardObject : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log($"Hazard triggered with: {other.gameObject.name}");
+       // Debug.Log($"Hazard triggered with: {other.gameObject.name}");
         
         // Check if the colliding object is the player
         PlayerController player = other.gameObject.GetComponent<PlayerController>();
         
         if (player != null && !player.isInvulnerable)
         {
-            Debug.Log("Player hit hazard!");
+           // Debug.Log("Player hit hazard!");
             
             // Find a ground point near the hazard
             Vector2 deathPosition = FindNearestGroundPoint();
@@ -76,7 +76,7 @@ public class HazardObject : MonoBehaviour
         }
 
         // If no ground found, return the hazard's position
-        Debug.LogWarning("No ground found near hazard, using hazard position");
+       // Debug.LogWarning("No ground found near hazard, using hazard position");
         return (Vector2)transform.position;
     }
 }
