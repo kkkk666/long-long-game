@@ -2099,8 +2099,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -3479406279213865732, guid: 43b012a201c44b04b8f7d3e5ac89e02c,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 43b012a201c44b04b8f7d3e5ac89e02c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5775,6 +5774,8 @@ MonoBehaviour:
   _sharedPathGenerator: {fileID: 11400000, guid: 481276cc42b495146bff1e236ed3b030,
     type: 2}
   levels: []
+  _use2DRunnerCleanup: 1
+  _cleanupDistanceThreshold: 5
   usePathGeneratorInstance: 1
 --- !u!4 &1658032202
 Transform:
@@ -5938,6 +5939,7 @@ MonoBehaviour:
   mainMenu: {fileID: 2110646551}
   gamePlayCanvasii: []
   gameController: {fileID: 1754240607}
+  showMainCanvas: 0
 --- !u!82 &1754240611
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6400,7 +6402,7 @@ PrefabInstance:
     - target: {fileID: 1476421543770171692, guid: 07a139246e366c448a506b061a69b3b5,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -168.73999
+      value: -168.74023
       objectReference: {fileID: 0}
     - target: {fileID: 1476421543770171692, guid: 07a139246e366c448a506b061a69b3b5,
         type: 3}
@@ -6590,7 +6592,7 @@ PrefabInstance:
     - target: {fileID: 4780441908957585546, guid: 07a139246e366c448a506b061a69b3b5,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -2.994873
+      value: -2.9951172
       objectReference: {fileID: 0}
     - target: {fileID: 4780441908957585546, guid: 07a139246e366c448a506b061a69b3b5,
         type: 3}

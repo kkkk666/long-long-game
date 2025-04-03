@@ -979,8 +979,8 @@ Transform:
   m_GameObject: {fileID: 3915632964510991139}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.3199997, y: 3.0222604, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 5.5, y: 3.77, z: 0}
+  m_LocalScale: {x: 1, y: 1.9876, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 193542891648867109}
@@ -1888,11 +1888,11 @@ MonoBehaviour:
     colliders: []
     _isRoot: 0
   bounds:
-    center: {x: 10.499001, y: 6.530582, z: 0.6763096}
-    extents: {x: 10.5, y: 10.010582, z: 0.6763096}
-    max: {x: 20.999, y: 16.541164, z: 1.3526192}
+    center: {x: 10.499001, y: 6.5572495, z: 0.6763096}
+    extents: {x: 10.5, y: 10.0372505, z: 0.6763096}
+    max: {x: 20.999, y: 16.5945, z: 1.3526192}
     min: {x: -0.0009994507, y: -3.4800005, z: 0}
-    size: {x: 21, y: 20.021164, z: 1.3526192}
+    size: {x: 21, y: 20.074501, z: 1.3526192}
   builders: []
   unpacked: 0
   alwaysDraw: 0
