@@ -8,7 +8,7 @@ public class CameraShake : MonoBehaviour
     [SerializeField] private float shakeDuration = 1f;
     [SerializeField] private float shakeAmplitude = 1f;
     
-    private CinemachineVirtualCamera virtualCamera;
+    private CinemachineCamera virtualCamera;
     private CinemachineBasicMultiChannelPerlin noise;
     private Coroutine shakeCoroutine;
 
@@ -18,7 +18,7 @@ public class CameraShake : MonoBehaviour
         {
             Instance = this;
             
-            virtualCamera = GetComponent<CinemachineVirtualCamera>();
+            virtualCamera = GetComponent<CinemachineCamera>();
             if (virtualCamera != null)
             {
                 noise = GetComponent<CinemachineBasicMultiChannelPerlin>();

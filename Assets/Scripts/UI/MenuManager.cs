@@ -2,8 +2,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using CozyFramework;
 
-
-
 public class MenuManager : MonoBehaviour
 {
     public void LoadStartScreen()

@@ -14,6 +14,10 @@ public class SpringPlatform : MonoBehaviour
     [SerializeField] private float compressedScale = 0.5f;
     [SerializeField] private AnimationCurve bounceCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
     
+    [Header("Audio")]
+    [SerializeField] private AudioClip springSound;
+    private AudioSource audioSource;
+    
     private Vector3 originalScale;
     private Vector3 originalPosition;
     private float originalHeight;
@@ -21,6 +25,7 @@ public class SpringPlatform : MonoBehaviour
     private bool isExpanding = false;
     private float animationTime = 0f;
     private PlayerController currentPlayer = null;
+    private bool isProcessingCollision = false;
 
     // Static list to track all spring platforms
     private static List<SpringPlatform> allSpringPlatforms = new List<SpringPlatform>();
@@ -53,11 +58,16 @@ public class SpringPlatform : MonoBehaviour
         originalScale = transform.localScale;
         originalPosition = transform.position;
         originalHeight = GetComponent<Collider2D>().bounds.size.y;
+        
+        // Initialize audio source
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+        audioSource.outputAudioMixerGroup = Resources.Load<UnityEngine.Audio.AudioMixerGroup>("SFX");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (isCompressing || isExpanding) return;
+        if (isCompressing || isExpanding || isProcessingCollision) return;
 
         PlayerController player = collision.gameObject.GetComponent<PlayerController>();
         if (player != null)
@@ -67,6 +77,7 @@ public class SpringPlatform : MonoBehaviour
             {
                 if (contact.normal.y < -0.5f) // Player is above the spring
                 {
+                    isProcessingCollision = true;
                     currentPlayer = player;
                     
                     // Make player invulnerable
@@ -75,11 +86,22 @@ public class SpringPlatform : MonoBehaviour
                         player.StartCoroutine(TemporaryInvulnerability());
                     }
 
-                    // Cancel stomp state
+                    // Handle stomp state
                     if (player.isStomping)
                     {
                         player.isStomping = false;
                         bounceForce *= 1.5f; // Give extra bounce force when stomping
+                        
+                        // Ensure player is above the platform
+                        Vector3 playerPos = player.transform.position;
+                        playerPos.y = transform.position.y + GetComponent<Collider2D>().bounds.size.y;
+                        player.transform.position = playerPos;
+                    }
+                    
+                    // Play spring sound
+                    if (springSound != null && audioSource != null)
+                    {
+                        audioSource.PlayOneShot(springSound);
                     }
                     
                     StartCompression();
@@ -148,6 +170,7 @@ public class SpringPlatform : MonoBehaviour
                 isExpanding = false;
                 transform.localScale = originalScale;
                 transform.position = originalPosition;
+                isProcessingCollision = false;
             }
         }
     }

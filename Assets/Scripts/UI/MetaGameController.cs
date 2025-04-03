@@ -1,5 +1,6 @@
 using Platformer.Mechanics;
 using Platformer.UI;
+using Platformer.Model;
 using UnityEngine;
 
 namespace Platformer.UI
@@ -25,7 +26,7 @@ namespace Platformer.UI
         /// </summary>
         public GameController gameController;
 
-        bool showMainCanvas = false;
+        public bool showMainCanvas = false;
 
         void OnEnable()
         {
@@ -44,6 +45,14 @@ namespace Platformer.UI
             }
         }
 
+        /// <summary>
+        /// Toggle the menu state (show if hidden, hide if shown)
+        /// </summary>
+        public void ToggleMenuState()
+        {
+            ToggleMainMenu(!showMainCanvas);
+        }
+
         void _ToggleMainMenu(bool show)
         {
             if (show)
@@ -51,12 +60,22 @@ namespace Platformer.UI
                 Time.timeScale = 0;
                 mainMenu.gameObject.SetActive(true);
                 foreach (var i in gamePlayCanvasii) i.gameObject.SetActive(false);
+                // Disable player input when menu is shown
+                if (gameController != null && gameController.model != null && gameController.model.player != null)
+                {
+                    gameController.model.player.controlEnabled = false;
+                }
             }
             else
             {
                 Time.timeScale = 1;
                 mainMenu.gameObject.SetActive(false);
                 foreach (var i in gamePlayCanvasii) i.gameObject.SetActive(true);
+                // Re-enable player input when menu is hidden
+                if (gameController != null && gameController.model != null && gameController.model.player != null)
+                {
+                    gameController.model.player.controlEnabled = true;
+                }
             }
             this.showMainCanvas = show;
         }
@@ -65,9 +84,8 @@ namespace Platformer.UI
         {
             if (Input.GetButtonDown("Menu"))
             {
-                ToggleMainMenu(show: !showMainCanvas);
+                ToggleMenuState();
             }
         }
-
     }
 }
