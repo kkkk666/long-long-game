@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 2bf366de6973ee845a86232cfc9082b9
+guid: 6f77684e020a18347a3578b18d88a7f3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7476232964813910497
-    second: CreepyTree_0
-  - first:
-      213: -5481843758975373378
-    second: CreepyTree_1
+      213: 6478488738393448705
+    second: Mountain5_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -116,35 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CreepyTree_0
+      name: Mountain5_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 8
-        width: 500
-        height: 420
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1e17ccd454ae0c760800000000000000
-      internalID: 7476232964813910497
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CreepyTree_1
-      rect:
-        serializedVersion: 2
-        x: 201
         y: 0
-        width: 15
-        height: 7
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ebfa41035249ce3b0800000000000000
-      internalID: -5481843758975373378
+      spriteID: 1016f4dde2738e950800000000000000
+      internalID: 6478488738393448705
       vertices: []
       indices: 
       edges: []
@@ -163,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -172,9 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      CreepyTree_0: 7476232964813910497
-      CreepyTree_1: -5481843758975373378
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

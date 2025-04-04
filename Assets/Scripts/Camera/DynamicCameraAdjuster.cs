@@ -57,18 +57,16 @@ public class DynamicCameraAdjuster : MonoBehaviour
         virtualCamera.Lens.OrthographicSize = targetOrthographicSize;
 
         // Get the composer component from the virtual camera's pipeline
-        var composer = virtualCamera.GetCinemachineComponent(CinemachineCore.Stage.Body) as CinemachineComposer;
+        var composer = virtualCamera.GetCinemachineComponent(CinemachineCore.Stage.Body) as CinemachineRotationComposer;
         if (composer != null)
         {
             // Increase dead zone for smaller screens
             float deadZoneSize = Mathf.Max(0.1f, 0.15f * (minScreenWidth / Screen.width));
-            composer.m_DeadZoneWidth = deadZoneSize;
-            composer.m_DeadZoneHeight = deadZoneSize;
+            composer.Composition.DeadZone.Size = new Vector2(deadZoneSize, deadZoneSize);
 
             // Adjust hard limits by adjusting soft zone (which effectively acts as hard limits)
             float hardLimitSize = Mathf.Min(0.9f, 0.8f * (Screen.width / minScreenWidth));
-            composer.m_SoftZoneWidth = hardLimitSize;
-            composer.m_SoftZoneHeight = hardLimitSize;
+            composer.Composition.HardLimits.Size = new Vector2(hardLimitSize, hardLimitSize);
         }
     }
 } 

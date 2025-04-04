@@ -7,17 +7,71 @@ namespace Platformer.Mechanics
     {
         private const float MAX_RAYCAST_DISTANCE = 50f;  // Maximum distance to check downward
         private const float SPAWN_HEIGHT_OFFSET = 2f;    // How high above the ground to start checking
-        private const float HORIZONTAL_OFFSET = 1f;      // How far to move left when unsafe spot is found
+        private const float HORIZONTAL_OFFSET = 1f;      // How far to move when unsafe spot is found
         private const int MAX_ATTEMPTS = 50;             // Maximum number of horizontal shifts to try
         private const float PATROL_PATH_BUFFER = 3f;     // Buffer distance from patrol paths
         private const float HAZARD_BUFFER = 2f;          // Buffer distance from hazards
         private const float GROUND_OFFSET = 0.5f;        // How far above ground to spawn
-        private const float INITIAL_LEFT_OFFSET = 3f;    // How far left to start searching from death position
+        private const float INITIAL_OFFSET = 3f;         // How far to start searching from death position
+        private const float WATER_ZONE_BUFFER = 2f;      // Additional buffer around water zones
 
-        public static Vector2 FindSafeSpawnPoint(Vector2 deathPosition, LayerMask groundLayer, float spawnRadius = 1.5f)
+        public static Vector2 FindSafeSpawnPoint(Vector2 deathPosition, LayerMask groundLayer, float spawnRadius = 1.5f, bool diedInWater = false)
         {
-            // Start checking from left of the death position
-            Vector2 currentCheckPoint = deathPosition + Vector2.up * SPAWN_HEIGHT_OFFSET - Vector2.right * INITIAL_LEFT_OFFSET;
+            // Determine initial search direction based on whether player died in water
+            float searchDirection = diedInWater ? 1f : -1f; // 1 for right, -1 for left
+            
+            // Find the water zone collider at the death position
+            Collider2D waterZoneCollider = null;
+            if (diedInWater)
+            {
+                // First try to find water zone by raycasting down from death position
+                RaycastHit2D[] hits = Physics2D.RaycastAll(deathPosition, Vector2.down, MAX_RAYCAST_DISTANCE);
+                foreach (var hit in hits)
+                {
+                    if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Water"))
+                    {
+                        waterZoneCollider = hit.collider;
+                        break;
+                    }
+                }
+
+                // If no water zone found by raycast, try OverlapPointAll
+                if (waterZoneCollider == null)
+                {
+                    Collider2D[] colliders = Physics2D.OverlapPointAll(deathPosition);
+                    foreach (var collider in colliders)
+                    {
+                        if (collider.gameObject.layer == LayerMask.NameToLayer("Water"))
+                        {
+                            waterZoneCollider = collider;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            // If we found a water zone collider, calculate how far we need to move to get past it
+            float requiredOffset = INITIAL_OFFSET;
+            if (waterZoneCollider != null)
+            {
+                Bounds waterBounds = waterZoneCollider.bounds;
+                float distanceToEdge;
+                
+                if (searchDirection > 0) // Moving right
+                {
+                    distanceToEdge = waterBounds.max.x - deathPosition.x;
+                }
+                else // Moving left
+                {
+                    distanceToEdge = deathPosition.x - waterBounds.min.x;
+                }
+                
+                // Add buffer to ensure we're past the water zone
+                requiredOffset = distanceToEdge + WATER_ZONE_BUFFER;
+            }
+
+            // Start checking from the appropriate side of the death position
+            Vector2 currentCheckPoint = deathPosition + Vector2.up * SPAWN_HEIGHT_OFFSET + Vector2.right * requiredOffset * searchDirection;
 
             // Cache all enemy patrol paths
             var enemies = Object.FindObjectsOfType<EnemyController>();
@@ -82,12 +136,12 @@ namespace Platformer.Mechanics
                     }
                 }
 
-                // Move left and try again
-                currentCheckPoint.x -= HORIZONTAL_OFFSET;
+                // Move in the appropriate direction and try again
+                currentCheckPoint.x += HORIZONTAL_OFFSET * searchDirection;
             }
 
-            // If no safe spot found, try to find a safe spot above and to the left of the death position
-            Vector2 fallbackPosition = deathPosition + Vector2.up * 5f - Vector2.right * INITIAL_LEFT_OFFSET;
+            // If no safe spot found, try to find a safe spot above and to the appropriate side of the death position
+            Vector2 fallbackPosition = deathPosition + Vector2.up * 5f + Vector2.right * requiredOffset * searchDirection;
             
             // Verify the fallback position has ground below it
             RaycastHit2D fallbackHit = Physics2D.Raycast(
@@ -102,14 +156,14 @@ namespace Platformer.Mechanics
                 return fallbackHit.point + Vector2.up * GROUND_OFFSET;
             }
 
-            // Absolute fallback: Return a position high above and to the left of the death position
-            return deathPosition + Vector2.up * 5f - Vector2.right * INITIAL_LEFT_OFFSET;
+            // Absolute fallback: Return a position high above and to the appropriate side of the death position
+            return deathPosition + Vector2.up * 5f + Vector2.right * requiredOffset * searchDirection;
         }
 
         [System.Obsolete]
         public static Vector2 FindSafeSpawnPoint(Vector2 deathPosition, LayerMask groundLayer)
         {
-            return FindSafeSpawnPoint(deathPosition, groundLayer, 1.5f);
+            return FindSafeSpawnPoint(deathPosition, groundLayer, 1.5f, false);
         }
 
         private static bool IsPointNearPatrolPaths(Vector2 point, List<(Vector2 start, Vector2 end)> patrolPaths)

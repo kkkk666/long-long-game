@@ -19,6 +19,7 @@ namespace Platformer.Mechanics
             {
                 var ev = Schedule<PlayerEnteredDeathZone>();
                 ev.deathzone = this;
+                ev.diedInWater = gameObject.layer == LayerMask.NameToLayer("Water");
             }
         }
     }

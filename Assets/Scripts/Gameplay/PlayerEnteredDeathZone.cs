@@ -11,12 +11,14 @@ namespace Platformer.Gameplay
     public class PlayerEnteredDeathZone : Simulation.Event<PlayerEnteredDeathZone>
     {
         public DeathZone deathzone;
+        public bool diedInWater;
 
         PlatformerModel model = Simulation.GetModel<PlatformerModel>();
 
         public override void Execute()
         {
-            Simulation.Schedule<PlayerDeath>(0);
+            var ev = Simulation.Schedule<PlayerDeath>(0);
+            ev.diedInWater = diedInWater;
         }
     }
 }

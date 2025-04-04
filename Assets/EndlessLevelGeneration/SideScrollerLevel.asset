@@ -23,14 +23,28 @@ MonoBehaviour:
       segments:
       - nested: 0
         randomPickChance: 1
-        _prefab: {fileID: 5149972772357514159, guid: ce625e7701b285c4f86938fb6a6af052,
+        _prefab: {fileID: 5149972772357514159, guid: 5ab2064c185a66f4fbc2455545bb0ad7,
           type: 3}
         _segmentPool: []
         _pool: 0
         _poolParent: {fileID: 0}
       - nested: 0
         randomPickChance: 1
-        _prefab: {fileID: 5149972772357514159, guid: 5ab2064c185a66f4fbc2455545bb0ad7,
+        _prefab: {fileID: 5149972772357514159, guid: 29c834eb5f407ab4296154f2a2623b34,
+          type: 3}
+        _segmentPool: []
+        _pool: 0
+        _poolParent: {fileID: 0}
+      - nested: 0
+        randomPickChance: 1
+        _prefab: {fileID: 5149972772357514159, guid: 6012e4967a0c1004f9fc131118108231,
+          type: 3}
+        _segmentPool: []
+        _pool: 0
+        _poolParent: {fileID: 0}
+      - nested: 0
+        randomPickChance: 1
+        _prefab: {fileID: 5149972772357514159, guid: 6012e4967a0c1004f9fc131118108231,
           type: 3}
         _segmentPool: []
         _pool: 0
@@ -51,28 +65,14 @@ MonoBehaviour:
         _poolParent: {fileID: 0}
       - nested: 0
         randomPickChance: 1
-        _prefab: {fileID: 6270641892491633198, guid: aa30da9e8a9f3074f90c0dc4c8168954,
+        _prefab: {fileID: 5149972772357514159, guid: ce625e7701b285c4f86938fb6a6af052,
           type: 3}
         _segmentPool: []
         _pool: 0
         _poolParent: {fileID: 0}
       - nested: 0
         randomPickChance: 1
-        _prefab: {fileID: 5149972772357514159, guid: 29c834eb5f407ab4296154f2a2623b34,
-          type: 3}
-        _segmentPool: []
-        _pool: 0
-        _poolParent: {fileID: 0}
-      - nested: 0
-        randomPickChance: 1
-        _prefab: {fileID: 5149972772357514159, guid: e77955ea9dc5e024ca3a4a0bb9290583,
-          type: 3}
-        _segmentPool: []
-        _pool: 0
-        _poolParent: {fileID: 0}
-      - nested: 0
-        randomPickChance: 1
-        _prefab: {fileID: 5149972772357514159, guid: 29c834eb5f407ab4296154f2a2623b34,
+        _prefab: {fileID: 5149972772357514159, guid: 6012e4967a0c1004f9fc131118108231,
           type: 3}
         _segmentPool: []
         _pool: 0
@@ -87,6 +87,34 @@ MonoBehaviour:
       - nested: 0
         randomPickChance: 1
         _prefab: {fileID: 5149972772357514159, guid: e77955ea9dc5e024ca3a4a0bb9290583,
+          type: 3}
+        _segmentPool: []
+        _pool: 0
+        _poolParent: {fileID: 0}
+      - nested: 0
+        randomPickChance: 1
+        _prefab: {fileID: 5149972772357514159, guid: 29c834eb5f407ab4296154f2a2623b34,
+          type: 3}
+        _segmentPool: []
+        _pool: 0
+        _poolParent: {fileID: 0}
+      - nested: 0
+        randomPickChance: 1
+        _prefab: {fileID: 6270641892491633198, guid: aa30da9e8a9f3074f90c0dc4c8168954,
+          type: 3}
+        _segmentPool: []
+        _pool: 0
+        _poolParent: {fileID: 0}
+      - nested: 0
+        randomPickChance: 1
+        _prefab: {fileID: 5149972772357514159, guid: e77955ea9dc5e024ca3a4a0bb9290583,
+          type: 3}
+        _segmentPool: []
+        _pool: 0
+        _poolParent: {fileID: 0}
+      - nested: 0
+        randomPickChance: 1
+        _prefab: {fileID: 5149972772357514159, guid: b7b0c3b93a9ab3046874b15323a4f340,
           type: 3}
         _segmentPool: []
         _pool: 0
@@ -110,14 +138,14 @@ MonoBehaviour:
       customSequence: {fileID: 0}
       segments:
       - nested: 0
-        randomPickChance: 1
+        randomPickChance: 0.5555556
         _prefab: {fileID: 5149972772357514159, guid: ce625e7701b285c4f86938fb6a6af052,
           type: 3}
         _segmentPool: []
         _pool: 0
         _poolParent: {fileID: 0}
       - nested: 0
-        randomPickChance: 1
+        randomPickChance: 0.7222222
         _prefab: {fileID: 5149972772357514159, guid: e77955ea9dc5e024ca3a4a0bb9290583,
           type: 3}
         _segmentPool: []
@@ -160,8 +188,8 @@ MonoBehaviour:
         _poolParent: {fileID: 0}
       customPathGenerator: {fileID: 0}
       spawnCount: 1
-      type: 0
-      randomizer: {fileID: 0}
+      type: 1
+      randomizer: {fileID: 11400000, guid: fb600be43607d7e47822c78754644d57, type: 2}
       customShuffle: {fileID: 0}
       preventRepeat: 0
     - enabled: 1
@@ -204,14 +232,28 @@ MonoBehaviour:
       segments:
       - nested: 0
         randomPickChance: 1
-        _prefab: {fileID: 5149972772357514159, guid: ce625e7701b285c4f86938fb6a6af052,
+        _prefab: {fileID: 5149972772357514159, guid: 5ab2064c185a66f4fbc2455545bb0ad7,
           type: 3}
         _segmentPool: []
         _pool: 0
         _poolParent: {fileID: 0}
       - nested: 0
         randomPickChance: 1
-        _prefab: {fileID: 5149972772357514159, guid: 5ab2064c185a66f4fbc2455545bb0ad7,
+        _prefab: {fileID: 5149972772357514159, guid: 29c834eb5f407ab4296154f2a2623b34,
+          type: 3}
+        _segmentPool: []
+        _pool: 0
+        _poolParent: {fileID: 0}
+      - nested: 0
+        randomPickChance: 1
+        _prefab: {fileID: 5149972772357514159, guid: 6012e4967a0c1004f9fc131118108231,
+          type: 3}
+        _segmentPool: []
+        _pool: 0
+        _poolParent: {fileID: 0}
+      - nested: 0
+        randomPickChance: 1
+        _prefab: {fileID: 5149972772357514159, guid: 6012e4967a0c1004f9fc131118108231,
           type: 3}
         _segmentPool: []
         _pool: 0
@@ -232,28 +274,14 @@ MonoBehaviour:
         _poolParent: {fileID: 0}
       - nested: 0
         randomPickChance: 1
-        _prefab: {fileID: 6270641892491633198, guid: aa30da9e8a9f3074f90c0dc4c8168954,
+        _prefab: {fileID: 5149972772357514159, guid: ce625e7701b285c4f86938fb6a6af052,
           type: 3}
         _segmentPool: []
         _pool: 0
         _poolParent: {fileID: 0}
       - nested: 0
         randomPickChance: 1
-        _prefab: {fileID: 5149972772357514159, guid: 29c834eb5f407ab4296154f2a2623b34,
-          type: 3}
-        _segmentPool: []
-        _pool: 0
-        _poolParent: {fileID: 0}
-      - nested: 0
-        randomPickChance: 1
-        _prefab: {fileID: 5149972772357514159, guid: e77955ea9dc5e024ca3a4a0bb9290583,
-          type: 3}
-        _segmentPool: []
-        _pool: 0
-        _poolParent: {fileID: 0}
-      - nested: 0
-        randomPickChance: 1
-        _prefab: {fileID: 5149972772357514159, guid: 29c834eb5f407ab4296154f2a2623b34,
+        _prefab: {fileID: 5149972772357514159, guid: 6012e4967a0c1004f9fc131118108231,
           type: 3}
         _segmentPool: []
         _pool: 0
@@ -268,6 +296,34 @@ MonoBehaviour:
       - nested: 0
         randomPickChance: 1
         _prefab: {fileID: 5149972772357514159, guid: e77955ea9dc5e024ca3a4a0bb9290583,
+          type: 3}
+        _segmentPool: []
+        _pool: 0
+        _poolParent: {fileID: 0}
+      - nested: 0
+        randomPickChance: 1
+        _prefab: {fileID: 5149972772357514159, guid: 29c834eb5f407ab4296154f2a2623b34,
+          type: 3}
+        _segmentPool: []
+        _pool: 0
+        _poolParent: {fileID: 0}
+      - nested: 0
+        randomPickChance: 1
+        _prefab: {fileID: 6270641892491633198, guid: aa30da9e8a9f3074f90c0dc4c8168954,
+          type: 3}
+        _segmentPool: []
+        _pool: 0
+        _poolParent: {fileID: 0}
+      - nested: 0
+        randomPickChance: 1
+        _prefab: {fileID: 5149972772357514159, guid: e77955ea9dc5e024ca3a4a0bb9290583,
+          type: 3}
+        _segmentPool: []
+        _pool: 0
+        _poolParent: {fileID: 0}
+      - nested: 0
+        randomPickChance: 1
+        _prefab: {fileID: 5149972772357514159, guid: b7b0c3b93a9ab3046874b15323a4f340,
           type: 3}
         _segmentPool: []
         _pool: 0
@@ -291,14 +347,14 @@ MonoBehaviour:
       customSequence: {fileID: 0}
       segments:
       - nested: 0
-        randomPickChance: 1
+        randomPickChance: 0.5555556
         _prefab: {fileID: 5149972772357514159, guid: ce625e7701b285c4f86938fb6a6af052,
           type: 3}
         _segmentPool: []
         _pool: 0
         _poolParent: {fileID: 0}
       - nested: 0
-        randomPickChance: 1
+        randomPickChance: 0.7222222
         _prefab: {fileID: 5149972772357514159, guid: e77955ea9dc5e024ca3a4a0bb9290583,
           type: 3}
         _segmentPool: []
@@ -341,8 +397,8 @@ MonoBehaviour:
         _poolParent: {fileID: 0}
       customPathGenerator: {fileID: 0}
       spawnCount: 1
-      type: 0
-      randomizer: {fileID: 0}
+      type: 1
+      randomizer: {fileID: 11400000, guid: fb600be43607d7e47822c78754644d57, type: 2}
       customShuffle: {fileID: 0}
       preventRepeat: 0
     - enabled: 1

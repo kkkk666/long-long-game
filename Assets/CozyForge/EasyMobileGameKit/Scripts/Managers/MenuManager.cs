@@ -97,9 +97,25 @@ namespace CozyFramework
 
         public void EndGame()
         {
+            // Reset UI states
             GameUIView.SetActive(true);
             MainMenuView.SetActive(true);
             InGameView.SetActive(false);
+            
+            // Reset any game-specific UI elements
+            if (GameUIView != null)
+            {
+                foreach (Transform child in GameUIView.transform)
+                {
+                    if (child.name.Contains("ENDSCREEN"))
+                    {
+                        child.gameObject.SetActive(false);
+                    }
+                }
+            }
+            
+            // Reset currencies visibility
+            UpdateCurrenciesVisibility(true);
         }
 
         private void UpdateCurrenciesVisibility(bool visible)
