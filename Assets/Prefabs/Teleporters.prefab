@@ -105,7 +105,7 @@ MonoBehaviour:
   cooldownTime: 2
   teleportOffset: {x: 1, y: 0}
   teleportEffect: {fileID: 0}
-  teleportSound: {fileID: 0}
+  teleportSound: {fileID: 8300000, guid: 837f461c4c4b05d47bd675be48196ffb, type: 3}
 --- !u!70 &9120332239372285596
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -248,7 +248,7 @@ MonoBehaviour:
   cooldownTime: 2
   teleportOffset: {x: 1, y: 0}
   teleportEffect: {fileID: 0}
-  teleportSound: {fileID: 0}
+  teleportSound: {fileID: 8300000, guid: bfcd4a3d6433b1340a81e18248d1c8b7, type: 3}
 --- !u!70 &6778637542935283670
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

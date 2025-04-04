@@ -4302,7 +4302,7 @@ MonoBehaviour:
   _buildOnAwake: 1
   _multithreaded: 0
   _useUnloadUnusedAssets: 1
-  _loopSegmentLogic: 1
+  _loopSegmentLogic: 0
   _levelCollection:
   - {fileID: 11400000, guid: c9c0548a48acd7a4989b5fbed1cbdb9a, type: 2}
   _levelIteration: 4
@@ -4763,8 +4763,8 @@ Transform:
   m_GameObject: {fileID: 1822802026}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.476, y: 6.4785, z: 0}
-  m_LocalScale: {x: 0.9228782, y: 19.83432, z: 1}
+  m_LocalPosition: {x: 21.4276, y: 3.0303, z: 0}
+  m_LocalScale: {x: 0.9228782, y: 25.175703, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
