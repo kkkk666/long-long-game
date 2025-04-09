@@ -6,7 +6,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Enemy
+  m_Name: Turtle
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: velocityX
@@ -153,7 +153,7 @@ AnimatorStateMachine:
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: -144, y: -288, z: 0}
-  m_EntryPosition: {x: 60, y: 276, z: 0}
+  m_EntryPosition: {x: 60, y: 280, z: 0}
   m_ExitPosition: {x: 348, y: 0, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 1102469078766878910}
@@ -227,7 +227,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 9bb15653848a66b43ab42d8a0bedcdbd, type: 2}
+  m_Motion: {fileID: 7400000, guid: 81c20569e3adefa4e9c9ab1b2b30335a, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

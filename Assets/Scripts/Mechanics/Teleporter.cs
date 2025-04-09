@@ -16,7 +16,7 @@ namespace Platformer.Mechanics
         
         [Header("Visual Effects")]
         [Tooltip("Particle effect to play when teleporting")]
-        public ParticleSystem teleportEffect;
+        public ParticleSystem teleportEffectPrefab;
         
         [Tooltip("Sound to play when teleporting")]
         public AudioClip teleportSound;
@@ -44,6 +44,12 @@ namespace Platformer.Mechanics
             {
                 Debug.LogError("No collider found on teleporter! Please add a 2D collider set as trigger.");
             }
+
+            // Verify particle system prefab is assigned
+            if (teleportEffectPrefab == null)
+            {
+                Debug.LogError($"No particle system prefab assigned to teleporter {gameObject.name}!");
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -62,10 +68,34 @@ namespace Platformer.Mechanics
 
         private void TeleportPlayer(PlayerController player)
         {
+            Debug.Log($"Teleporting player from {gameObject.name} to {linkedTeleporter.gameObject.name}");
+            
             // Play teleport effect if available
-            if (teleportEffect != null)
+            if (teleportEffectPrefab != null)
             {
-                teleportEffect.Play();
+                Debug.Log($"Instantiating particle system at player position");
+                
+                // Instantiate a new particle system at the player's position
+                ParticleSystem effect = Instantiate(teleportEffectPrefab, player.transform.position, Quaternion.identity);
+                
+                // Make it a child of the player and maintain its original scale
+                effect.transform.SetParent(player.transform);
+                effect.transform.localScale = Vector3.one; // Reset scale to 1
+                effect.transform.localPosition = Vector3.zero; // Center on player
+                
+                // Set simulation space to World so particles trail behind
+                var main = effect.main;
+                main.simulationSpace = ParticleSystemSimulationSpace.World;
+                
+                // Play the effect
+                effect.Play();
+                
+                // Destroy it after 3 seconds
+                Destroy(effect.gameObject, 1.5f);
+            }
+            else
+            {
+                Debug.LogError($"No particle system prefab assigned to teleporter {gameObject.name}!");
             }
             
             // Play teleport sound if available

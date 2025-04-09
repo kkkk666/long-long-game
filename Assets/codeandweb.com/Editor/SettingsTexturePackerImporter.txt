@@ -8,6 +8,8 @@ tpsheetFileNames:
 - Assets/Character/Sprites/BabyDragonStomp.tpsheet
 - Assets/Character/Sprites/Heart.tpsheet
 - Assets/Character/Sprites/JewelSpin.tpsheet
+- Assets/Character/Sprites/SquirrelWalk.tpsheet
+- Assets/Character/Sprites/turtlewalk.tpsheet
 - Assets/codeandweb.com/Example/SpriteSheet/sprites.tpsheet
 textureFileNames:
 - Assets/Character/Sprites/BabyDragonDie.png
@@ -18,12 +20,16 @@ textureFileNames:
 - Assets/Character/Sprites/BabyDragonStomp.png
 - Assets/Character/Sprites/Heart.png
 - Assets/Character/Sprites/JewelSpin.png
+- Assets/Character/Sprites/SquirrelWalk.png
+- Assets/Character/Sprites/turtlewalk.png
 - Assets/codeandweb.com/Example/SpriteSheet/sprites.png
 normalmapFileNames:
 - 
 - 
 - 
 - Assets/Character/Sprites/BabyDragonJump_n.png
+- 
+- 
 - 
 - 
 - 

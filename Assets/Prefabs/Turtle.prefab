@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 772289407653213039}
   - component: {fileID: 5843668731025413174}
   m_Layer: 6
-  m_Name: Ghost
+  m_Name: Turtle
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,9 +32,9 @@ Transform:
   m_GameObject: {fileID: 1661912868639658944}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.508, y: 1.242, z: 1}
-  m_LocalScale: {x: 0.28338343, y: 0.28338343, z: 0.28338343}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_SortingLayerID: 1907945055
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: ac3715ddf5bdd5b47adf04160918a9d9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ff3c9c13766d7e44ebd2711d1cb011b1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,9 +101,9 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1661912868639658944}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ed1bbb2dccb7a424a9969f916919f446, type: 2}
+  m_Controller: {fileID: 9100000, guid: b481eb5de34e3e145a13d4777b78ba48, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -176,9 +176,9 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.11}
-  m_Size: {x: 0.45, y: 0.09}
-  m_Direction: 0
+  m_Offset: {x: 0.006871229, y: 0.03854448}
+  m_Size: {x: 2.4621701, y: 1.3685187}
+  m_Direction: 1
 --- !u!114 &2651140156555518892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,7 +235,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 0.6429367
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0

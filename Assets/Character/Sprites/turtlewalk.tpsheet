@@ -1,0 +1,35 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:e436d3fc8c1ab17603f439b9be7b13ea:2c4fe317160c6b5a3205a86e01168d0c:59ce88ead4f3378cf2bd6ffd103a9b0a$
+#
+:format=40300
+:texture=turtlewalk.png
+:size=496x1600
+:pivotpoints=enabled
+:borders=enabled
+:alphahandling=ClearTransparentPixels
+
+TurtleWalk_Main.1;243;1453;243;147; 0.5;0.5; 0;0;0;0
+TurtleWalk_Main.3;0;1308;243;147; 0.5;0.5; 0;0;0;0
+TurtleWalk_Main.5;241;861;244;149; 0.5;0.5; 0;0;0;0
+TurtleWalk_Main.7;243;560;243;151; 0.5;0.5; 0;0;0;0
+TurtleWalk_Main.9;242;3;254;254; 0.5;0.5; 0;254;0;254
+TurtleWalk_Main.11;0;258;242;152; 0.5;0.5; 0;0;0;0
+TurtleWalk_Main.13;0;410;242;151; 0.5;0.5; 0;0;0;0
+TurtleWalk_Main.15;0;712;241;150; 0.5;0.5; 0;0;0;0
+TurtleWalk_Main.17;0;1011;241;149; 0.5;0.5; 0;0;0;0
+TurtleWalk_Main.19;0;1160;242;148; 0.5;0.5; 0;0;0;0
+TurtleWalk_Main.21;242;1158;242;148; 0.5;0.5; 0;0;0;0
+TurtleWalk_Main.23;0;862;241;149; 0.5;0.5; 0;0;0;0
+TurtleWalk_Main.25;241;711;241;150; 0.5;0.5; 0;0;0;0
+TurtleWalk_Main.27;242;409;242;151; 0.5;0.5; 0;0;0;0
+TurtleWalk_Main.29;242;257;242;152; 0.5;0.5; 0;0;0;0
+TurtleWalk_Main.31;0;106;242;152; 0.5;0.5; 0;0;0;0
+TurtleWalk_Main.33;0;561;243;150; 0.5;0.5; 0;0;0;0
+TurtleWalk_Main.35;241;1010;243;148; 0.5;0.5; 0;0;0;0
+TurtleWalk_Main.37;243;1306;243;147; 0.5;0.5; 0;0;0;0
+TurtleWalk_Main.39;0;1455;243;145; 0.5;0.5; 0;0;0;0

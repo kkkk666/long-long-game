@@ -1,0 +1,590 @@
+fileFormatVersion: 2
+guid: 461e8efd8667caa42968590668d4e624
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SquirrelWalk_Main.01
+      rect:
+        serializedVersion: 2
+        x: 574
+        y: 533
+        width: 195
+        height: 245
+      alignment: 9
+      pivot: {x: 0.4974359, y: 0.49387756}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2420eb3c5309cf345a4ca9eb01558222
+      internalID: -337218850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquirrelWalk_Main.03
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 49
+        width: 185
+        height: 240
+      alignment: 9
+      pivot: {x: 0.5243243, y: 0.48333332}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21c38d079ef57e44a93e11e0db9499e1
+      internalID: 1514510372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquirrelWalk_Main.05
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 275
+        width: 189
+        height: 247
+      alignment: 9
+      pivot: {x: 0.58201057, y: 0.4777328}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7dff5ac2246d3d041ae72827ecd7a8b2
+      internalID: 812837482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquirrelWalk_Main.07
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 22
+        width: 197
+        height: 247
+      alignment: 9
+      pivot: {x: 0.5177665, y: 0.48987854}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1b457bc9e217dc4e9b3502f354e1432
+      internalID: -677334363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquirrelWalk_Main.09
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 529
+        width: 192
+        height: 246
+      alignment: 9
+      pivot: {x: 0.53125, y: 0.4878049}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b4be5c3d30c76941843d89f034511b4
+      internalID: 1902241400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquirrelWalk_Main.11
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 522
+        width: 194
+        height: 250
+      alignment: 9
+      pivot: {x: 0.53092784, y: 0.488}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ebbfc291c504a4b42bcb3e87b54c971a
+      internalID: -2102608805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquirrelWalk_Main.13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 269
+        width: 199
+        height: 251
+      alignment: 9
+      pivot: {x: 0.5427136, y: 0.49402392}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a366588a93e3d1242b838540d3f05626
+      internalID: 1309815780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquirrelWalk_Main.15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 21
+        width: 197
+        height: 248
+      alignment: 9
+      pivot: {x: 0.5431472, y: 0.49596775}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5edb5ef011f672c48912a60457e7991d
+      internalID: 52345277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquirrelWalk_Main.17
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 40
+        width: 198
+        height: 244
+      alignment: 9
+      pivot: {x: 0.55050504, y: 0.4918033}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2733150b01bbf854697eaeacc0425799
+      internalID: -628927048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquirrelWalk_Main.19
+      rect:
+        serializedVersion: 2
+        x: 578
+        y: 779
+        width: 194
+        height: 245
+      alignment: 9
+      pivot: {x: 0.5463917, y: 0.48979592}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4bc81d7c9de8cf84f85cc10efed8d68c
+      internalID: 828166705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquirrelWalk_Main.21
+      rect:
+        serializedVersion: 2
+        x: 769
+        y: 535
+        width: 195
+        height: 244
+      alignment: 9
+      pivot: {x: 0.548718, y: 0.48770493}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5de2e715fe5edd46aa0996a59d929ba
+      internalID: -2094114072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquirrelWalk_Main.23
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 775
+        width: 194
+        height: 249
+      alignment: 9
+      pivot: {x: 0.53608245, y: 0.49799198}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83342ec46a0be07488c036a2b75dc257
+      internalID: 1435927661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquirrelWalk_Main.25
+      rect:
+        serializedVersion: 2
+        x: 584
+        y: 289
+        width: 197
+        height: 244
+      alignment: 9
+      pivot: {x: 0.5482234, y: 0.48770493}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41fc7782620de36429241608ba7996e5
+      internalID: -250290781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquirrelWalk_Main.27
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 772
+        width: 196
+        height: 252
+      alignment: 9
+      pivot: {x: 0.54591835, y: 0.49603173}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 655fbec85cbf9924cb8dac00e8449836
+      internalID: 1325427081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquirrelWalk_Main.29
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 284
+        width: 196
+        height: 245
+      alignment: 9
+      pivot: {x: 0.5510204, y: 0.477551}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bae4dbb105981540b1451aee6bea8ba
+      internalID: -813865783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquirrelWalk_Main.31
+      rect:
+        serializedVersion: 2
+        x: 781
+        y: 296
+        width: 192
+        height: 239
+      alignment: 9
+      pivot: {x: 0.5416667, y: 0.48535565}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8901216b2dd9244aada343ef589caec
+      internalID: -326940625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquirrelWalk_Main.33
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 778
+        width: 188
+        height: 246
+      alignment: 9
+      pivot: {x: 0.5425532, y: 0.4796748}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39f8dc90a220ec843b6e086662e00d2f
+      internalID: 294249892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquirrelWalk_Main.35
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 520
+        width: 188
+        height: 252
+      alignment: 9
+      pivot: {x: 0.5425532, y: 0.4920635}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5118f5bf49c3d24487f638e3ed5a87b
+      internalID: 535352423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquirrelWalk_Main.37
+      rect:
+        serializedVersion: 2
+        x: 772
+        y: 782
+        width: 185
+        height: 242
+      alignment: 9
+      pivot: {x: 0.5243243, y: 0.47933885}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47b89062628be294393bda776a3bad57
+      internalID: -1454519917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquirrelWalk_Main.39
+      rect:
+        serializedVersion: 2
+        x: 394
+        y: 39
+        width: 186
+        height: 245
+      alignment: 9
+      pivot: {x: 0.5268817, y: 0.48163265}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcc4a0e3acd932a4093d68e32134cf47
+      internalID: 527580559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 9a38945c377e0d34aa87f700d380d432
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      SquirrelWalk_Main.01: -337218850
+      SquirrelWalk_Main.03: 1514510372
+      SquirrelWalk_Main.05: 812837482
+      SquirrelWalk_Main.07: -677334363
+      SquirrelWalk_Main.09: 1902241400
+      SquirrelWalk_Main.11: -2102608805
+      SquirrelWalk_Main.13: 1309815780
+      SquirrelWalk_Main.15: 52345277
+      SquirrelWalk_Main.17: -628927048
+      SquirrelWalk_Main.19: 828166705
+      SquirrelWalk_Main.21: -2094114072
+      SquirrelWalk_Main.23: 1435927661
+      SquirrelWalk_Main.25: -250290781
+      SquirrelWalk_Main.27: 1325427081
+      SquirrelWalk_Main.29: -813865783
+      SquirrelWalk_Main.31: -326940625
+      SquirrelWalk_Main.33: 294249892
+      SquirrelWalk_Main.35: 535352423
+      SquirrelWalk_Main.37: -1454519917
+      SquirrelWalk_Main.39: 527580559
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
