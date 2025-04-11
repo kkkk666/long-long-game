@@ -8,6 +8,8 @@ using CozyFramework;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Unity.Services.Leaderboards;
 
 namespace Platformer.Gameplay
 {
@@ -84,15 +86,9 @@ namespace Platformer.Gameplay
                     string userName = PlayerManager.Instance.PlayerUsername;
                     int finalScore = ScoreManager.Instance.GetScore(); // Get the actual score
 
-                    // Submit score to Unity leaderboard
-                    _ = CozyAPI.Instance.SubmitScoreToLeaderboard("highscore", finalScore);
-                    Debug.Log($"Submitting final score to leaderboard: {finalScore}");
+                    // Submit score to Unity leaderboard and check if it's a top score
+                    HandleTopScoreAndDiscordMessage(userName, finalScore);
 
-                    DiscordWebhook.Create("https://discord.com/api/webhooks/1351517390940405880/_ZaimGah7CrNBqOmrxiaUvWiV2k1qF-CPHu1FTCg0XoupUTikDLKuDnyDGbofdbC64kt")
-                        .WithUsername("BabyLoongGame")
-                        .WithContent($"{userName} has died with a final score of {finalScore}!")
-                        .Send();
-                    
                     // Find and activate the end screen
                     Debug.Log("Attempting to find ENDSCREEN through CozyManager...");
                     
@@ -130,6 +126,92 @@ namespace Platformer.Gameplay
                     spawnEvent.deathPosition = deathPosition;
                     spawnEvent.diedInWater = diedInWater;
                 }
+            }
+        }
+        
+        private async void HandleTopScoreAndDiscordMessage(string userName, int finalScore)
+        {
+            Debug.Log($"Player died with a final score of {finalScore}");
+            
+            try
+            {
+                // First query the leaderboard to get the current top score BEFORE submitting the new score
+                var scoresResponse = await LeaderboardsService.Instance.GetScoresAsync("highscore");
+                int currentTopScore = 0;
+                bool isNewHighScore = false;
+                
+                // Check if there are existing scores
+                if (scoresResponse != null && scoresResponse.Results.Count > 0)
+                {
+                    // Get the top score from the leaderboard
+                    var topEntry = scoresResponse.Results[0];
+                    currentTopScore = (int)topEntry.Score;
+                    Debug.Log($"Current top score on leaderboard before submission: {currentTopScore}");
+                    
+                    // Check if this score beats the current top score
+                    isNewHighScore = finalScore > currentTopScore;
+                }
+                else
+                {
+                    // No existing scores, so this is automatically a high score
+                    isNewHighScore = true;
+                    Debug.Log("No existing scores found. This is the first high score.");
+                }
+                
+                // Now submit the score to the leaderboard
+                await CozyAPI.Instance.SubmitScoreToLeaderboard("highscore", finalScore);
+                Debug.Log($"Submitted final score to leaderboard: {finalScore}");
+                
+                // Determine if this is a high score or the first score
+                if (isNewHighScore)
+                {
+                    // This is a new high score
+                    string message = $"{userName} has achieved a new high score of {finalScore}!";
+                    
+                    DiscordWebhook.Create("https://discord.com/api/webhooks/1351517390940405880/_ZaimGah7CrNBqOmrxiaUvWiV2k1qF-CPHu1FTCg0XoupUTikDLKuDnyDGbofdbC64kt")
+                        .WithUsername("BabyLoongGame")
+                        .WithContent(message)
+                        .Send();
+                        
+                    Debug.Log($"Sent Discord message for new high score: {message}");
+                }
+                else if (finalScore == currentTopScore)
+                {
+                    // This is a tied high score
+                    string message = $"{userName} has tied the high score with {finalScore}!";
+                    
+                    DiscordWebhook.Create("https://discord.com/api/webhooks/1351517390940405880/_ZaimGah7CrNBqOmrxiaUvWiV2k1qF-CPHu1FTCg0XoupUTikDLKuDnyDGbofdbC64kt")
+                        .WithUsername("BabyLoongGame")
+                        .WithContent(message)
+                        .Send();
+                        
+                    Debug.Log($"Sent Discord message for tied high score: {message}");
+                }
+                else
+                {
+                    Debug.Log($"Not sending Discord message as {finalScore} is not the top score");
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"Error handling leaderboard: {ex.Message}");
+                
+                // Try to submit the score anyway if there was an error
+                try
+                {
+                    await CozyAPI.Instance.SubmitScoreToLeaderboard("highscore", finalScore);
+                    Debug.Log($"Submitted final score to leaderboard after error: {finalScore}");
+                }
+                catch (System.Exception submitEx)
+                {
+                    Debug.LogError($"Error submitting score: {submitEx.Message}");
+                }
+                
+                // Send regular Discord message if there's an error
+                DiscordWebhook.Create("https://discord.com/api/webhooks/1351517390940405880/_ZaimGah7CrNBqOmrxiaUvWiV2k1qF-CPHu1FTCg0XoupUTikDLKuDnyDGbofdbC64kt")
+                    .WithUsername("BabyLoongGame")
+                    .WithContent($"{userName} has died with a final score of {finalScore}!")
+                    .Send();
             }
         }
         
