@@ -10,6 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Unity.Services.Leaderboards;
+using TMPro;
 
 namespace Platformer.Gameplay
 {
@@ -143,17 +144,14 @@ namespace Platformer.Gameplay
                 // Check if there are existing scores
                 if (scoresResponse != null && scoresResponse.Results.Count > 0)
                 {
-                    // Get the top score from the leaderboard
                     var topEntry = scoresResponse.Results[0];
                     currentTopScore = (int)topEntry.Score;
                     Debug.Log($"Current top score on leaderboard before submission: {currentTopScore}");
                     
-                    // Check if this score beats the current top score
                     isNewHighScore = finalScore > currentTopScore;
                 }
                 else
                 {
-                    // No existing scores, so this is automatically a high score
                     isNewHighScore = true;
                     Debug.Log("No existing scores found. This is the first high score.");
                 }
@@ -162,6 +160,43 @@ namespace Platformer.Gameplay
                 await CozyAPI.Instance.SubmitScoreToLeaderboard("highscore", finalScore);
                 Debug.Log($"Submitted final score to leaderboard: {finalScore}");
                 
+                // Find and update the high score text if this is a new high score
+                GameObject cozyManager = GameObject.Find("CozyManager");
+                if (cozyManager != null)
+                {
+                    Transform endScreenTransform = cozyManager.transform.Find("ENDSCREEN");
+                    if (endScreenTransform != null)
+                    {
+                        // Updated path to include the Main object
+                        Transform mainTransform = endScreenTransform.Find("Main");
+                        if (mainTransform != null)
+                        {
+                            TextMeshProUGUI highScoreText = mainTransform.Find("HighScoreText")?.GetComponent<TextMeshProUGUI>();
+                            if (highScoreText != null)
+                            {
+                                // Only show the high score message if it's a new high score
+                                if (isNewHighScore)
+                                {
+                                    highScoreText.text = $"Congrats - New High Score of - {finalScore} !!!";
+                                    highScoreText.gameObject.SetActive(true);
+                                }
+                                else
+                                {
+                                    highScoreText.gameObject.SetActive(false);
+                                }
+                            }
+                            else
+                            {
+                                Debug.LogError("HighScoreText component not found in Main object!");
+                            }
+                        }
+                        else
+                        {
+                            Debug.LogError("Main object not found in ENDSCREEN!");
+                        }
+                    }
+                }
+
                 // Determine if this is a high score or the first score
                 if (isNewHighScore)
                 {

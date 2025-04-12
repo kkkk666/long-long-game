@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using CozyFramework;
 using Platformer.Gameplay;
+using TMPro;
 
 public class MenuManager : MonoBehaviour
 {
@@ -48,6 +49,31 @@ public class MenuManager : MonoBehaviour
 
     public void LoadStartScreen()
     {
+        // Hide the high score text before loading the start screen
+        GameObject cozyManager = GameObject.Find("CozyManager");
+        if (cozyManager != null)
+        {
+            Transform endScreenTransform = cozyManager.transform.Find("ENDSCREEN");
+            if (endScreenTransform != null)
+            {
+                Transform mainTransform = endScreenTransform.Find("Main");
+                if (mainTransform != null)
+                {
+                    Transform highScoreTextTransform = mainTransform.Find("HighScoreText");
+                    if (highScoreTextTransform != null)
+                    {
+                        // Clear the text before setting inactive
+                        TextMeshProUGUI highScoreText = highScoreTextTransform.GetComponent<TextMeshProUGUI>();
+                        if (highScoreText != null)
+                        {
+                            highScoreText.text = string.Empty;
+                        }
+                        highScoreTextTransform.gameObject.SetActive(false);
+                    }
+                }
+            }
+        }
+
         // Load start screen - canvas will be activated and end screen deactivated in OnSceneLoaded
         SceneManager.LoadScene("StartScreen");
     }

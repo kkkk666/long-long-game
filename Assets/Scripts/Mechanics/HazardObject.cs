@@ -38,15 +38,21 @@ public class HazardObject : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-       // Debug.Log($"Hazard triggered with: {other.gameObject.name}");
-        
+        HandleHazardCollision(other);
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        HandleHazardCollision(other);
+    }
+
+    private void HandleHazardCollision(Collider2D other)
+    {
         // Check if the colliding object is the player
         PlayerController player = other.gameObject.GetComponent<PlayerController>();
         
         if (player != null && !player.isInvulnerable)
         {
-           // Debug.Log("Player hit hazard!");
-            
             // Find a ground point near the hazard
             Vector2 deathPosition = FindNearestGroundPoint();
             
