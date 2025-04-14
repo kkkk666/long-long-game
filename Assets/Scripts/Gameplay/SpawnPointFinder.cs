@@ -6,7 +6,7 @@ namespace Platformer.Mechanics
     public class SpawnPointFinder : MonoBehaviour
     {
         private const float MAX_RAYCAST_DISTANCE = 50f;  // Maximum distance to check downward
-        private const float SPAWN_HEIGHT_OFFSET = 2f;    // How high above the ground to start checking
+        private const float SPAWN_HEIGHT_OFFSET = 5f;    // Increased from 2f to 5f to start search higher
         private const float HORIZONTAL_OFFSET = 1f;      // How far to move when unsafe spot is found
         private const int MAX_ATTEMPTS = 50;             // Maximum number of horizontal shifts to try
         private const float PATROL_PATH_BUFFER = 3f;     // Buffer distance from patrol paths
@@ -14,6 +14,7 @@ namespace Platformer.Mechanics
         private const float GROUND_OFFSET = 0.5f;        // How far above ground to spawn
         private const float INITIAL_OFFSET = 3f;         // How far to start searching from death position
         private const float WATER_ZONE_BUFFER = 2f;      // Additional buffer around water zones
+        private const float MIN_GROUND_DISTANCE = 1f;    // Minimum distance required between spawn point and ground
 
         public static Vector2 FindSafeSpawnPoint(Vector2 deathPosition, LayerMask groundLayer, float spawnRadius = 1.5f, bool diedInWater = false)
         {
@@ -70,7 +71,7 @@ namespace Platformer.Mechanics
                 requiredOffset = distanceToEdge + WATER_ZONE_BUFFER;
             }
 
-            // Start checking from the appropriate side of the death position
+            // Start checking from a higher point to avoid terrain features
             Vector2 currentCheckPoint = deathPosition + Vector2.up * SPAWN_HEIGHT_OFFSET + Vector2.right * requiredOffset * searchDirection;
 
             // Cache all enemy patrol paths
@@ -110,26 +111,37 @@ namespace Platformer.Mechanics
                 {
                     Vector2 potentialSpawnPoint = groundHit.point + Vector2.up * GROUND_OFFSET;
                     
-                    // Check if this point is safe from patrol paths
-                    if (!IsPointNearPatrolPaths(potentialSpawnPoint, patrolPaths))
+                    // Additional check to ensure we're not too close to the ground
+                    RaycastHit2D groundCheck = Physics2D.Raycast(
+                        potentialSpawnPoint,
+                        Vector2.down,
+                        MIN_GROUND_DISTANCE,
+                        groundLayer
+                    );
+                    
+                    if (groundCheck.collider == null) // If no ground found within minimum distance, it's safe
                     {
-                        // Check if this point is safe from hazards
-                        if (!IsPointNearHazards(potentialSpawnPoint, hazardPositions))
+                        // Check if this point is safe from patrol paths
+                        if (!IsPointNearPatrolPaths(potentialSpawnPoint, patrolPaths))
                         {
-                            // Check if this point is safe from spring platforms
-                            if (SpringPlatform.IsSafeForRespawn(potentialSpawnPoint, spawnRadius))
+                            // Check if this point is safe from hazards
+                            if (!IsPointNearHazards(potentialSpawnPoint, hazardPositions))
                             {
-                                // Verify the spawn point is above ground
-                                RaycastHit2D verifyHit = Physics2D.Raycast(
-                                    potentialSpawnPoint + Vector2.up * 0.1f,
-                                    Vector2.down,
-                                    0.2f,
-                                    groundLayer
-                                );
-
-                                if (verifyHit.collider != null)
+                                // Check if this point is safe from spring platforms
+                                if (SpringPlatform.IsSafeForRespawn(potentialSpawnPoint, spawnRadius))
                                 {
-                                    return potentialSpawnPoint;
+                                    // Verify the spawn point is above ground
+                                    RaycastHit2D verifyHit = Physics2D.Raycast(
+                                        potentialSpawnPoint + Vector2.up * 0.1f,
+                                        Vector2.down,
+                                        0.2f,
+                                        groundLayer
+                                    );
+
+                                    if (verifyHit.collider != null)
+                                    {
+                                        return potentialSpawnPoint;
+                                    }
                                 }
                             }
                         }

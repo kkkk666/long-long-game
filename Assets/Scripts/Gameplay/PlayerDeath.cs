@@ -60,6 +60,48 @@ namespace Platformer.Gameplay
                 // Store the death position
                 deathPosition = player.transform.position;
                 
+                // Check if player died in water
+                Collider2D[] colliders = Physics2D.OverlapPointAll(deathPosition);
+                foreach (var collider in colliders)
+                {
+                    if (collider.gameObject.layer == LayerMask.NameToLayer("Water"))
+                    {
+                        diedInWater = true;
+                        break;
+                    }
+                }
+                
+                // Spawn water splash effect if died in water
+                if (diedInWater && player.GetComponent<PlayerController>().waterSplashEffectPrefab != null)
+                {
+                    // Get the player controller and offset
+                    var playerController = player.GetComponent<PlayerController>();
+                    Vector3 spawnPosition = deathPosition + playerController.waterSplashOffset;
+                    
+                    // Spawn the effect at the adjusted position
+                    GameObject splashEffect = UnityEngine.Object.Instantiate(playerController.waterSplashEffectPrefab, spawnPosition, Quaternion.identity);
+                    
+                    // Get the particle system component
+                    ParticleSystem particles = splashEffect.GetComponent<ParticleSystem>();
+                    if (particles != null)
+                    {
+                        // Play the particle system
+                        particles.Play();
+                        
+                        // Destroy the game object after the particle system has finished
+                        float duration = particles.main.duration + particles.main.startLifetime.constantMax;
+                        UnityEngine.Object.Destroy(splashEffect, duration);
+                    }
+                    else
+                    {
+                        // If no particle system found, destroy after a default time
+                        UnityEngine.Object.Destroy(splashEffect, 2f);
+                    }
+                }
+                
+                // Reset the diedInWater flag after processing the death
+                diedInWater = false;
+                
                 // Decrease lives using ScoreManager
                 ScoreManager.Instance.RemoveLife();
                 

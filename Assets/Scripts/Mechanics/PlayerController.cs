@@ -99,6 +99,8 @@ namespace Platformer.Mechanics
 
         [Header("Effects")]
         public GameObject doubleJumpEffectPrefab; // Reference to your particle effect prefab
+        public GameObject waterSplashEffectPrefab; // Reference to the water splash particle effect prefab
+        public Vector2 waterSplashOffset = Vector3.zero; // Offset for adjusting water splash spawn position
 
         [Header("Touch Controls")]
         public float minSwipeDistance = 50f;        // Minimum distance for a swipe to be detected

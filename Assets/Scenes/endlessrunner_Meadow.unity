@@ -2970,6 +2970,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114230831923080080, guid: 7d60c822c3f1b408ea7a00ecdb5e047a,
         type: 3}
+      propertyPath: waterSplashOffset.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114230831923080080, guid: 7d60c822c3f1b408ea7a00ecdb5e047a,
+        type: 3}
       propertyPath: sidewaysAcceleration
       value: 10
       objectReference: {fileID: 0}
@@ -2983,6 +2988,12 @@ PrefabInstance:
       propertyPath: doubleJumpEffectPrefab
       value: 
       objectReference: {fileID: 2425026235299677040, guid: 2d40d7af61496f44182e51c569d4c4c9,
+        type: 3}
+    - target: {fileID: 114230831923080080, guid: 7d60c822c3f1b408ea7a00ecdb5e047a,
+        type: 3}
+      propertyPath: waterSplashEffectPrefab
+      value: 
+      objectReference: {fileID: 5706870848199602427, guid: a15bbc080ad0bda45b61a1ee1055bb46,
         type: 3}
     - target: {fileID: 212064061491315838, guid: 7d60c822c3f1b408ea7a00ecdb5e047a,
         type: 3}
