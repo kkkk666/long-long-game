@@ -23,56 +23,59 @@ namespace Platformer.Mechanics
             
             // Find the water zone collider at the death position
             Collider2D waterZoneCollider = null;
-            if (diedInWater)
+            
+            // Always check for water zones, regardless of how the player died
+            // First try to find water zone by raycasting down from death position
+            RaycastHit2D[] hits = Physics2D.RaycastAll(deathPosition, Vector2.down, MAX_RAYCAST_DISTANCE);
+            foreach (var hit in hits)
             {
-                // First try to find water zone by raycasting down from death position
-                RaycastHit2D[] hits = Physics2D.RaycastAll(deathPosition, Vector2.down, MAX_RAYCAST_DISTANCE);
-                foreach (var hit in hits)
+                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Water"))
                 {
-                    if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Water"))
-                    {
-                        waterZoneCollider = hit.collider;
-                        break;
-                    }
+                    waterZoneCollider = hit.collider;
+                    break;
                 }
+            }
 
-                // If no water zone found by raycast, try OverlapPointAll
-                if (waterZoneCollider == null)
+            // If no water zone found by raycast, try OverlapPointAll
+            if (waterZoneCollider == null)
+            {
+                Collider2D[] colliders = Physics2D.OverlapPointAll(deathPosition);
+                foreach (var collider in colliders)
                 {
-                    Collider2D[] colliders = Physics2D.OverlapPointAll(deathPosition);
-                    foreach (var collider in colliders)
+                    if (collider.gameObject.layer == LayerMask.NameToLayer("Water"))
                     {
-                        if (collider.gameObject.layer == LayerMask.NameToLayer("Water"))
-                        {
-                            waterZoneCollider = collider;
-                            break;
-                        }
+                        waterZoneCollider = collider;
+                        break;
                     }
                 }
             }
 
             // If we found a water zone collider, calculate how far we need to move to get past it
             float requiredOffset = INITIAL_OFFSET;
+            Vector2 currentCheckPoint;
+            
             if (waterZoneCollider != null)
             {
                 Bounds waterBounds = waterZoneCollider.bounds;
-                float distanceToEdge;
                 
-                if (searchDirection > 0) // Moving right
-                {
-                    distanceToEdge = waterBounds.max.x - deathPosition.x;
-                }
-                else // Moving left
-                {
-                    distanceToEdge = deathPosition.x - waterBounds.min.x;
-                }
+                // Always move to the right of the water zone
+                requiredOffset = waterBounds.max.x - deathPosition.x + WATER_ZONE_BUFFER;
                 
-                // Add buffer to ensure we're past the water zone
-                requiredOffset = distanceToEdge + WATER_ZONE_BUFFER;
+                // Force the search direction to the right
+                searchDirection = 1f;
+                
+                // Start the search from the edge of the water zone plus buffer
+                Vector2 searchStart = deathPosition;
+                searchStart.x += requiredOffset * searchDirection;
+                
+                // Start checking from a higher point to avoid terrain features
+                currentCheckPoint = searchStart + Vector2.up * SPAWN_HEIGHT_OFFSET;
             }
-
-            // Start checking from a higher point to avoid terrain features
-            Vector2 currentCheckPoint = deathPosition + Vector2.up * SPAWN_HEIGHT_OFFSET + Vector2.right * requiredOffset * searchDirection;
+            else
+            {
+                // Start checking from a higher point to avoid terrain features
+                currentCheckPoint = deathPosition + Vector2.up * SPAWN_HEIGHT_OFFSET + Vector2.right * requiredOffset * searchDirection;
+            }
 
             // Cache all enemy patrol paths
             var enemies = Object.FindObjectsOfType<EnemyController>();
