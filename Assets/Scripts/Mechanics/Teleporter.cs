@@ -40,16 +40,6 @@ namespace Platformer.Mechanics
             {
                 collider.isTrigger = true;
             }
-            else
-            {
-                Debug.LogError("No collider found on teleporter! Please add a 2D collider set as trigger.");
-            }
-
-            // Verify particle system prefab is assigned
-            if (teleportEffectPrefab == null)
-            {
-                Debug.LogError($"No particle system prefab assigned to teleporter {gameObject.name}!");
-            }
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -68,13 +58,9 @@ namespace Platformer.Mechanics
 
         private void TeleportPlayer(PlayerController player)
         {
-            Debug.Log($"Teleporting player from {gameObject.name} to {linkedTeleporter.gameObject.name}");
-            
             // Play teleport effect if available
             if (teleportEffectPrefab != null)
             {
-                Debug.Log($"Instantiating particle system at player position");
-                
                 // Instantiate a new particle system at the player's position
                 ParticleSystem effect = Instantiate(teleportEffectPrefab, player.transform.position, Quaternion.identity);
                 
@@ -92,10 +78,6 @@ namespace Platformer.Mechanics
                 
                 // Destroy it after 3 seconds
                 Destroy(effect.gameObject, 1.5f);
-            }
-            else
-            {
-                Debug.LogError($"No particle system prefab assigned to teleporter {gameObject.name}!");
             }
             
             // Play teleport sound if available

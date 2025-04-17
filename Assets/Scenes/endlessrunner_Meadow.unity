@@ -2991,6 +2991,12 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 114230831923080080, guid: 7d60c822c3f1b408ea7a00ecdb5e047a,
         type: 3}
+      propertyPath: stompImpactEffectPrefab
+      value: 
+      objectReference: {fileID: 6822768605182650547, guid: 07d624cb307fab54a920412b0e18433d,
+        type: 3}
+    - target: {fileID: 114230831923080080, guid: 7d60c822c3f1b408ea7a00ecdb5e047a,
+        type: 3}
       propertyPath: waterSplashEffectPrefab
       value: 
       objectReference: {fileID: 5706870848199602427, guid: a15bbc080ad0bda45b61a1ee1055bb46,

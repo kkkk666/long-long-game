@@ -100,7 +100,9 @@ namespace Platformer.Mechanics
         [Header("Effects")]
         public GameObject doubleJumpEffectPrefab; // Reference to your particle effect prefab
         public GameObject waterSplashEffectPrefab; // Reference to the water splash particle effect prefab
+        public GameObject stompImpactEffectPrefab; // Reference to the stomp impact particle effect prefab
         public Vector2 waterSplashOffset = Vector3.zero; // Offset for adjusting water splash spawn position
+        public Vector2 stompImpactOffset = Vector3.zero; // Offset for adjusting stomp impact spawn position
 
         [Header("Touch Controls")]
         public float minSwipeDistance = 50f;        // Minimum distance for a swipe to be detected
@@ -620,6 +622,41 @@ spriteRenderer.flipX = false;
         void OnCollisionEnter2D(Collision2D collision)
         {
             if (isInvulnerable && collision.gameObject.CompareTag("Enemy")) return;
+            
+            // Check if this is a landing collision after a stomp
+            if (isStomping && collision.contacts.Length > 0)
+            {
+                // Get the contact point
+                ContactPoint2D contact = collision.contacts[0];
+                
+                // Spawn stomp impact effect
+                if (stompImpactEffectPrefab != null)
+                {
+                    // Calculate spawn position with offset
+                    Vector3 spawnPosition = contact.point + (Vector2)stompImpactOffset;
+                    
+                    // Instantiate the effect
+                    GameObject effect = Instantiate(stompImpactEffectPrefab, spawnPosition, Quaternion.identity);
+                    
+                    // Get the particle system component
+                    ParticleSystem particles = effect.GetComponent<ParticleSystem>();
+                    if (particles != null)
+                    {
+                        // Play the particle system
+                        particles.Play();
+                        
+                        // Destroy the game object after the particle system has finished
+                        float duration = particles.main.duration + particles.main.startLifetime.constantMax;
+                        Destroy(effect, duration);
+                    }
+                    else
+                    {
+                        // If no particle system found, destroy after a default time
+                        Destroy(effect, 2f);
+                    }
+                }
+            }
+
             if (collision.gameObject.CompareTag("MovingPlatform"))
             {
                 foreach (ContactPoint2D contact in collision.contacts)
