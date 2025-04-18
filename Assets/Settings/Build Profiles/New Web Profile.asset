@@ -79,7 +79,7 @@ MonoBehaviour:
     - line: '|   m_SpriteBatchMaxVertexCount: 65535'
     - line: '|   m_SpriteBatchVertexThreshold: 300'
     - line: '|   m_MTRendering: 1'
-    - line: '|   mipStripping: 0'
+    - line: '|   mipStripping: 1'
     - line: '|   numberOfMipsStripped: 0'
     - line: '|   numberOfMipsStrippedPerMipmapLimitGroup: {}'
     - line: '|   m_StackTraceTypes: 010000000100000001000000010000000100000001000000'
@@ -167,7 +167,7 @@ MonoBehaviour:
     - line: '|   loadStoreDebugModeEnabled: 0'
     - line: '|   visionOSBundleVersion: 1.0'
     - line: '|   tvOSBundleVersion: 1.0'
-    - line: '|   bundleVersion: 0.6'
+    - line: '|   bundleVersion: 1.0'
     - line: '|   preloadedAssets: []'
     - line: '|   metroInputSource: 0'
     - line: '|   wsaTransparentSwapchain: 0'
@@ -211,7 +211,7 @@ MonoBehaviour:
     - line: '|   CreateWallpaper: 0'
     - line: '|   androidSplitApplicationBinary: 0'
     - line: '|   keepLoadedShadersAlive: 1'
-    - line: '|   StripUnusedMeshComponents: 0'
+    - line: '|   StripUnusedMeshComponents: 1'
     - line: '|   strictShaderVariantMatching: 0'
     - line: '|   VertexChannelCompressionMask: 4054'
     - line: '|   iPhoneSdkVersion: 988'
@@ -798,7 +798,7 @@ MonoBehaviour:
     - line: '|     PS5: 1'
     - line: '|     QNX: 1'
     - line: '|     Stadia: 1'
-    - line: '|     WebGL: 1'
+    - line: '|     WebGL: 3'
     - line: '|     Windows Store Apps: 1'
     - line: '|     XboxOne: 1'
     - line: '|     iPhone: 1'
@@ -927,7 +927,7 @@ MonoBehaviour:
         m_ExplicitArrayBoundsChecks: 0
         m_CompressionType: -1
         m_InstallInBuildFolder: 0
-        m_CodeOptimization: 0
+        m_CodeOptimization: 3
         m_WebGLClientBrowserPath: 
         m_WebGLClientBrowserType: 0
         m_WebGLTextureSubtarget: 0
