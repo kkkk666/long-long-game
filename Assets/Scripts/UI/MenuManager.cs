@@ -49,10 +49,18 @@ public class MenuManager : MonoBehaviour
 
     public void LoadStartScreen()
     {
-        // Hide the high score text before loading the start screen
+        // Find and handle the CozyManager before loading the start screen
         GameObject cozyManager = GameObject.Find("CozyManager");
         if (cozyManager != null)
         {
+            // First ensure the Canvas is active
+            Transform canvasTransform = cozyManager.transform.Find("Canvas");
+            if (canvasTransform != null)
+            {
+                canvasTransform.gameObject.SetActive(true);
+            }
+
+            // Then handle the ENDSCREEN
             Transform endScreenTransform = cozyManager.transform.Find("ENDSCREEN");
             if (endScreenTransform != null)
             {
@@ -71,8 +79,12 @@ public class MenuManager : MonoBehaviour
                         highScoreTextTransform.gameObject.SetActive(false);
                     }
                 }
+                endScreenTransform.gameObject.SetActive(false);
             }
         }
+
+        // Reset time scale before loading the start screen
+        Time.timeScale = 1;
 
         // Load start screen - canvas will be activated and end screen deactivated in OnSceneLoaded
         SceneManager.LoadScene("StartScreen");
