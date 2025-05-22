@@ -1,0 +1,13 @@
+{
+  "name": "vercel-discord-webhook",
+  "version": "1.0.0",
+  "description": "Discord webhook handler for BabyDragon game",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel deploy"
+  },
+  "dependencies": {
+    "axios": "^1.6.7"
+  }
+} 

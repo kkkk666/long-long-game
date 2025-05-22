@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Unity.Services.Leaderboards;
 using TMPro;
+using UnityEngine.Networking;
 
 namespace Platformer.Gameplay
 {
@@ -239,34 +240,26 @@ namespace Platformer.Gameplay
                     }
                 }
 
-                // Determine if this is a high score or the first score
-                if (isNewHighScore)
+                // Send score to Vercel endpoint
+                string vercelEndpoint = "https://babydragongame-webhook.vercel.app/api/discord-webhook";
+                WWWForm form = new WWWForm();
+                form.AddField("userName", userName);
+                form.AddField("score", finalScore.ToString());
+                form.AddField("isNewHighScore", isNewHighScore.ToString());
+                form.AddField("currentTopScore", currentTopScore.ToString());
+
+                using (UnityWebRequest www = UnityWebRequest.Post(vercelEndpoint, form))
                 {
-                    // This is a new high score
-                    string message = $"{userName} has achieved a new high score of {finalScore}!";
-                    
-                    DiscordWebhook.Create("https://discord.com/api/webhooks/1351517390940405880/_ZaimGah7CrNBqOmrxiaUvWiV2k1qF-CPHu1FTCg0XoupUTikDLKuDnyDGbofdbC64kt")
-                        .WithUsername("BabyLoongGame")
-                        .WithContent(message)
-                        .Send();
-                        
-                    Debug.Log($"Sent Discord message for new high score: {message}");
-                }
-                else if (finalScore == currentTopScore)
-                {
-                    // This is a tied high score
-                    string message = $"{userName} has tied the high score with {finalScore}!";
-                    
-                    DiscordWebhook.Create("https://discord.com/api/webhooks/1351517390940405880/_ZaimGah7CrNBqOmrxiaUvWiV2k1qF-CPHu1FTCg0XoupUTikDLKuDnyDGbofdbC64kt")
-                        .WithUsername("BabyLoongGame")
-                        .WithContent(message)
-                        .Send();
-                        
-                    Debug.Log($"Sent Discord message for tied high score: {message}");
-                }
-                else
-                {
-                    Debug.Log($"Not sending Discord message as {finalScore} is not the top score");
+                    await www.SendWebRequest();
+
+                    if (www.result == UnityWebRequest.Result.Success)
+                    {
+                        Debug.Log("Score successfully sent to server");
+                    }
+                    else
+                    {
+                        Debug.LogError($"Error sending score to server: {www.error}");
+                    }
                 }
             }
             catch (System.Exception ex)
@@ -284,11 +277,33 @@ namespace Platformer.Gameplay
                     Debug.LogError($"Error submitting score: {submitEx.Message}");
                 }
                 
-                // Send regular Discord message if there's an error
-                DiscordWebhook.Create("https://discord.com/api/webhooks/1351517390940405880/_ZaimGah7CrNBqOmrxiaUvWiV2k1qF-CPHu1FTCg0XoupUTikDLKuDnyDGbofdbC64kt")
-                    .WithUsername("BabyLoongGame")
-                    .WithContent($"{userName} has died with a final score of {finalScore}!")
-                    .Send();
+                // Try to send score to Vercel endpoint even if there was an error
+                try
+                {
+                    string vercelEndpoint = "https://babydragongame-webhook.vercel.app/api/discord-webhook";
+                    WWWForm form = new WWWForm();
+                    form.AddField("userName", userName);
+                    form.AddField("score", finalScore.ToString());
+                    form.AddField("isNewHighScore", "false");
+                    form.AddField("currentTopScore", "0");
+
+                    using (UnityWebRequest www = UnityWebRequest.Post(vercelEndpoint, form))
+                    {
+                        await www.SendWebRequest();
+                        if (www.result == UnityWebRequest.Result.Success)
+                        {
+                            Debug.Log("Score successfully sent to server after error");
+                        }
+                        else
+                        {
+                            Debug.LogError($"Error sending score to server after error: {www.error}");
+                        }
+                    }
+                }
+                catch (System.Exception webEx)
+                {
+                    Debug.LogError($"Error sending to Vercel endpoint: {webEx.Message}");
+                }
             }
         }
         
