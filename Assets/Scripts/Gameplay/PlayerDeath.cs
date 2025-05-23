@@ -248,18 +248,26 @@ namespace Platformer.Gameplay
                 form.AddField("isNewHighScore", isNewHighScore.ToString());
                 form.AddField("currentTopScore", currentTopScore.ToString());
 
-                using (UnityWebRequest www = UnityWebRequest.Post(vercelEndpoint, form))
+                // Only send to Discord if it's a new high score
+                if (isNewHighScore)
                 {
-                    await www.SendWebRequest();
+                    using (UnityWebRequest www = UnityWebRequest.Post(vercelEndpoint, form))
+                    {
+                        await www.SendWebRequest();
 
-                    if (www.result == UnityWebRequest.Result.Success)
-                    {
-                        Debug.Log("Score successfully sent to server");
+                        if (www.result == UnityWebRequest.Result.Success)
+                        {
+                            Debug.Log("New high score successfully sent to Discord");
+                        }
+                        else
+                        {
+                            Debug.LogError($"Error sending score to Discord: {www.error}");
+                        }
                     }
-                    else
-                    {
-                        Debug.LogError($"Error sending score to server: {www.error}");
-                    }
+                }
+                else
+                {
+                    Debug.Log("Not a new high score, skipping Discord message");
                 }
             }
             catch (System.Exception ex)

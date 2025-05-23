@@ -36,14 +36,7 @@ module.exports = async (req, res) => {
     }
 
     // Create message based on score type
-    let message;
-    if (isNewHighScore === 'true') {
-      message = `${userName} has achieved a new high score of ${score}!`;
-    } else if (score === currentTopScore) {
-      message = `${userName} has tied the high score with ${score}!`;
-    } else {
-      message = `${userName} has died with a final score of ${score}!`;
-    }
+    let message = `${userName} has achieved a new high score of ${score}!!!`;
 
     // Send to Discord
     await axios.post(webhookUrl, {
