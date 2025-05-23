@@ -13,22 +13,22 @@ public class AudioController : MonoBehaviour
     // Minimum volume value in decibels (-80dB is essentially silent)
     private const float MIN_VOLUME_DB = -80f;
     
+    // Default volume values (0.75 = 75% volume)
+    private const float DEFAULT_MUSIC_VOLUME = 0.75f;
+    private const float DEFAULT_SFX_VOLUME = 0.75f;
+    
     void Start()
     {
-        // Set initial slider values (optional)
-        if (PlayerPrefs.HasKey("MusicVolume"))
-        {
-            float musicVolume = PlayerPrefs.GetFloat("MusicVolume");
-            musicSlider.value = musicVolume;
-            SetMusicVolume(musicVolume);
-        }
+        // Set initial slider values
+        float musicVolume = PlayerPrefs.HasKey("MusicVolume") ? PlayerPrefs.GetFloat("MusicVolume") : DEFAULT_MUSIC_VOLUME;
+        float sfxVolume = PlayerPrefs.HasKey("SFXVolume") ? PlayerPrefs.GetFloat("SFXVolume") : DEFAULT_SFX_VOLUME;
         
-        if (PlayerPrefs.HasKey("SFXVolume"))
-        {
-            float sfxVolume = PlayerPrefs.GetFloat("SFXVolume");
-            sfxSlider.value = sfxVolume;
-            SetSFXVolume(sfxVolume);
-        }
+        // Initialize sliders and audio mixers
+        musicSlider.value = musicVolume;
+        sfxSlider.value = sfxVolume;
+        
+        SetMusicVolume(musicVolume);
+        SetSFXVolume(sfxVolume);
         
         // Add listeners
         musicSlider.onValueChanged.AddListener(SetMusicVolume);

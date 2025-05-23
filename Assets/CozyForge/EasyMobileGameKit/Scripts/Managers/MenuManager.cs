@@ -83,6 +83,13 @@ namespace CozyFramework
             GameUIView.SetActive(true);
             MainMenuView.SetActive(true);
             InGameView.SetActive(false);
+            
+            // Show username prompt if player doesn't have a username
+            if (!PlayerManager.Instance.PlayerHasUsername)
+            {
+                CozyPickUsername.Instance.ShowPickUsernameView();
+            }
+            
             SelectTabByName("Play");
             BottomBar.SetActive(true);
             UpdateCurrenciesVisibility(true);

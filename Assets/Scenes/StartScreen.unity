@@ -2425,6 +2425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   videoFileName: BabyDragonSplash2.mov
+  loadingScreen: {fileID: 0}
 --- !u!1 &1259144166
 GameObject:
   m_ObjectHideFlags: 0
@@ -3676,6 +3677,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 253fb043a2f520a46ad98396a1af1e97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  persistAcrossScenes: 1
 --- !u!114 &44665240086517002
 MonoBehaviour:
   m_ObjectHideFlags: 0
