@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Services.Authentication;
 using Unity.Services.CloudSave.Models;
 using UnityEngine;
+using TMPro;
 
 namespace CozyFramework
 {
@@ -84,6 +85,8 @@ namespace CozyFramework
             if (PlayerHasUsername)
             {
                 PlayerUsername = await AuthenticationService.Instance.GetPlayerNameAsync();
+                Debug.Log($"Loaded username: {PlayerUsername}");
+                UpdateUsernameDisplay();
             }
         }
 
@@ -109,6 +112,20 @@ namespace CozyFramework
             }
         }
 
+        public void UpdateUsernameDisplay()
+        {
+            // Find and update the USERNAME text in the current scene
+            GameObject usernameObj = GameObject.Find("USERNAME");
+            if (usernameObj != null)
+            {
+                var usernameText = usernameObj.GetComponent<TMP_Text>();
+                if (usernameText != null && PlayerHasUsername)
+                {
+                    usernameText.text = PlayerUsername;
+                    Debug.Log($"Updated USERNAME display to: {PlayerUsername}");
+                }
+            }
+        }
 
     }
 }

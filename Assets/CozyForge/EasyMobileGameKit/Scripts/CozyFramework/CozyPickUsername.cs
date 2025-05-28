@@ -66,8 +66,17 @@ namespace CozyFramework
                 await AuthenticationService.Instance.UpdatePlayerNameAsync(playerName);
                 HidePickUsernameView();
 
+                // Update PlayerManager with the new username
                 PlayerManager.Instance.PlayerHasUsername = true;
+                PlayerManager.Instance.PlayerUsername = AuthenticationService.Instance.PlayerName;
+                
+                // Save to cloud
                 await CozyAPI.Instance.SavePlayerData("username", AuthenticationService.Instance.PlayerName);
+                
+                // Update the username display
+                PlayerManager.Instance.UpdateUsernameDisplay();
+                
+                Debug.Log($"Username updated to: {PlayerManager.Instance.PlayerUsername}");
 
                 if (CozyLeaderboards.Instance.LeaderboardExists("highscore")) await CozyAPI.Instance.SubmitScoreToLeaderboard("highscore", PlayerManager.Instance.PlayerHighScore);
                 if (CozyLeaderboards.Instance.LeaderboardExists("matches")) await CozyAPI.Instance.SubmitScoreToLeaderboard("matches", PlayerManager.Instance.PlayerTotalMatches);
