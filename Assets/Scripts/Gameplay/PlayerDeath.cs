@@ -3,7 +3,6 @@ using Platformer.Mechanics;
 using Platformer.Model;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using ShadowGroveGames.WebhooksForDiscord.Scripts;
 using CozyFramework; 
 using System.Linq;
 using System.Collections;
@@ -18,7 +17,11 @@ namespace Platformer.Gameplay
     public class PlayerDeath : Simulation.Event<PlayerDeath>
     {
         PlatformerModel model = Simulation.GetModel<PlatformerModel>();
-        
+
+        // API key for Vercel webhook authentication
+        // IMPORTANT: Change this when you deploy to a new Vercel instance
+        private const string WEBHOOK_API_KEY = "BabyDragon2024SecureKey";
+
         // Store death position
         public Vector2 deathPosition;
         
@@ -134,8 +137,10 @@ namespace Platformer.Gameplay
                     HandleTopScoreAndDiscordMessage(userName, finalScore);
 
                     // Find and activate the end screen
+                    #if UNITY_EDITOR || DEVELOPMENT_BUILD
                     Debug.Log("Attempting to find ENDSCREEN through CozyManager...");
-                    
+                    #endif
+
                     // Find CozyManager in the StartScreen scene
                     GameObject cozyManager = GameObject.Find("CozyManager");
                     if (cozyManager != null)
@@ -144,7 +149,9 @@ namespace Platformer.Gameplay
                         Transform endScreenTransform = cozyManager.transform.Find("ENDSCREEN");
                         if (endScreenTransform != null)
                         {
+                            #if UNITY_EDITOR || DEVELOPMENT_BUILD
                             Debug.Log("Found ENDSCREEN in CozyManager, activating it...");
+                            #endif
                             endScreenTransform.gameObject.SetActive(true);
                             
                             // Disable player completely to prevent further interactions
@@ -155,12 +162,16 @@ namespace Platformer.Gameplay
                         }
                         else
                         {
+                            #if UNITY_EDITOR || DEVELOPMENT_BUILD
                             Debug.LogError("ENDSCREEN not found in CozyManager!");
+                            #endif
                         }
                     }
                     else
                     {
+                        #if UNITY_EDITOR || DEVELOPMENT_BUILD
                         Debug.LogError("CozyManager not found in the scene!");
+                        #endif
                     }
                 }
                 else
@@ -175,8 +186,10 @@ namespace Platformer.Gameplay
         
         private async void HandleTopScoreAndDiscordMessage(string userName, int finalScore)
         {
+            #if UNITY_EDITOR || DEVELOPMENT_BUILD
             Debug.Log($"Player died with a final score of {finalScore}");
-            
+            #endif
+
             try
             {
                 // First query the leaderboard to get the current top score BEFORE submitting the new score
@@ -189,20 +202,26 @@ namespace Platformer.Gameplay
                 {
                     var topEntry = scoresResponse.Results[0];
                     currentTopScore = (int)topEntry.Score;
+                    #if UNITY_EDITOR || DEVELOPMENT_BUILD
                     Debug.Log($"Current top score on leaderboard before submission: {currentTopScore}");
-                    
+                    #endif
+
                     isNewHighScore = finalScore > currentTopScore;
                 }
                 else
                 {
                     isNewHighScore = true;
+                    #if UNITY_EDITOR || DEVELOPMENT_BUILD
                     Debug.Log("No existing scores found. This is the first high score.");
+                    #endif
                 }
                 
                 // Now submit the score to the leaderboard
                 await CozyAPI.Instance.SubmitScoreToLeaderboard("highscore", finalScore);
+                #if UNITY_EDITOR || DEVELOPMENT_BUILD
                 Debug.Log($"Submitted final score to leaderboard: {finalScore}");
-                
+                #endif
+
                 // Find and update the high score text if this is a new high score
                 GameObject cozyManager = GameObject.Find("CozyManager");
                 if (cozyManager != null)
@@ -230,12 +249,16 @@ namespace Platformer.Gameplay
                             }
                             else
                             {
+                                #if UNITY_EDITOR || DEVELOPMENT_BUILD
                                 Debug.LogError("HighScoreText component not found in Main object!");
+                                #endif
                             }
                         }
                         else
                         {
+                            #if UNITY_EDITOR || DEVELOPMENT_BUILD
                             Debug.LogError("Main object not found in ENDSCREEN!");
+                            #endif
                         }
                     }
                 }
@@ -247,6 +270,7 @@ namespace Platformer.Gameplay
                 form.AddField("score", finalScore.ToString());
                 form.AddField("isNewHighScore", isNewHighScore.ToString());
                 form.AddField("currentTopScore", currentTopScore.ToString());
+                form.AddField("apiKey", WEBHOOK_API_KEY);
 
                 // Only send to Discord if it's a new high score
                 if (isNewHighScore)
@@ -255,6 +279,7 @@ namespace Platformer.Gameplay
                     {
                         await www.SendWebRequest();
 
+                        #if UNITY_EDITOR || DEVELOPMENT_BUILD
                         if (www.result == UnityWebRequest.Result.Success)
                         {
                             Debug.Log("New high score successfully sent to Discord");
@@ -263,26 +288,35 @@ namespace Platformer.Gameplay
                         {
                             Debug.LogError($"Error sending score to Discord: {www.error}");
                         }
+                        #endif
                     }
                 }
                 else
                 {
+                    #if UNITY_EDITOR || DEVELOPMENT_BUILD
                     Debug.Log("Not a new high score, skipping Discord message");
+                    #endif
                 }
             }
             catch (System.Exception ex)
             {
+                #if UNITY_EDITOR || DEVELOPMENT_BUILD
                 Debug.LogError($"Error handling leaderboard: {ex.Message}");
-                
+                #endif
+
                 // Try to submit the score anyway if there was an error
                 try
                 {
                     await CozyAPI.Instance.SubmitScoreToLeaderboard("highscore", finalScore);
+                    #if UNITY_EDITOR || DEVELOPMENT_BUILD
                     Debug.Log($"Submitted final score to leaderboard after error: {finalScore}");
+                    #endif
                 }
                 catch (System.Exception submitEx)
                 {
+                    #if UNITY_EDITOR || DEVELOPMENT_BUILD
                     Debug.LogError($"Error submitting score: {submitEx.Message}");
+                    #endif
                 }
                 
                 // Try to send score to Vercel endpoint even if there was an error
@@ -294,10 +328,12 @@ namespace Platformer.Gameplay
                     form.AddField("score", finalScore.ToString());
                     form.AddField("isNewHighScore", "false");
                     form.AddField("currentTopScore", "0");
+                    form.AddField("apiKey", WEBHOOK_API_KEY);
 
                     using (UnityWebRequest www = UnityWebRequest.Post(vercelEndpoint, form))
                     {
                         await www.SendWebRequest();
+                        #if UNITY_EDITOR || DEVELOPMENT_BUILD
                         if (www.result == UnityWebRequest.Result.Success)
                         {
                             Debug.Log("Score successfully sent to server after error");
@@ -306,11 +342,14 @@ namespace Platformer.Gameplay
                         {
                             Debug.LogError($"Error sending score to server after error: {www.error}");
                         }
+                        #endif
                     }
                 }
                 catch (System.Exception webEx)
                 {
+                    #if UNITY_EDITOR || DEVELOPMENT_BUILD
                     Debug.LogError($"Error sending to Vercel endpoint: {webEx.Message}");
+                    #endif
                 }
             }
         }
@@ -327,7 +366,9 @@ namespace Platformer.Gameplay
             SafeSpot[] safeSpots = Object.FindObjectsOfType<SafeSpot>();
             if (safeSpots.Length == 0)
             {
+                #if UNITY_EDITOR || DEVELOPMENT_BUILD
                 Debug.LogWarning("No safe spots found in the scene!");
+                #endif
                 return null;
             }
 
@@ -335,7 +376,9 @@ namespace Platformer.Gameplay
             DeathZone[] deathZones = Object.FindObjectsOfType<DeathZone>();
             if (deathZones.Length == 0)
             {
+                #if UNITY_EDITOR || DEVELOPMENT_BUILD
                 Debug.LogWarning("No death zones found in the scene!");
+                #endif
                 return null;
             }
 
