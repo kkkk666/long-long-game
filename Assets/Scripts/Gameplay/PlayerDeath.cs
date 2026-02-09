@@ -20,7 +20,7 @@ namespace Platformer.Gameplay
 
         // API key for Vercel webhook authentication
         // IMPORTANT: Change this when you deploy to a new Vercel instance
-        private const string WEBHOOK_API_KEY = "BabyDragon2024SecureKey";
+        private const string WEBHOOK_API_KEY = "G5p9kVn7zR2tC0yB1mQ8sXeLfUwD3hJ4";
 
         // Store death position
         public Vector2 deathPosition;
@@ -193,7 +193,7 @@ namespace Platformer.Gameplay
             try
             {
                 // First query the leaderboard to get the current top score BEFORE submitting the new score
-                var scoresResponse = await LeaderboardsService.Instance.GetScoresAsync("highscore");
+                var scoresResponse = await LeaderboardsService.Instance.GetScoresAsync("Babylon-Loong");
                 int currentTopScore = 0;
                 bool isNewHighScore = false;
                 
@@ -217,7 +217,7 @@ namespace Platformer.Gameplay
                 }
                 
                 // Now submit the score to the leaderboard
-                await CozyAPI.Instance.SubmitScoreToLeaderboard("highscore", finalScore);
+                await CozyAPI.Instance.SubmitScoreToLeaderboard("Babylon-Loong", finalScore);
                 #if UNITY_EDITOR || DEVELOPMENT_BUILD
                 Debug.Log($"Submitted final score to leaderboard: {finalScore}");
                 #endif
@@ -264,7 +264,7 @@ namespace Platformer.Gameplay
                 }
 
                 // Send score to Vercel endpoint
-                string vercelEndpoint = "https://babydragongame-webhook.vercel.app/api/discord-webhook";
+                string vercelEndpoint = "https://loong-loong-game.vercel.app/api/discord-webhook";
                 WWWForm form = new WWWForm();
                 form.AddField("userName", userName);
                 form.AddField("score", finalScore.ToString());
@@ -307,7 +307,7 @@ namespace Platformer.Gameplay
                 // Try to submit the score anyway if there was an error
                 try
                 {
-                    await CozyAPI.Instance.SubmitScoreToLeaderboard("highscore", finalScore);
+                    await CozyAPI.Instance.SubmitScoreToLeaderboard("Babylon-Loong", finalScore);
                     #if UNITY_EDITOR || DEVELOPMENT_BUILD
                     Debug.Log($"Submitted final score to leaderboard after error: {finalScore}");
                     #endif
@@ -322,7 +322,7 @@ namespace Platformer.Gameplay
                 // Try to send score to Vercel endpoint even if there was an error
                 try
                 {
-                    string vercelEndpoint = "https://babydragongame-webhook.vercel.app/api/discord-webhook";
+                    string vercelEndpoint = "https://loong-loong-game.vercel.app/api/discord-webhook";
                     WWWForm form = new WWWForm();
                     form.AddField("userName", userName);
                     form.AddField("score", finalScore.ToString());
