@@ -14,39 +14,46 @@ namespace CozyFramework
 
         public void Initialize(int position, string playerName, int score)
         {
-            ScoreText.text = score.ToString();
-            PlayerNameText.text = playerName;
+            if (ScoreText != null) ScoreText.text = score.ToString();
+            if (PlayerNameText != null) PlayerNameText.text = playerName ?? "";
 
+            if (LeaderboardView.Instance == null)
+            {
+                if (RankText != null) { RankText.gameObject.SetActive(true); RankText.text = (position + 1).ToString(); }
+                return;
+            }
 
             if (position >= 0 && position <= 2)
             {
-                TopIcon.gameObject.SetActive(true);
+                if (TopIcon != null) TopIcon.gameObject.SetActive(true);
                 switch (position)
                 {
                     case 0:
-                        RankText.gameObject.SetActive(false);
-                        TopIcon.sprite = LeaderboardView.Instance.Top1Icon;
-                        BackgroundImage.color = LeaderboardView.Instance.Top1Color;
+                        if (RankText != null) RankText.gameObject.SetActive(false);
+                        if (TopIcon != null && LeaderboardView.Instance.Top1Icon != null) TopIcon.sprite = LeaderboardView.Instance.Top1Icon;
+                        if (BackgroundImage != null) BackgroundImage.color = LeaderboardView.Instance.Top1Color;
                         break;
                     case 1:
-                        RankText.gameObject.SetActive(false);
-                        TopIcon.sprite = LeaderboardView.Instance.Top2Icon;
-                        BackgroundImage.color = LeaderboardView.Instance.Top2Color;
+                        if (RankText != null) RankText.gameObject.SetActive(false);
+                        if (TopIcon != null && LeaderboardView.Instance.Top2Icon != null) TopIcon.sprite = LeaderboardView.Instance.Top2Icon;
+                        if (BackgroundImage != null) BackgroundImage.color = LeaderboardView.Instance.Top2Color;
                         break;
                     case 2:
-                        RankText.gameObject.SetActive(false);
-                        TopIcon.sprite = LeaderboardView.Instance.Top3Icon;
-                        BackgroundImage.color = LeaderboardView.Instance.Top3Color;
+                        if (RankText != null) RankText.gameObject.SetActive(false);
+                        if (TopIcon != null && LeaderboardView.Instance.Top3Icon != null) TopIcon.sprite = LeaderboardView.Instance.Top3Icon;
+                        if (BackgroundImage != null) BackgroundImage.color = LeaderboardView.Instance.Top3Color;
                         break;
                 }
             }
             else
             {
-                TopIcon.gameObject.SetActive(false);
-                RankText.gameObject.SetActive(true);
-                int rank = position + 1;
-                RankText.text = rank.ToString();
-                BackgroundImage.color = LeaderboardView.Instance.DefaultBackgroundColor;
+                if (TopIcon != null) TopIcon.gameObject.SetActive(false);
+                if (RankText != null)
+                {
+                    RankText.gameObject.SetActive(true);
+                    RankText.text = (position + 1).ToString();
+                }
+                if (BackgroundImage != null) BackgroundImage.color = LeaderboardView.Instance.DefaultBackgroundColor;
             }
         }
 

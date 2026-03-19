@@ -95,9 +95,9 @@ module.exports = async (req, res) => {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    // Validate and sanitize score (must be a positive integer)
+    // Basic score sanity (non-negative number only; no upper limit)
     const scoreNum = parseInt(score, 10);
-    if (isNaN(scoreNum) || scoreNum < 0 || scoreNum > 999999999) {
+    if (isNaN(scoreNum) || scoreNum < 0) {
       return res.status(400).json({ error: 'Invalid score value' });
     }
 

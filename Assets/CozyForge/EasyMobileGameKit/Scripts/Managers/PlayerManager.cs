@@ -12,6 +12,9 @@ namespace CozyFramework
         [Header("PLAYER DATA")]
         public bool PlayerHasUsername;
         public string PlayerUsername;
+        public string PlayerDiscordId;
+        /// <summary>JWT from Discord login; used to submit score to /api/submit-score (never send API key from client).</summary>
+        public string PlayerSessionToken;
         public int PlayerHighScore;
         public int PlayerTotalMatches;
 
@@ -45,7 +48,9 @@ namespace CozyFramework
             {
                 "highscore",
                 "matches",
-                "username"
+                "username",
+                "discord_id",
+                "session_token"
             };
 
             var loadedData = await CozyCloudSave.LoadData(keysToLoad);
@@ -79,12 +84,33 @@ namespace CozyFramework
                 if (!string.IsNullOrEmpty(username))
                 {
                     PlayerHasUsername = true;
+                    PlayerUsername = username;
                 }
+            }
+            if (loadedData.TryGetValue("discord_id", out var discordIdItem))
+            {
+                string id = ConvertItem<string>(discordIdItem);
+                if (!string.IsNullOrEmpty(id))
+                    PlayerDiscordId = id;
+            }
+            if (loadedData.TryGetValue("session_token", out var tokenItem))
+            {
+                string tok = ConvertItem<string>(tokenItem);
+                if (!string.IsNullOrEmpty(tok))
+                    PlayerSessionToken = tok;
             }
 
             if (PlayerHasUsername)
             {
-                PlayerUsername = await AuthenticationService.Instance.GetPlayerNameAsync();
+                try
+                {
+                    PlayerUsername = await AuthenticationService.Instance.GetPlayerNameAsync();
+                }
+                catch
+                {
+                    if (string.IsNullOrEmpty(PlayerUsername) && loadedData.TryGetValue("username", out var u))
+                        PlayerUsername = ConvertItem<string>(u);
+                }
                 Debug.Log($"Loaded username: {PlayerUsername}");
                 UpdateUsernameDisplay();
             }

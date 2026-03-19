@@ -1,4 +1,4 @@
-﻿using Platformer.Core;
+using Platformer.Core;
 using Platformer.Mechanics;
 using Platformer.Model;
 using UnityEngine;
@@ -18,9 +18,8 @@ namespace Platformer.Gameplay
     {
         PlatformerModel model = Simulation.GetModel<PlatformerModel>();
 
-        // API key for Vercel webhook authentication
-        // IMPORTANT: Change this when you deploy to a new Vercel instance
-        private const string WEBHOOK_API_KEY = "G5p9kVn7zR2tC0yB1mQ8sXeLfUwD3hJ4";
+        // Score is sent to /api/submit-score with JWT token (no API key in client).
+        private const string SUBMIT_SCORE_ENDPOINT = "https://loong-loong-game.vercel.app/api/submit-score";
 
         // Store death position
         public Vector2 deathPosition;
@@ -127,10 +126,13 @@ namespace Platformer.Gameplay
                 }
                 
                 // Check if player has no more lives
+                if (ScoreManager.Instance == null) return;
                 if (ScoreManager.Instance.lives <= 0)
                 {
                     gameOverTriggered = true;
-                    string userName = PlayerManager.Instance.PlayerUsername;
+                    string userName = (PlayerManager.Instance != null && !string.IsNullOrEmpty(PlayerManager.Instance.PlayerUsername))
+                        ? PlayerManager.Instance.PlayerUsername
+                        : "Player";
                     int finalScore = ScoreManager.Instance.GetScore(); // Get the actual score
 
                     // Submit score to Unity leaderboard and check if it's a top score
@@ -193,12 +195,19 @@ namespace Platformer.Gameplay
             try
             {
                 // First query the leaderboard to get the current top score BEFORE submitting the new score
-                var scoresResponse = await LeaderboardsService.Instance.GetScoresAsync("Babylon-Loong");
+                if (LeaderboardsService.Instance == null)
+                {
+                    #if UNITY_EDITOR || DEVELOPMENT_BUILD
+                    Debug.LogWarning("LeaderboardsService.Instance is null, skipping leaderboard.");
+                    #endif
+                    return;
+                }
+                var scoresResponse = await LeaderboardsService.Instance.GetScoresAsync("highscore");
                 int currentTopScore = 0;
                 bool isNewHighScore = false;
                 
                 // Check if there are existing scores
-                if (scoresResponse != null && scoresResponse.Results.Count > 0)
+                if (scoresResponse != null && scoresResponse.Results != null && scoresResponse.Results.Count > 0)
                 {
                     var topEntry = scoresResponse.Results[0];
                     currentTopScore = (int)topEntry.Score;
@@ -217,23 +226,39 @@ namespace Platformer.Gameplay
                 }
                 
                 // Now submit the score to the leaderboard
-                await CozyAPI.Instance.SubmitScoreToLeaderboard("Babylon-Loong", finalScore);
+                if (CozyAPI.Instance == null)
+                {
+                    #if UNITY_EDITOR || DEVELOPMENT_BUILD
+                    Debug.LogWarning("CozyAPI.Instance is null, skipping score submit.");
+                    #endif
+                }
+                else
+                {
+                    await CozyAPI.Instance.SubmitScoreToLeaderboard("highscore", finalScore);
+                }
+            
+                if (PlayerManager.Instance != null && CozyAPI.Instance != null && CozyLeaderboards.Instance != null && CozyLeaderboards.Instance.LeaderboardExists("matches"))
+                {
+                    PlayerManager.Instance.PlayerTotalMatches++;
+                    await CozyAPI.Instance.SavePlayerData("matches", PlayerManager.Instance.PlayerTotalMatches);
+                    await CozyAPI.Instance.SubmitScoreToLeaderboard("matches", PlayerManager.Instance.PlayerTotalMatches);
+                }
                 #if UNITY_EDITOR || DEVELOPMENT_BUILD
                 Debug.Log($"Submitted final score to leaderboard: {finalScore}");
                 #endif
 
                 // Find and update the high score text if this is a new high score
                 GameObject cozyManager = GameObject.Find("CozyManager");
-                if (cozyManager != null)
+                if (cozyManager != null && cozyManager.transform != null)
                 {
                     Transform endScreenTransform = cozyManager.transform.Find("ENDSCREEN");
                     if (endScreenTransform != null)
                     {
-                        // Updated path to include the Main object
                         Transform mainTransform = endScreenTransform.Find("Main");
                         if (mainTransform != null)
                         {
-                            TextMeshProUGUI highScoreText = mainTransform.Find("HighScoreText")?.GetComponent<TextMeshProUGUI>();
+                            Transform highScoreTransform = mainTransform.Find("HighScoreText");
+                            TextMeshProUGUI highScoreText = highScoreTransform != null ? highScoreTransform.GetComponent<TextMeshProUGUI>() : null;
                             if (highScoreText != null)
                             {
                                 // Only show the high score message if it's a new high score
@@ -263,19 +288,18 @@ namespace Platformer.Gameplay
                     }
                 }
 
-                // Send score to Vercel endpoint
-                string vercelEndpoint = "https://loong-loong-game.vercel.app/api/discord-webhook";
+                // Send score to Vercel /api/submit-score with JWT (server verifies and then posts to Discord; no API key in client).
                 WWWForm form = new WWWForm();
-                form.AddField("userName", userName);
+                string sessionToken = (PlayerManager.Instance != null && !string.IsNullOrEmpty(PlayerManager.Instance.PlayerSessionToken))
+                    ? PlayerManager.Instance.PlayerSessionToken : "";
+                form.AddField("token", sessionToken);
                 form.AddField("score", finalScore.ToString());
                 form.AddField("isNewHighScore", isNewHighScore.ToString());
                 form.AddField("currentTopScore", currentTopScore.ToString());
-                form.AddField("apiKey", WEBHOOK_API_KEY);
 
-                // Only send to Discord if it's a new high score
                 if (isNewHighScore)
                 {
-                    using (UnityWebRequest www = UnityWebRequest.Post(vercelEndpoint, form))
+                    using (UnityWebRequest www = UnityWebRequest.Post(SUBMIT_SCORE_ENDPOINT, form))
                     {
                         await www.SendWebRequest();
 
@@ -307,7 +331,8 @@ namespace Platformer.Gameplay
                 // Try to submit the score anyway if there was an error
                 try
                 {
-                    await CozyAPI.Instance.SubmitScoreToLeaderboard("Babylon-Loong", finalScore);
+                    if (CozyAPI.Instance != null)
+                        await CozyAPI.Instance.SubmitScoreToLeaderboard("highscore", finalScore);
                     #if UNITY_EDITOR || DEVELOPMENT_BUILD
                     Debug.Log($"Submitted final score to leaderboard after error: {finalScore}");
                     #endif
@@ -322,15 +347,15 @@ namespace Platformer.Gameplay
                 // Try to send score to Vercel endpoint even if there was an error
                 try
                 {
-                    string vercelEndpoint = "https://loong-loong-game.vercel.app/api/discord-webhook";
+                    string sessionToken = (PlayerManager.Instance != null && !string.IsNullOrEmpty(PlayerManager.Instance.PlayerSessionToken))
+                        ? PlayerManager.Instance.PlayerSessionToken : "";
                     WWWForm form = new WWWForm();
-                    form.AddField("userName", userName);
+                    form.AddField("token", sessionToken);
                     form.AddField("score", finalScore.ToString());
                     form.AddField("isNewHighScore", "false");
                     form.AddField("currentTopScore", "0");
-                    form.AddField("apiKey", WEBHOOK_API_KEY);
 
-                    using (UnityWebRequest www = UnityWebRequest.Post(vercelEndpoint, form))
+                    using (UnityWebRequest www = UnityWebRequest.Post(SUBMIT_SCORE_ENDPOINT, form))
                     {
                         await www.SendWebRequest();
                         #if UNITY_EDITOR || DEVELOPMENT_BUILD

@@ -37,7 +37,8 @@ namespace CozyFramework
 
         public void SelectLeaderboardID(string id)
         {
-            LeaderboardList.SetActive(false);
+            if (LeaderboardList != null)
+                LeaderboardList.SetActive(false);
             if (currentLeaderboard == id) return;
             currentLeaderboard = id;
             UpdateCurrentLeaderBoardText();
@@ -53,10 +54,13 @@ namespace CozyFramework
 
                 if (currentLeaderboard == "")
                 {
-                    if (CozyLeaderboards.Instance.LeaderboardListTemplate.Leaderboards.Count == 0)
+                    if (CozyLeaderboards.Instance == null || CozyLeaderboards.Instance.LeaderboardListTemplate == null
+                        || CozyLeaderboards.Instance.LeaderboardListTemplate.Leaderboards == null
+                        || CozyLeaderboards.Instance.LeaderboardListTemplate.Leaderboards.Count == 0)
                     {
                         Debug.LogWarning("No leaderboards found in the remote config.");
-                        MenuManager.Instance.SelectTabByName("Play");
+                        if (MenuManager.Instance != null)
+                            MenuManager.Instance.SelectTabByName("Play");
                         return;
                     }
 
@@ -65,12 +69,24 @@ namespace CozyFramework
 
                 UpdateCurrentLeaderBoardText();
 
+                if (LeaderboardsService.Instance == null)
+                {
+                    Debug.LogWarning("LeaderboardsService.Instance is null.");
+                    return;
+                }
                 var scoresResponse = await LeaderboardsService.Instance.GetScoresAsync(currentLeaderboard);
+                if (scoresResponse == null || scoresResponse.Results == null)
+                {
+                    Debug.LogWarning("scoresResponse or Results is null.");
+                    return;
+                }
 
                 foreach (var player in scoresResponse.Results)
                 {
+                    if (LeaderboardEntryDisplay == null || LeaderboardEntriesContainer == null) break;
                     var leaderboardEntry = Instantiate(LeaderboardEntryDisplay, LeaderboardEntriesContainer);
-                    leaderboardEntry.Initialize(player.Rank, player.PlayerName, (int)player.Score);
+                    if (leaderboardEntry != null)
+                        leaderboardEntry.Initialize(player.Rank, player.PlayerName, (int)player.Score);
                     currentLeaderboardEntryDisplays.Add(leaderboardEntry);
                 }
             }
@@ -82,25 +98,34 @@ namespace CozyFramework
 
         private void UpdateCurrentLeaderBoardText()
         {
-            CurrentlySelectedLeaderboardText.text = CozyLeaderboards.Instance.LeaderboardListTemplate.Leaderboards.Find(x => x.LeaderboardId == currentLeaderboard).LeaderboardName;
+            if (CurrentlySelectedLeaderboardText == null || CozyLeaderboards.Instance?.LeaderboardListTemplate?.Leaderboards == null) return;
+            var entry = CozyLeaderboards.Instance.LeaderboardListTemplate.Leaderboards.Find(x => x.LeaderboardId == currentLeaderboard);
+            if (entry != null)
+                CurrentlySelectedLeaderboardText.text = entry.LeaderboardName;
         }
 
         public void ShowLeaderboardList()
         {
+            if (LeaderboardList == null) return;
             LeaderboardList.SetActive(true);
 
             foreach (var optionDisplay in leaderboardOptionDisplays)
             {
-                Destroy(optionDisplay.gameObject);
+                if (optionDisplay != null && optionDisplay.gameObject != null)
+                    Destroy(optionDisplay.gameObject);
             }
 
             leaderboardOptionDisplays.Clear();
 
+            if (CozyLeaderboards.Instance == null || CozyLeaderboards.Instance.LeaderboardListTemplate == null
+                || CozyLeaderboards.Instance.LeaderboardListTemplate.Leaderboards == null) return;
+            if (LeaderboardOptionDisplayPrefab == null || LeaderboardListContainer == null) return;
             foreach (var leaderboard in CozyLeaderboards.Instance.LeaderboardListTemplate.Leaderboards)
             {
                 var leaderboardOption = Instantiate(LeaderboardOptionDisplayPrefab, LeaderboardListContainer.transform);
-                leaderboardOption.LeaderboardName.text = leaderboard.LeaderboardName;
-                leaderboardOption.SelectedImage.SetActive(currentLeaderboard == leaderboard.LeaderboardId);
+                if (leaderboardOption == null) continue;
+                if (leaderboardOption.LeaderboardName != null) leaderboardOption.LeaderboardName.text = leaderboard.LeaderboardName;
+                if (leaderboardOption.SelectedImage != null) leaderboardOption.SelectedImage.SetActive(currentLeaderboard == leaderboard.LeaderboardId);
                 leaderboardOption.Initiliaze(leaderboard.LeaderboardId);
 
                 leaderboardOptionDisplays.Add(leaderboardOption);
@@ -113,7 +138,8 @@ namespace CozyFramework
         {
             foreach (var item in currentLeaderboardEntryDisplays)
             {
-                Destroy(item.gameObject);
+                if (item != null && item.gameObject != null)
+                    Destroy(item.gameObject);
             }
 
             currentLeaderboardEntryDisplays.Clear();

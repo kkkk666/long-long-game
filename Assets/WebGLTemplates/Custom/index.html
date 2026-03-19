@@ -137,6 +137,7 @@
         createUnityInstance(canvas, config, (progress) => {
           document.querySelector("#unity-progress-bar-full").style.width = 100 * progress + "%";
               }).then((unityInstance) => {
+                window.unityInstance = unityInstance;
                 document.querySelector("#unity-loading-bar").style.display = "none";
 #if SHOW_DIAGNOSTICS
                 document.getElementById("diagnostics-icon").onclick = () => {
@@ -184,6 +185,14 @@
             };
 
       document.body.appendChild(script);
+
+      window.addEventListener('message', function (e) {
+        if (!e.data || e.data.type !== 'discord') return;
+        var u = window.unityInstance;
+        if (u && typeof u.SendMessage === 'function') {
+          u.SendMessage('DiscordLoginReceiver', 'OnDiscordUser', JSON.stringify(e.data));
+        }
+      });
 
     </script>
   </body>

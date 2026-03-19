@@ -97,6 +97,11 @@ namespace CozyFramework
 
         public void StartGame()
         {
+            if (!PlayerManager.Instance.PlayerHasUsername)
+            {
+                CozyPickUsername.Instance.ShowPickUsernameView();
+                return;
+            }
             GameUIView.SetActive(true);
             MainMenuView.SetActive(false);
             InGameView.SetActive(true);

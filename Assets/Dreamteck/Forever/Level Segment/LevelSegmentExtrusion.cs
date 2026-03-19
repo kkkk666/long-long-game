@@ -374,6 +374,7 @@ namespace Dreamteck.Forever
                 list.Count / POST_EXTRUDE_ACTION_FRAMES,
                 (AsyncJobSystem.JobData<Transform> data) =>
                 {
+                    if (data.current == null) return;
                     var handler = data.current.GetComponent<ISegmentCompleteHandler>();
                     if (handler != null)
                     {
